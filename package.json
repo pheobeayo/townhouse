@@ -1,13 +1,20 @@
 {
-  "name": "team_ruiru",
+  "name": "townhall",
+  "description":"A community engagement platform",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
+  "author":"imrany",
+  "license":"MPL-2.0",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
+  },
+  "repository":{
+    "type":"git",
+    "url":"https://github.com/aimset-hackathon-team6/Townhall"
   },
   "dependencies": {
     "firebase": "^10.8.0",
