@@ -1,6 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { auth, onAuthStateChanged } from "./firebaseConfig/config";
 import { ToastContainer } from 'react-toastify';
 import { Toaster } from "react-hot-toast";
 import Layout from './pages/Layout';

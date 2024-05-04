@@ -1,7 +1,7 @@
 import { toast } from "react-toastify";
 import { useHotToast } from "../components/CustomHooks"
 
-function err_toast(msg:string){
+export function err_toast(msg:string){
     let screen_width=window.innerWidth;
     if(screen_width>640){
         toast.error(msg,{
@@ -14,7 +14,7 @@ function err_toast(msg:string){
     }
 }
 
-function success_toast(msg:string){
+export function success_toast(msg:string){
     let screen_width=window.innerWidth;
     if(screen_width>640){
         toast.success(msg,{
@@ -27,7 +27,7 @@ function success_toast(msg:string){
     }
 }
 
-function info_toast(msg:string){
+export function info_toast(msg:string){
     let screen_width=window.innerWidth;
     if(screen_width>640){
         toast.info(msg,{
@@ -38,10 +38,4 @@ function info_toast(msg:string){
             position: "top-center"
         })
     }
-}
-
-export {
-    err_toast,
-    success_toast,
-    info_toast,
 }

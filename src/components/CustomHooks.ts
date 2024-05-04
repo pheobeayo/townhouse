@@ -1,6 +1,6 @@
 import { toast } from 'react-hot-toast';
 
-let useHotToast={
+export let useHotToast={
    error:(msg:string,opt?:any)=>{
       return toast.error(msg,opt)
    },
@@ -10,8 +10,4 @@ let useHotToast={
    info:(msg:string,opt?:any)=>{
       return toast.custom(msg,opt)
    }
-}
-
-export{
-	useHotToast,
 }
