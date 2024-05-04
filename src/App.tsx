@@ -69,7 +69,7 @@ function App() {
         {isLoading?(
           <div className="fixed top-0 bottom-0 left-0 z-20 right-0 bg-white">
             <div className="flex flex-col items-center h-[100vh] justify-center">
-              <p className="text-xl font-semibold text-[var(--theme-blue)]">Loading...</p>
+              <p className="text-xl font-semibold text-[var(--primary-01)]">Loading...</p>
             </div>
           </div>
         ):(

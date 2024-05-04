@@ -55,14 +55,14 @@ export default function CreateAccount() {
         }
     }
     return (
-        <main style={{background:`url(${backgroundPattern})`}} className={`flex md:h-screen max-md:h-[85vh] justify-center flex-col items-center`}>
-            <div className="m-[40px] items-center shadow-lg bg-white flex flex-col sm:w-[520px] max-sm:w-[85vw]">
+        <main style={{background:`url(${backgroundPattern})`}} className={`flex h-screen justify-center flex-col items-center`}>
+            <div className="sm:m-[40px] items-center sm:shadow-lg bg-white flex flex-col sm:w-[520px] max-sm:px-[3vw]">
                 <div className="sm:w-[360px] my-[40px]">
                 <div className="sm:mb-[40px] gap-[8px] flex flex-col items-center max-sm:my-[20px]">
                     <p className="text-[30px] font-semibold">Sign in</p>
                     <p className="text-[var(--secondary-08)] text-[14px]">Get you connected with your community</p>
                 </div>
-                <form  className="flex flex-col sm:gap-[12px] text-sm">
+                <form  className="flex flex-col gap-[12px] text-sm">
                     <div className="flex flex-col gap-4">
                         <button className={`flex justify-center items-center py-3 px-6 rounded-md bg-white border-[1px] rounded-lg`}>
                             <img src={googleIcon} alt="google's icon" className="sm:w-[24px] mr-auto sm:h-[24px]"/>
@@ -79,7 +79,7 @@ export default function CreateAccount() {
 
                     </div>
 
-                    <img src={orIcon} className="sm:h-[20px]" alt="Or"/>
+                    <img src={orIcon} className="h-[20px]" alt="Or"/>
 
                     <div className="flex flex-col gap-4">
                         <button onClick={()=>navigate('/sign_in_with_email')} className={`flex justify-center items-center py-3 px-6 rounded-md bg-white border-[1px] rounded-lg`}>
@@ -93,7 +93,7 @@ export default function CreateAccount() {
                         <p className="mr-3">{"Don't have an account?"}</p>
                         <Link to="/getstarted" className="underline text-[var(--primary-01)]">Create an Account</Link>
                     </div>
-                    <div className="sm:mt-[110px] text-sm flex items-center justify-center gap-x-1 text-[var(--secondary-08)]">
+                    <div className="sm:mt-[110px] max-sm:mt-[50px] text-sm flex items-center justify-center gap-x-1 text-[var(--secondary-08)]">
                         <p className="text-center">By tapping "Continue", you understand and agree to <Link to="/" className="underline text-[var(--primary-01)]">TownHouse's Terms and Policies</Link></p>
                     </div>
                 </form>
