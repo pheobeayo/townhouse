@@ -10,13 +10,27 @@
   scroll-behavior: smooth;
 
   color: #213547;
-  background-color: #ffffff;
   font-size: 14px;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /*btn primary colors*/
+  --pink-1-fill:#DC0E62;
+  --white:#FFFFFF;
+
+  /*btn Hover/pressed*/
+  --pink-2-fill:#D76995;
+
+  /*btn disable*/
+  --gray-2-fill:#FAFAFA;
+  --gray-5-stroke:#D9D9D9;
+  --gray-7-text:gray;
+
+  /*text color*/
+  --secondary-08:#808080;
 
   --theme-blue:#366388;
   --theme-dark:#213547;

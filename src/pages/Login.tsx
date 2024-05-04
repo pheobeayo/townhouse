@@ -1,6 +1,6 @@
 import { useState } from "react"
+import backgroundPattern from "../assets/images/backgrounds/Background_pattern.png"
 import { FaEye, FaEyeSlash, FaInfoCircle } from "react-icons/fa";
-import { auth, signInWithEmailAndPassword } from "../firebaseConfig/config";
 import { err_toast, success_toast } from "../components/Feedback";
 import { Link } from "react-router-dom";
 
@@ -29,25 +29,31 @@ function Login() {
                 email:e.target.email.value,
                 password:e.target.password.value
             }
-            let userCredential=await signInWithEmailAndPassword(auth, userInput.email, userInput.password);
-            const user = userCredential.user;
-            console.log(user)
+            let url=``
+            let response=await fetch(url,{
+                method:"POST",
+                headers:{
+                    "content-type":"application/json"
+                },
+                body:JSON.stringify(userInput)
+            });
+            const parseRes=await response.json();
+            console.log(parseRes)
             success_toast(`Sign in successfull`)
             setDisable(false)
         } catch (error:any) {
             setDisable(false)
-            const errorCode = error.code;
             const errorMessage = error.message;
-            console.log(error,errorCode,errorMessage)
-            errorCode==="auth/network-request-failed"?err_toast(`No internet`):err_toast(error.message)
+            console.log(errorMessage)
+            errorMessage==="failed to fetch"?err_toast(`No internet`):err_toast(error.message)
         }
     }
     return (
-        <main className="flex md:h-screen max-md:h-[85vh] max-md:justify-center flex-col items-center md:p-4">
-            <div className="flex flex-col sm:w-[440px] max-sm:w-[85vw]">
-                <div className="sm:my-[40px] max-sm:my-[20px]">
-                <p className="text-[30px] text-[#1e293b] mb-[8px] font-semibold">Sign in</p>
-                <p className="text-[#64748b] text-[14px]">Enter your credentials to access our realtime messaging platform</p>
+        <main style={{background:`url(${backgroundPattern})`}} className={`flex md:h-screen max-md:h-[85vh] justify-center flex-col items-center`}>
+            <div className="sm:pt-[40px] sm:pb-[20px] items-center shadow-md bg-white flex flex-col sm:w-[640px] max-sm:w-[85vw]">
+                <div className="sm:mb-[40px] flex flex-col items-center max-sm:my-[20px]">
+                    <p className="text-[30px] text-[#1e293b] mb-[8px] font-semibold">Sign in</p>
+                    <p className="text-[#64748b] text-[14px]">Enter your credentials to access our realtime messaging platform</p>
                 </div>
                 <form onSubmit={(e)=>handleLogin(e)} className="flex flex-col text-sm">
                 <div className="flex flex-col mb-3">

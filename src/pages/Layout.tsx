@@ -1,5 +1,4 @@
 import { Outlet, Link, useLocation } from "react-router-dom";
-import { auth, signOut } from "../firebaseConfig/config"
 import Footer from "../components/Footer";
 import { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../context";
@@ -12,7 +11,7 @@ export default function Layout(){
   const location=useLocation()
   async function logout(){
     try{
-      await signOut(auth);
+      //sign out
       success_toast(`Successfull sign out`)
     }catch(error:any){
       console.log(error)

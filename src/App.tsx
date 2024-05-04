@@ -5,11 +5,10 @@ import { Toaster } from "react-hot-toast";
 import Layout from './pages/Layout';
 import NotFound from './pages/NotFound';
 import About from './pages/About';
+import GetStarted from "./pages/GetStarted";
 import Login from "./pages/Login";
-import ChatRoom from "./pages/ChatRoom";
 import { GlobalContext } from "./context";
 import { User } from "./types/definitions";
-import CreateAccount from "./pages/CreateAccount";
 
 function App() {
   const [user,setUser]=useState<User>({
@@ -22,29 +21,44 @@ function App() {
   })
   const [isLoading,setIsLoading]=useState(true)
   const [isAuth,setIsAuth]=useState(false);
-  useEffect(()=>{
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        // User is signed in
-        console.log(user)
-        let userData:User={
-          uid:user.uid,
-          photoURL:user.photoURL,
-          email:user.email,
-          displayName:user.displayName,
-          phoneNumber:user.phoneNumber,
-          emailVerified:user.emailVerified
+
+    async function getUserCreds(){
+        try{
+            let url=``
+            let response=await fetch(url,{
+                method:"GET"
+            })
+            let parseRes:any=await response.json()
+            console.log(parseRes.data)
+            if(parseRes.error){
+                // User is signed out
+                console.log(parseRes.error,"user is signed out")
+	            setIsAuth(false)
+                setIsLoading(false)
+            }else{
+                let user=parRes.data.user;
+                let userData:User={
+                    uid:user.uid,
+                    photoURL:user.photoURL,
+                    email:user.email,
+                    displayName:user.displayName,
+                    phoneNumber:user.phoneNumber,
+                    emailVerified:user.emailVerified
+                }
+                setUser(userData)
+                setIsAuth(true)
+                setIsLoading(false)
+            }
+        }catch(error:any){
+            // User is signed out
+            console.log(error.message,"user is signed out")
+	        setIsAuth(false)
+            setIsLoading(false)
         }
-        setUser(userData)
-        setIsAuth(true)
-        setIsLoading(false)
-      } else {
-        // User is signed out
-        console.log("user is signed out")
-	      setIsAuth(false)
-        setIsLoading(false)
-      }
-    });
+    }
+
+  useEffect(()=>{
+      getUserCreds()
   },[isAuth]);
 
   return (
@@ -71,11 +85,11 @@ function App() {
             />
             <Toaster/>
             <Routes>
-              <Route path="/login" element={!isAuth?<Login/>:<Navigate to="/"/>}/>
-              <Route path="/create" element={!isAuth?<CreateAccount />:<Navigate to="/"/>} />
-              <Route path="/" element={isAuth?<Layout />:<Navigate to="/login"/>}>
+              <Route path="/getstarted" element={!isAuth?<GetStarted/>:<Navigate to="/"/>}/>
+              <Route path="/login" element={!isAuth?<Login />:<Navigate to="/"/>} />
+              <Route path="/" element={isAuth?<Layout />:<Navigate to="/getstarted"/>}>
                 <Route index element={<About />} />
-                <Route path="chat_room" element={<ChatRoom />} />
+                {/*<Route path="chat_room" element={<ChatRoom />} />*/}
               </Route>
               <Route path="*" element={<NotFound />} />
             </Routes>
