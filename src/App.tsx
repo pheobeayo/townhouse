@@ -38,7 +38,7 @@ function App() {
 	            setIsAuth(false)
                 setIsLoading(false)
             }else{
-                let user=parRes.data.user;
+                let user=parseRes.data.user;
                 let userData:User={
                     uid:user.uid,
                     photoURL:user.photoURL,

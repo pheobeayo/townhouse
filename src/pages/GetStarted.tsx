@@ -1,59 +1,13 @@
-import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import backgroundPattern from "../assets/images/backgrounds/Background_pattern.png";
 import facebookIcon from "../assets/images/icons/facebook_icon.svg";
 import emailIcon from "../assets/images/icons/email_icon.svg";
 import googleIcon from "../assets/images/icons/google_icon.svg";
 import orIcon from "../assets/images/icons/or_icon.svg";
-import { FaEye, FaEyeSlash, FaInfoCircle } from "react-icons/fa";
-import { err_toast, success_toast } from "../components/Feedback";
 import { Link } from "react-router-dom";
 
 function GetStarted() {
     let navigate=useNavigate()
-    let [eye_icon,setEye_icon]=useState(<FaEye className="h-5 w-5"/>);
-    let [disable,setDisable]=useState(false); 
-
-    function toggle_password(){
-        let password=document.getElementById("password");
-        if(password?.getAttribute("type")=="password"){
-          password?.setAttribute("type","text");
-          setEye_icon(<FaEyeSlash className="h-5 w-5"/>);
-          return;
-        }
-        password?.setAttribute("type","password");
-        setEye_icon(<FaEye className="h-5 w-5"/>);
-    }
-
-    
-
-    async function handleLogin(e:any){
-        try {
-            e.preventDefault();
-            setDisable(true)
-            let userInput={
-                email:e.target.email.value,
-                password:e.target.password.value
-            }
-            let url=``
-            let response=await fetch(url,{
-                method:"POST",
-                headers:{
-                    "content-type":"application/json"
-                },
-                body:JSON.stringify(userInput)
-            });
-            const parseRes=await response.json();
-            console.log(parseRes)
-            success_toast(`Sign in successfull`)
-            setDisable(false)
-        } catch (error:any) {
-            setDisable(false)
-            const errorMessage = error.message;
-            console.log(errorMessage)
-            errorMessage==="failed to fetch"?err_toast(`No internet`):err_toast(error.message)
-        }
-    }
     return (
         <main style={{background:`url(${backgroundPattern})`}} className={`flex h-screen justify-center flex-col items-center`}>
             <div className="sm:m-[40px] items-center sm:shadow-lg bg-white flex flex-col sm:w-[520px] max-sm:px-[3vw]">
