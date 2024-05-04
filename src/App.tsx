@@ -6,9 +6,11 @@ import Layout from './pages/Layout';
 import NotFound from './pages/NotFound';
 import About from './pages/About';
 import GetStarted from "./pages/GetStarted";
-import Login from "./pages/Login";
-import { GlobalContext } from "./context";
+import SignIn from "./pages/SignIn";
+import SignInWithEmail from "./pages/SignInWithEmail";
+import SignUpWithEmail from "./pages/SignUpWithEmail";
 import { User } from "./types/definitions";
+import { GlobalContext } from "./context";
 
 function App() {
   const [user,setUser]=useState<User>({
@@ -86,7 +88,10 @@ function App() {
             <Toaster/>
             <Routes>
               <Route path="/getstarted" element={!isAuth?<GetStarted/>:<Navigate to="/"/>}/>
-              <Route path="/login" element={!isAuth?<Login />:<Navigate to="/"/>} />
+              <Route path="/sign_in" element={!isAuth?<SignIn />:<Navigate to="/"/>} />
+              <Route path="/sign_in_with_email" element={!isAuth?<SignInWithEmail />:<Navigate to="/"/>} />
+
+              <Route path="/sign_up_with_email" element={!isAuth?<SignUpWithEmail />:<Navigate to="/"/>} />
               <Route path="/" element={isAuth?<Layout />:<Navigate to="/getstarted"/>}>
                 <Route index element={<About />} />
                 {/*<Route path="chat_room" element={<ChatRoom />} />*/}

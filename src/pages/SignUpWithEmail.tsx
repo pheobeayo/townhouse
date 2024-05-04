@@ -1,10 +1,11 @@
+
 import { useState } from "react"
 import backgroundPattern from "../assets/images/backgrounds/Background_pattern.png"
 import { FaEye, FaEyeSlash, FaInfoCircle } from "react-icons/fa";
 import { err_toast, success_toast } from "../components/Feedback";
 import { Link } from "react-router-dom";
 
-function Login() {
+export default function SignUpWithEmail() {
     let [eye_icon,setEye_icon]=useState(<FaEye className="h-5 w-5"/>);
     let [disable,setDisable]=useState(false); 
 
@@ -94,5 +95,3 @@ function Login() {
         </main>
     );
 };
-
-export default Login;

@@ -18,18 +18,19 @@
   -moz-osx-font-smoothing: grayscale;
 
   /*btn primary colors*/
-  --pink-1-fill:#DC0E62;
+  --primary-01:#DC0E62;
   --white:#FFFFFF;
 
   /*btn Hover/pressed*/
-  --pink-2-fill:#D76995;
+  --primary-02:#D76995;
 
   /*btn disable*/
   --gray-2-fill:#FAFAFA;
   --gray-5-stroke:#D9D9D9;
   --gray-7-text:gray;
 
-  /*text color*/
+
+  /*secondary color*/
   --secondary-08:#808080;
 
   --theme-blue:#366388;
