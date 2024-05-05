@@ -2,10 +2,10 @@ import { createContext } from 'react'
 import { User } from '../types/definitions'
 
 export const GlobalContext=createContext<User>({
-    uid:"",
-    photoURL:"",
+    photo:"",
     email:"",
-    displayName:"",
+    username:"",
+    accessToken:"",
     phoneNumber:0,
     emailVerified:false
 })

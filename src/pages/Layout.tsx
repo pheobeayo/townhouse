@@ -91,7 +91,7 @@ export default function Layout(){
           <div className="px-2 py-2 flex items-center justify-between ">
             <div className="flex gap-2 items-center">
               <img src="/uni_logo.png" alt="ruiru logo" width={30} height={30}/>
-              <p className="text-lg font-semibold">Realtime messaging platform</p>
+              <p className="text-lg font-semibold">Townhouse</p>
             </div>
             <div className="flex gap-8 items-center">
               <div className="flex flex-col justify-center">
@@ -122,7 +122,7 @@ export default function Layout(){
           <div className="px-2 py-2 flex items-center justify-between ">
             <div className="flex gap-2 items-center">
               <img src="/uni_logo.png" alt="ruiru logo" width={25} height={25}/>
-              <p className="text-base font-semibold">Realtime messaging platform</p>
+              <p className="text-base font-semibold">Townhouse</p>
             </div>
             <button
               id="show_mobile_sidebar_btn"

@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useSearchParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { ToastContainer } from 'react-toastify';
 import { Toaster } from "react-hot-toast";
@@ -13,54 +13,60 @@ import { User } from "./types/definitions";
 import { GlobalContext } from "./context";
 
 function App() {
+    let API_URL='https://townhouse-server.onrender.com'
+    let search:any=useSearchParams()
+    let accessTokenQuery:string=search[0].access_token
+
   const [user,setUser]=useState<User>({
-    uid:"",
-    photoURL:"",
+    photo:"",
     email:"",
-    displayName:"",
+    username:"",
     phoneNumber:0,
     emailVerified:false
   })
   const [isLoading,setIsLoading]=useState(true)
   const [isAuth,setIsAuth]=useState(false);
 
-    async function getUserCreds(){
-        try{
-            let url=``
-            let response=await fetch(url,{
-                method:"GET"
-            })
-            let parseRes:any=await response.json()
-            console.log(parseRes.data)
-            if(parseRes.error){
-                // User is signed out
-                console.log(parseRes.error,"user is signed out")
-	            setIsAuth(false)
-                setIsLoading(false)
-            }else{
-                let user=parseRes.data.user;
-                let userData:User={
-                    uid:user.uid,
-                    photoURL:user.photoURL,
-                    email:user.email,
-                    displayName:user.displayName,
-                    phoneNumber:user.phoneNumber,
-                    emailVerified:user.emailVerified
-                }
-                setUser(userData)
-                setIsAuth(true)
-                setIsLoading(false)
+  let $userData:any=localStorage.getItem('user_data')
+  let parsedUserData:User=JSON.parse($userData)
+  async function authenticate(){
+    try{
+        let url=accessTokenQuery.length===0&&$userData.length>0?`${API_URL}/api/users/${parsedUserData.email}`:`${API_URL}/api/authenticate/${accessTokenQuery}`
+        let response=await fetch(url,{
+            method:"GET",
+            headers:{
+                authorization:accessTokenQuery.length===0&&$userData.length>0?`Bearer ${parsedUserData.accessToken}`:""
             }
-        }catch(error:any){
-            // User is signed out
-            console.log(error.message,"user is signed out")
-	        setIsAuth(false)
+        })
+        let parseRes=await response.json()
+        if(parseRes.error){
+            console.log(parseRes.error)
+            setIsAuth(false)
+            setIsLoading(false)
+        }else{
+            let user:any=parseRes.data;
+            let userData:User={
+                photo:user.photo,
+                email:user.email,
+                username:user.username,
+                accessToken:user.access_token,
+                phoneNumber:user.phone_number,
+                emailVerified:user.email_verified
+            }
+            localStorage.setItem('user_data',JSON.stringify(userData))
+            setUser(userData)
+            setIsAuth(true)
             setIsLoading(false)
         }
+    }catch(error:any){
+        console.log(error.message,"fail to authenticate access token")
+	    setIsAuth(false)
+        setIsLoading(false)
     }
+  }
 
   useEffect(()=>{
-      getUserCreds()
+      authenticate()
   },[isAuth]);
 
   return (
