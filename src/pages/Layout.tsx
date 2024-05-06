@@ -54,17 +54,12 @@ export default function Layout(){
       let header:any=document.getElementById("header")
       header.innerHTML=`
         <div class="px-2 pt-1 flex items-center justify-between">
-            <p class="text-sm ml-auto">Logged in as <span class="underline text-[var(--theme-blue)]">${email}</span></p>
+            <p class="text-sm ml-auto">Logged in as <span class="underline text-[var(--primary-01)]">${email}</span></p>
         </div>
         <div class="px-2 py-2 flex items-center justify-between ">
             <div class="flex gap-2 items-center">
-                <img src="/uni_logo.png" alt="ruiru logo" width="30" height="30"/>
-                <p class="text-lg font-semibold">Realtime messaging platform</p>
-            </div>
-            <div class="flex gap-8 items-center">
-            <div class="flex flex-col justify-center">
-                <p class="text-[var(--theme-yellow)] font-semibold">Call Us:</p>
-                <a href="tel:+254734720752" target="_blank" rel="noopener noreferrer">+254734720752</a>
+                <img src="/favicon.png" alt="ruiru logo" width="30" height="30"/>
+                <p class="text-lg font-semibold">Townhouse</p>
             </div>
   
             <div class="flex flex-col justify-center">
@@ -86,7 +81,7 @@ export default function Layout(){
       <nav className="md-nav border-b-[1px] shadow-sm">
         <div className="" id={screen.width>768?"header":""}>
           <div className="px-2 pt-1 flex items-center justify-between">
-            <p className="text-sm ml-auto">Logged in as <span className="underline text-[var(--theme-blue)]">{email}</span></p>
+            <p className="text-sm ml-auto">Logged in as <span className="underline text-[var(--primary-01)]">{email}</span></p>
           </div>
           <div className="px-2 py-2 flex items-center justify-between ">
             <div className="flex gap-2 items-center">
@@ -95,29 +90,24 @@ export default function Layout(){
             </div>
             <div className="flex gap-8 items-center">
               <div className="flex flex-col justify-center">
-                <p className="text-[var(--theme-yellow)] font-semibold">Call Us:</p>
-                <a href="tel:+254734720752" target="_blank" rel="noopener noreferrer">+254734720752</a>
-              </div>
-
-              <div className="flex flex-col justify-center">
-                <p className="text-[var(--theme-yellow)] font-semibold">Email:</p>
+                <p className="text-[var(--primary-01)] font-semibold">Email:</p>
                 <a href="mailto:imranmat2542gmail.com" target="_blank" rel="noopener noreferrer">imranmat254@gmail.com</a>
               </div>
 
               <div className="flex flex-col justify-center">
-                <p className="text-[var(--theme-yellow)] font-semibold">Virtual Tour:</p>
+                <p className="text-[var(--primary-01)] font-semibold">Virtual Tour:</p>
                 <a href="#" target="_blank" rel="noopener noreferrer">Click to Visit</a>
               </div>
             </div>
           </div>
         </div>
-        <div className="flex text-white bg-[var(--theme-blue)] pr-2">
+        <div className="flex text-white bg-[var(--primary-01)] pr-2">
 	        {links.map((link,index)=>(<Link to={link.to} className={location.pathname===link.to?"px-2 py-3 bg-white text-[#213547]":"px-2 py-3 hover:bg-slate-200 hover:text-[#213547]"} key={index}>{link.name}</Link>))}
           <button onClick={logout} className="px-2 hover:bg-slate-200 hover:text-[#213547]">Log out</button>
         </div>
       </nav>
 
-      <nav className="max-md-nav bg-[var(--theme-blue)] text-white shadow-sm">
+      <nav className="max-md-nav bg-[var(--primary-01)] text-white shadow-sm">
         <div className="" id={screen.width<768?"header":""}>
           <div className="px-2 py-2 flex items-center justify-between ">
             <div className="flex gap-2 items-center">
