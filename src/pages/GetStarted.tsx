@@ -7,6 +7,7 @@ import orIcon from "../assets/images/icons/or_icon.svg";
 import { Link } from "react-router-dom";
 
 function GetStarted() {
+    let API_URL='https://townhouse-server.onrender.com'
     let navigate=useNavigate()
     return (
         <main style={{background:`url(${backgroundPattern})`}} className={`flex h-screen justify-center flex-col items-center`}>
@@ -16,22 +17,18 @@ function GetStarted() {
                     <p className="text-[30px] font-semibold">Get Started</p>
                     <p className="text-[var(--secondary-08)] text-[14px]">Get you connected with your community</p>
                 </div>
-                <form  className="flex flex-col gap-[12px] text-sm">
-                    <div className="flex flex-col gap-4">
-                        <button className={`flex justify-center items-center py-3 px-6 rounded-md bg-white border-[1px] rounded-lg`}>
-                            <img src={googleIcon} alt="google's icon" className="sm:w-[24px] mr-auto sm:h-[24px]"/>
-                            <span className="text-base flex-grow">Sign up with Google </span>
-                        </button>
+                <div  className="flex flex-col gap-[12px] text-sm">
+                    <button onClick={()=>window.location.href=`${API_URL}/auth/googleOAuth/google`} className={`flex justify-center items-center py-3 px-6 rounded-md bg-white border-[1px] rounded-lg`}>
+                        <img src={googleIcon} alt="google's icon" className="sm:w-[24px] mr-auto sm:h-[24px]"/>
+                        <span className="text-base flex-grow">Sign up with Google </span>
+                    </button>
 
-                    </div>
 
-                    <div className="flex flex-col gap-4">
-                        <button className={`flex justify-center items-center py-3 px-6 rounded-md bg-white border-[1px] rounded-lg`}>
-                            <img src={facebookIcon} alt="google's icon" className="sm:w-[24px] mr-auto sm:h-[24px]"/>
-                            <span className="text-base flex-grow">Sign up with Facebook </span>
-                        </button>
+                    <button onClick={()=>window.location.href=`#`} className={`flex justify-center items-center py-3 px-6 rounded-md bg-white border-[1px] rounded-lg`}>
+                        <img src={facebookIcon} alt="google's icon" className="sm:w-[24px] mr-auto sm:h-[24px]"/>
+                        <span className="text-base flex-grow">Sign up with Facebook </span>
+                    </button>
 
-                    </div>
 
                     <img src={orIcon} className="h-[20px]" alt="Or"/>
 
@@ -50,7 +47,7 @@ function GetStarted() {
                     <div className="sm:mt-[110px] max-sm:mt-[50px] text-sm flex items-center justify-center gap-x-1 text-[var(--secondary-08)]">
                         <p className="text-center">By tapping "Continue", you understand and agree to <Link to="/" className="underline text-[var(--primary-01)]">TownHouse's Terms and Policies</Link></p>
                     </div>
-                </form>
+                </div>
                 </div>
             </div>
         </main>
