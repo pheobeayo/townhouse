@@ -32,7 +32,7 @@ function App() {
   let parsedUserData:User=JSON.parse($userData)
   async function authenticate(){
     try{
-        let url=searchParams.has('access_token')===false&&$userData!==null?`${API_URL}/api/users/${parsedUserData.email}`:`${API_URL}/api/authenticate/${accessTokenQuery}`
+        let url=searchParams.has('access_token')===false&&$userData!==null?`${API_URL}/api/users/${parsedUserData.email}`:`${API_URL}/api/authenticate/${JSON.parse(accessTokenQuery)}`
         let response=await fetch(url,{
             method:"GET",
             headers:{
@@ -40,7 +40,7 @@ function App() {
             }
         })
         let parseRes=await response.json()
-        console.log(parseRes,searchParams.has('access_token'))
+        console.log(parseRes,searchParams.get('access_token'))
         if(parseRes.error){
             console.log(parseRes.error)
             setIsAuth(false)
