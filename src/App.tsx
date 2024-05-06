@@ -14,8 +14,9 @@ import { GlobalContext } from "./context";
 
 function App() {
     let API_URL='https://townhouse-server.onrender.com'
-    let search:any=useSearchParams()
-    let accessTokenQuery:string=search[0].access_token
+    const searchParams = new URLSearchParams(window.location.search);
+
+    let accessTokenQuery:string=searchParams.get('access_token');
 
   const [user,setUser]=useState<User>({
     photo:"",
@@ -31,14 +32,15 @@ function App() {
   let parsedUserData:User=JSON.parse($userData)
   async function authenticate(){
     try{
-        let url=accessTokenQuery.length===0&&$userData.length>0?`${API_URL}/api/users/${parsedUserData.email}`:`${API_URL}/api/authenticate/${accessTokenQuery}`
+        let url=searchParams.has('access_token')===false&&$userData!==null?`${API_URL}/api/users/${parsedUserData.email}`:`${API_URL}/api/authenticate/${accessTokenQuery}`
         let response=await fetch(url,{
             method:"GET",
             headers:{
-                authorization:accessTokenQuery.length===0&&$userData.length>0?`Bearer ${parsedUserData.accessToken}`:""
+                authorization:searchParams.has('access_token')===false&&$userData!==null?`Bearer ${parsedUserData.accessToken}`:""
             }
         })
         let parseRes=await response.json()
+        console.log(parseRes)
         if(parseRes.error){
             console.log(parseRes.error)
             setIsAuth(false)
@@ -59,14 +61,20 @@ function App() {
             setIsLoading(false)
         }
     }catch(error:any){
-        console.log(error.message,"fail to authenticate access token")
+        let errorMessage:string=error.message==="fail to fetch"?"No internet":`${error.message}`
+        console.log(errorMessage)
 	    setIsAuth(false)
         setIsLoading(false)
     }
   }
 
   useEffect(()=>{
-      authenticate()
+      if(searchParams.has('access_token')===true||$userData!==null){
+            authenticate()
+      }else{
+        setIsAuth(false)
+        setIsLoading(false)
+      }
   },[isAuth]);
 
   return (
