@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate, useSearchParams } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { ToastContainer } from 'react-toastify';
 import { Toaster } from "react-hot-toast";
@@ -16,7 +16,7 @@ function App() {
     let API_URL='https://townhouse-server.onrender.com'
     const searchParams = new URLSearchParams(window.location.search);
 
-    let accessTokenQuery:string=searchParams.get('access_token');
+    let accessTokenQuery:any=searchParams.get('access_token');
 
   const [user,setUser]=useState<User>({
     photo:"",
