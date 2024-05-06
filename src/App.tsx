@@ -40,7 +40,7 @@ function App() {
             }
         })
         let parseRes=await response.json()
-        console.log(parseRes)
+        console.log(parseRes,searchParams.has('access_token'))
         if(parseRes.error){
             console.log(parseRes.error)
             setIsAuth(false)
