@@ -18,7 +18,6 @@ export default function VerifyAccount(){
                 setDisable(false)
                 err_toast("You've enter a wrong verification code, Try again!")
                 navigate(-1)
-                sessionStorage.clear()
             }else{
                 let userData:any=sessionStorage.getItem("user_data")
                 localStorage.setItem("user_data",userData)
