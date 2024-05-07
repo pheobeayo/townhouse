@@ -2,7 +2,7 @@ import { useState } from "react"
 import backgroundPattern from "../assets/images/backgrounds/Background_pattern.png"
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { err_toast, success_toast } from "../components/Feedback";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { User } from "../types/definitions"
 
 export default function SignInWithEmail() {
@@ -10,6 +10,7 @@ export default function SignInWithEmail() {
     let API_URL=`https://townhouse-server.onrender.com`
     let [eye_icon,setEye_icon]=useState(<FaEye className="h-5 w-5"/>);
     let [disable,setDisable]=useState(false); 
+    let navigate=useNavigate()
 
     function toggle_password(){
         let password=document.getElementById("password");
@@ -114,13 +115,19 @@ export default function SignInWithEmail() {
 
                 </div>
 
-                <button disabled={disable} className={disable===true?"cursor-wait mt-1 capitalize py-3 px-6 text-[var(--white)] rounded-md bg-[var(--primary-02)] border-[1px]":"mt-1 capitalize py-3 px-6 text-white rounded-md bg-[var(--primary-01)]"}>
-                    {disable===false?(<span>
-                        Continue
-                    </span>):(
-                        <i className="italic">Proceeding...</i>
-                    )}
-                </button>
+                <div className="flex gap-2 w-full items-center">
+                    <button type="button" onClick={()=>navigate(-1)} className={"flex-grow font-semibold cursor-wait mt-1 capitalize py-3 px-6 text-[var(--gray-7-text)] rounded-md bg-[var(--white)] border-[1px]"}>
+                        Back
+                    </button>
+
+                    <button disabled={disable} className={disable===true?"flex-grow cursor-wait mt-1 capitalize py-3 px-6 text-[var(--white)] rounded-md bg-[var(--primary-02)] border-[1px]":"flex-grow mt-1 capitalize py-3 px-6 text-white rounded-md bg-[var(--primary-01)]"}>
+                        {disable===false?(<span>
+                            Continue
+                        </span>):(
+                            <i className="italic">Proceeding...</i>
+                        )}
+                    </button>
+                </div>
                 <div className="flex items-center justify-center mt-5">
                     <p className="mr-3">{"Already have an Account"}</p>
                     <Link to="/sign_in_with_email" className="underline text-[var(--primary-01)]">Sign in</Link>

@@ -98,13 +98,19 @@ export default function SignInWithEmail() {
                 </div>
 
                 <a href="#" target="_blank" rel="noopener noreferrer" className="text-[var(--primary-01)] underline text-sm ml-auto">Forget Password?</a>
-                <button disabled={disable} className={disable===true?"cursor-wait mt-5 capitalize py-3 px-6 text-[var(--white)] rounded-md bg-[var(--primary-02)] border-[1px]":"mt-5 capitalize py-3 px-6 text-white rounded-md bg-[var(--primary-01)]"}>
-                    {disable===false?(<span>
-                        Sign in
-                    </span>):(
-                        <i className="italic">Signing in...</i>
-                    )}
-                </button>
+                <div className="flex gap-2 w-full items-center">
+                    <button type='button' onClick={()=>navigate(-1)} className={"flex-grow font-semibold cursor-wait mt-5 capitalize py-3 px-6 text-[var(--gray-7-text)] rounded-md bg-[var(--white)] border-[1px]"}>
+                        Back
+                    </button>
+
+                    <button disabled={disable} className={disable===true?"flex-grow cursor-wait mt-5 capitalize py-3 px-6 text-[var(--white)] rounded-md bg-[var(--primary-02)] border-[1px]":"flex-grow mt-5 capitalize py-3 px-6 text-white rounded-md bg-[var(--primary-01)]"}>
+                        {disable===false?(<span>
+                            Sign in
+                        </span>):(
+                            <i className="italic">Signing in...</i>
+                        )}
+                    </button>
+                </div>
                 <div className="flex items-center justify-center mt-5">
                     <p className="mr-3">{"Don't have an account"}</p>
                     <Link to="/sign_up_with_email" className="underline text-[var(--primary-01)]">Create an account</Link>

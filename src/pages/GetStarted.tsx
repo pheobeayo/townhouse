@@ -39,7 +39,7 @@ function GetStarted() {
 
 
                     <div className="flex items-center justify-center mt-5">
-                        <p className="mr-3">{"Alread have an Account?"}</p>
+                        <p className="mr-3">{"Already have an Account?"}</p>
                         <Link to="/sign_in" className="underline text-[var(--primary-01)]">Sign in</Link>
                     </div>
                     <div className="sm:mt-[110px] max-sm:mt-[50px] text-sm flex items-center justify-center gap-x-1 text-[var(--secondary-08)]">
