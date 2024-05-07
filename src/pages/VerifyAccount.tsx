@@ -7,7 +7,7 @@ export default function VerifyAccount(){
     let [disable,setDisable]=useState(false); 
     let navigate=useNavigate()
     let user_data:any=sessionStorage.getItem("user_data")
-    let userEmail=JSON.parse(user_data).email
+    let userEmail:any=JSON.parse(user_data).email
 
     async function handleVerification(e:any){
         try{
@@ -18,12 +18,12 @@ export default function VerifyAccount(){
                 setDisable(false)
                 err_toast("You've enter a wrong verification code, Try again!")
                 navigate(-1)
+                sessionStorage.clear()
             }else{
                 let userData:any=sessionStorage.getItem("user_data")
                 localStorage.setItem("user_data",userData)
                 setDisable(false)
             }
-            sessionStorage.clear()
         }catch(error:any){
             setDisable(false)
             const errorMessage = error.message;
@@ -37,13 +37,13 @@ export default function VerifyAccount(){
                 <div className="sm:w-[360px] my-[40px]">
                     <div className="sm:mb-[40px] gap-[8px] flex flex-col items-center max-sm:my-[20px]">
                         <p className="text-[30px] font-semibold">Account Verification</p>
-                        <p className="text-[var(--secondary-08)] text-[14px]">Enter verification code sent to {`${userEmail.slice(0,1)}....${userEmail.slice(userEmail.length-10, userEmail.length)}`}</p>
+                        <p className="text-[var(--secondary-08)] text-[14px]">Enter verification code sent to {`${userEmail.slice(0,2)}....${userEmail.slice(userEmail.length-12, userEmail.length)}`}</p>
                     </div>
 
                     <form onSubmit={(e)=>handleVerification(e)} className="flex flex-col gap-[12px] text-sm">
                         <div className="flex flex-col mb-3">
                             <div className="pb-4">
-                                <input id="verification_code" name="verification_code" type="text" className={`px-[10px] w-full py-2 focus:outline-[var(--primary-01)] focus:outline-[1px] bg-white border-[1px] rounded-lg`} placeholder="Enter your verification code" required/>
+                                <input id="verification_code" maxLength={6} minLength={6} name="verification_code" type="text" className={`px-[10px] w-full py-2 focus:outline-[var(--primary-01)] focus:outline-[1px] bg-white border-[1px] rounded-lg`} placeholder="Enter your verification code" required/>
                             </div>
 
                             <button disabled={disable} className={disable===true?"cursor-wait mt-5 capitalize py-3 px-6 text-[var(--white)] rounded-md bg-[var(--primary-02)] border-[1px]":"mt-5 capitalize py-3 px-6 text-white rounded-md bg-[var(--primary-01)]"}>
