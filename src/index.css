@@ -33,11 +33,6 @@
   /*secondary color*/
   --secondary-08:#808080;
 
-  --theme-blue:#366388;
-  --theme-dark:#213547;
-  --theme-gray:#f9f9f9;
-  --theme-yellow:rgb(199, 140, 31);
-  --hover-blue:#535bf2;
 } 
 
 .sidebar::-webkit-scrollbar{

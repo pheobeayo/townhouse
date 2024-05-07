@@ -5,6 +5,8 @@ import { err_toast, success_toast } from "../components/Feedback";
 import { Link } from "react-router-dom";
 
 export default function SignInWithEmail() {
+    let date=new Date()    
+    let API_URL=`https://townhouse-server.onrender.com`
     let [eye_icon,setEye_icon]=useState(<FaEye className="h-5 w-5"/>);
     let [disable,setDisable]=useState(false); 
 
@@ -27,9 +29,10 @@ export default function SignInWithEmail() {
             setDisable(true)
             let userInput={
                 email:e.target.email.value,
-                password:e.target.password.value
+                password:e.target.password.value,
+                last_time_loggedin:`${date}`, user_browser:`${navigator.userAgent}`
             }
-            let url=``
+            let url=`${API_URL}/api/sign_in`
             let response=await fetch(url,{
                 method:"POST",
                 headers:{
@@ -39,57 +42,74 @@ export default function SignInWithEmail() {
             });
             const parseRes=await response.json();
             console.log(parseRes)
-            success_toast(`Sign in successfull`)
-            setDisable(false)
+            if(parseRes.error){
+                setDisable(false)
+                err_toast(parseRes.error)
+            }else{
+                let user:any=parseRes.data;
+                let userData:User={
+                    photo:user.photo,
+                    email:user.email,
+                    username:user.username,
+                    accessToken:user.access_token,
+                    phoneNumber:user.phone_number,
+                    emailVerified:user.email_verified
+                }
+                success_toast(parseRes.msg)
+                localStorage.setItem("user_data",JSON.stringify(userData))
+                setDisable(false)
+            }
         } catch (error:any) {
             setDisable(false)
             const errorMessage = error.message;
             console.log(errorMessage)
-            errorMessage==="failed to fetch"?err_toast(`No internet`):err_toast(error.message)
+            errorMessage==="Failed to fetch"?err_toast(`No internet`):err_toast(error.message)
         }
     }
     return (
-        <main style={{background:`url(${backgroundPattern})`}} className={`flex md:h-screen max-md:h-[85vh] justify-center flex-col items-center`}>
-            <div className="sm:pt-[40px] sm:pb-[20px] items-center shadow-md bg-white flex flex-col sm:w-[640px] max-sm:w-[85vw]">
-                <div className="sm:mb-[40px] flex flex-col items-center max-sm:my-[20px]">
-                    <p className="text-[30px] text-[#1e293b] mb-[8px] font-semibold">Sign in</p>
-                    <p className="text-[#64748b] text-[14px]">Enter your credentials to access our realtime messaging platform</p>
+        <main style={{background:`url(${backgroundPattern})`}} className={`flex h-screen justify-center flex-col items-center`}>
+            <div className="sm:m-[40px] items-center sm:shadow-lg bg-white flex flex-col sm:w-[520px] max-sm:px-[6vw]">
+            <div className="sm:w-[360px] my-[40px]">
+                 <div className="sm:mb-[40px] gap-[8px] flex flex-col items-center max-sm:my-[20px]">
+                    <p className="text-[30px] font-semibold">Sign in</p>
+                    <p className="text-[var(--secondary-08)] text-[14px]">Get you connected with your community</p>
                 </div>
-                <form onSubmit={(e)=>handleLogin(e)} className="flex flex-col text-sm">
+                <form onSubmit={(e)=>handleLogin(e)} className="flex flex-col gap-[12px] text-sm">
                 <div className="flex flex-col mb-3">
-                    <label className="mb-[8px] font-semibold text-[#0f172a]" htmlFor="email">Email</label>
+                    <label className="mb-[8px] font-semibold text-[var(--primary-01)]" htmlFor="email">Email</label>
                     <div className="pb-4">
-                        <input id="email" name="email" type="email" className={`px-[10px] w-full py-2 focus:outline-[var(--theme-blue)] focus:outline-[1px] bg-white border-[1px] rounded-lg`} placeholder="johndoe@gmail.com" required/>
+                        <input id="email" name="email" type="email" className={`px-[10px] w-full py-2 focus:outline-[var(--primary-01)] focus:outline-[1px] bg-white border-[1px] rounded-lg`} placeholder="johndoe@gmail.com" required/>
                     </div>
 
-                    <label htmlFor="password" className=" font-semibold mb-[8px] text-[#0f172a]">Password</label>
+                    <label htmlFor="password" className="font-semibold mb-[8px] text-[var(--primary-01)]">Password</label>
                     <div className="flex flex-col">
                         <div className="flex">
-                            <input id="password" name="password" placeholder="Enter password" type="password" className={`flex-grow px-[10px] py-2 focus:outline-[var(--theme-blue)] focus:outline-[1px] bg-white border-[1px] rounded-l-lg`} minLength={8} maxLength={24} required/>
-                            <button type="button" onClick={toggle_password} className="rounded-r-lg px-3 py-2 border-[1px] w-[53px] bg-white text-[#64748b]">
+                            <input id="password" name="password" placeholder="Enter password" type="password" className={`flex-grow px-[10px] py-2 focus:outline-[var(--primary-01)] focus:outline-[1px] bg-white border-[1px] rounded-l-lg`} minLength={8} maxLength={24} required/>
+                            <button type="button" onClick={toggle_password} className="rounded-r-lg px-3 py-2 border-[1px] w-[53px] bg-white text-[var(--gray-7-text)]">
                             {eye_icon}
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <a href="#" target="_blank" rel="noopener noreferrer" className="text-[#475569] underline text-[14px] ml-auto">Forget Password?</a>
-                <button disabled={disable} className={disable===true?"cursor-wait mt-5 capitalize py-3 px-6 text-white rounded-md bg-[var(--theme-dark)]":"mt-5 capitalize py-3 px-6 text-white rounded-md bg-[var(--theme-blue)]"}>
+                <a href="#" target="_blank" rel="noopener noreferrer" className="text-[var(--primary-01)] underline text-sm ml-auto">Forget Password?</a>
+                <button disabled={disable} className={disable===true?"cursor-wait mt-5 capitalize py-3 px-6 text-[var(--white)] rounded-md bg-[var(--primary-02)] border-[1px]":"mt-5 capitalize py-3 px-6 text-white rounded-md bg-[var(--primary-01)]"}>
                     {disable===false?(<span>
                         Sign in
                     </span>):(
                         <i className="italic">Signing in...</i>
                     )}
                 </button>
-                <div className="flex mt-5">
+                <div className="flex items-center justify-center mt-5">
                     <p className="mr-3">{"Don't have an account"}</p>
-                    <Link to="/create" className="underline text-[var(--theme-blue)]">Create an account</Link>
+                    <Link to="/sign_up_with_email" className="underline text-[var(--primary-01)]">Create an account</Link>
                 </div>
-                <div className="mt-5 text-xs flex items-center gap-x-1 text-[var(--gray-text)]">
-                    <FaInfoCircle className="w-5 h-5"/>
-                    <p>Only members should sign in.</p>
-                    </div>
+
+                <div className="mt-[30px] text-sm flex items-center justify-center gap-x-1 text-[var(--secondary-08)]">
+                        <p className="text-center">By tapping "Continue", you understand and agree to <Link to="/" className="underline text-[var(--primary-01)]">TownHouse's Terms and Policies</Link></p>
+                </div>
                 </form>
+            </div>
             </div>
         </main>
     );

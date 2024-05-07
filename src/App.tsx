@@ -41,7 +41,6 @@ function App() {
         })
         let parseRes=await response.json()
         if(parseRes.error){
-            console.log(parseRes.error)
             setIsAuth(false)
             setIsLoading(false)
         }else{
@@ -60,7 +59,7 @@ function App() {
             setIsLoading(false)
         }
     }catch(error:any){
-        let errorMessage:string=error.message==="fail to fetch"?"No internet":`${error.message}`
+        let errorMessage:string=error.message==="Fail to fetch"?"No internet":`${error.message}`
         console.log(errorMessage)
 	    setIsAuth(false)
         setIsLoading(false)

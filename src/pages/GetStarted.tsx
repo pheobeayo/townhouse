@@ -32,13 +32,11 @@ function GetStarted() {
 
                     <img src={orIcon} className="h-[20px]" alt="Or"/>
 
-                    <div className="flex flex-col gap-4">
-                        <button onClick={()=>navigate("/sign_up_with_email")} className={`flex justify-center items-center py-3 px-6 rounded-md bg-white border-[1px] rounded-lg`}>
-                            <img src={emailIcon} alt="google's icon" className="sm:w-[24px] mr-auto sm:h-[24px]"/>
-                            <span className="text-base flex-grow">Sign up with Email Address</span>
-                        </button>
+                    <button onClick={()=>navigate("/sign_up_with_email")} className={`flex justify-center items-center py-3 px-6 rounded-md bg-white border-[1px] rounded-lg`}>
+                        <img src={emailIcon} alt="google's icon" className="sm:w-[24px] mr-auto sm:h-[24px]"/>
+                        <span className="text-base flex-grow">Sign up with Email Address</span>
+                    </button>
 
-                    </div>
 
                     <div className="flex items-center justify-center mt-5">
                         <p className="mr-3">{"Alread have an Account?"}</p>
