@@ -7,7 +7,7 @@ export default function VerifyAccount(){
     let [disable,setDisable]=useState(false); 
     let navigate=useNavigate()
     let user_data:any=sessionStorage.getItem("user_data")
-    let userEmail:any=JSON.parse(user_data).email
+    let userEmail:any=user_data===null?null:JSON.parse(user_data)
 
     async function handleVerification(e:any){
         try{
@@ -32,17 +32,17 @@ export default function VerifyAccount(){
         }
     }
     useEffect(()=>{
-        if(!user_data){
+        if(userEmail===null){
             navigate(-1)
         }
     },[])
     return(
         <main style={{background:`url(${backgroundPattern})`}} className={`flex h-screen justify-center flex-col items-center`}>
             <div className="sm:m-[40px] items-center sm:shadow-lg bg-white flex flex-col sm:w-[520px] max-sm:px-[6vw]">
-                <div className="sm:w-[360px] my-[40px]">
+                {userEmail&&<div className="sm:w-[360px] my-[40px]">
                     <div className="sm:mb-[40px] gap-[8px] flex flex-col items-center max-sm:my-[20px]">
                         <p className="text-[30px] font-semibold">Account Verification</p>
-                        <p className="text-[var(--secondary-08)] text-[14px]">Enter verification code sent to {`${userEmail.slice(0,2)}....${userEmail.slice(userEmail.length-12, userEmail.length)}`}</p>
+                        <p className="text-[var(--secondary-08)] text-[14px]">Enter verification code sent to {`${userEmail.email.slice(0,2)}....${userEmail.email.slice(userEmail.email.length-12, userEmail.email.length)}`}</p>
                     </div>
 
                     <form onSubmit={(e)=>handleVerification(e)} className="flex flex-col gap-[12px] text-sm">
@@ -61,7 +61,7 @@ export default function VerifyAccount(){
                             </button>
                         </div>
                     </form>
-                </div>
+                </div>}
             </div>
         </main>
     )
