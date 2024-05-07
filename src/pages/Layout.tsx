@@ -12,7 +12,9 @@ export default function Layout(){
   async function logout(){
     try{
       //sign out
+      localStorage.clear()
       success_toast(`Successfull sign out`)
+      window.location.href="/?access_token=''"
     }catch(error:any){
       console.log(error)
       err_toast(error.message)

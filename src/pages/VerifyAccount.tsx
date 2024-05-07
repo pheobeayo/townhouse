@@ -23,6 +23,7 @@ export default function VerifyAccount(){
                 let userData:any=sessionStorage.getItem("user_data")
                 localStorage.setItem("user_data",userData)
                 setDisable(false)
+                window.location.reload()
             }
         }catch(error:any){
             setDisable(false)
