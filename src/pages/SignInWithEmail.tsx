@@ -4,12 +4,14 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { err_toast, success_toast } from "../components/Feedback";
 import { Link } from "react-router-dom";
 import { User } from "../types/definitions"
+import { useNavigate } from "react-router-dom"
 
 export default function SignInWithEmail() {
     let date=new Date()    
     let API_URL=`https://townhouse-server.onrender.com`
     let [eye_icon,setEye_icon]=useState(<FaEye className="h-5 w-5"/>);
     let [disable,setDisable]=useState(false); 
+    let navigate=useNavigate()
 
     function toggle_password(){
         let password=document.getElementById("password");
@@ -47,6 +49,7 @@ export default function SignInWithEmail() {
                 setDisable(false)
                 err_toast(parseRes.error)
             }else{
+                let verification_code=parseRes.verification_code
                 let user:any=parseRes.data;
                 let userData:User={
                     photo:user.photo,
@@ -56,9 +59,10 @@ export default function SignInWithEmail() {
                     phoneNumber:user.phone_number,
                     emailVerified:user.email_verified
                 }
-                success_toast(parseRes.msg)
-                localStorage.setItem("user_data",JSON.stringify(userData))
+                sessionStorage.setItem("verification_code",verification_code)
+                sessionStorage.setItem("user_data",JSON.stringify(userData))
                 setDisable(false)
+                navigate("/verify_account")
             }
         } catch (error:any) {
             setDisable(false)
