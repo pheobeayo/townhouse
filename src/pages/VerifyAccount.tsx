@@ -1,6 +1,6 @@
 import backgroundPattern from "../assets/images/backgrounds/Background_pattern.png"
 import { err_toast } from "../components/Feedback";
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 
 export default function VerifyAccount(){
@@ -18,6 +18,7 @@ export default function VerifyAccount(){
                 setDisable(false)
                 err_toast("You've enter a wrong verification code, Try again!")
                 navigate(-1)
+                sessionStorage.clear()
             }else{
                 let userData:any=sessionStorage.getItem("user_data")
                 localStorage.setItem("user_data",userData)
@@ -30,6 +31,11 @@ export default function VerifyAccount(){
             errorMessage==="Failed to fetch"?err_toast(`No internet`):err_toast(error.message)
         }
     }
+    useEffect(()=>{
+        if(!user_data){
+            navigate(-1)
+        }
+    },[])
     return(
         <main style={{background:`url(${backgroundPattern})`}} className={`flex h-screen justify-center flex-col items-center`}>
             <div className="sm:m-[40px] items-center sm:shadow-lg bg-white flex flex-col sm:w-[520px] max-sm:px-[6vw]">
