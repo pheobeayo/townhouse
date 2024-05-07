@@ -1,7 +1,7 @@
 import { useState } from "react"
 import backgroundPattern from "../assets/images/backgrounds/Background_pattern.png"
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { err_toast, success_toast } from "../components/Feedback";
+import { err_toast } from "../components/Feedback";
 import { Link } from "react-router-dom";
 import { User } from "../types/definitions"
 import { useNavigate } from "react-router-dom"

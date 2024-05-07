@@ -1,11 +1,9 @@
 import backgroundPattern from "../assets/images/backgrounds/Background_pattern.png"
-import { err_toast, success_toast } from "../components/Feedback";
+import { err_toast } from "../components/Feedback";
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 
 export default function VerifyAccount(){
-    let date=new Date()    
-    let API_URL=`https://townhouse-server.onrender.com`
     let [disable,setDisable]=useState(false); 
     let navigate=useNavigate()
     let user_data:any=sessionStorage.getItem("user_data")
@@ -21,7 +19,7 @@ export default function VerifyAccount(){
                 err_toast("You've enter a wrong verification code, Try again!")
                 navigate(-1)
             }else{
-                let userData=sessionStorage.getItem("user_data")
+                let userData:any=sessionStorage.getItem("user_data")
                 localStorage.setItem("user_data",userData)
                 setDisable(false)
             }

@@ -103,7 +103,7 @@ function App() {
               <Route path="/getstarted" element={!isAuth?<GetStarted/>:<Navigate to="/"/>}/>
               <Route path="/sign_in" element={!isAuth?<SignIn />:<Navigate to="/"/>} />
               <Route path="/sign_in_with_email" element={!isAuth?<SignInWithEmail />:<Navigate to="/"/>} />
-              <Route path="/verify_account" element={!isAuth?<Verifyaccount/>:<Navigate to="/"/>}/>
+              <Route path="/verify_account" element={!isAuth?<VerifyAccount/>:<Navigate to="/"/>}/>
               <Route path="/sign_up_with_email" element={!isAuth?<SignUpWithEmail />:<Navigate to="/"/>} />
               <Route path="/" element={isAuth?<Layout />:<Navigate to="/getstarted"/>}>
                 <Route index element={<About />} />
