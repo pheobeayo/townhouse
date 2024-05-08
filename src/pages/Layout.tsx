@@ -1,13 +1,14 @@
 import { Outlet, Link, useLocation } from "react-router-dom";
-import Footer from "../components/Footer";
 import { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../context";
+import { CongratulationDialog, NewFeatures } from "../components/dialog"
 import { MdClose, MdMenu, MdHome, MdOutlineHome, MdGroup, MdOutlineGroup, MdAssignment, MdOutlineAssignment, MdLogout, MdSettings, MdOutlineSettings, MdEventNote, MdOutlineEventNote } from "react-icons/md";
 import { err_toast, success_toast } from "../components/Feedback";
 import Logo from "../assets/images/logos/logo.svg"
+import { openDialog } from "../components/actions"
 
 export default function Layout(){
-  const { email } =useContext(GlobalContext);
+  const userInfo =useContext(GlobalContext);
   let [showMobileSidebar, setShowMobileSidebar]=useState(false)
   let [isMobile,setIsMobile]=useState(false)
 
@@ -86,13 +87,22 @@ export default function Layout(){
     console.log("screen changed")
   }
 
+    function toggleDialog(id:string){
+        let dialog_bg=document.getElementById(id);
+        dialog_bg?.classList.add("ease-in-out");
+        dialog_bg?.classList.toggle("none");
+        // dialog_bg?.classList.add("duration-1000");
+        // dialog_bg?.classList.add("delay-2000");
+    }
+
   useEffect(()=>{
+        openDialog("new_features_dialog")
         console.log(location.pathname)
   },[location.pathname])
   return (
     <>
     <div className={"flex max-sm:flex-col w-[100vw] h-screen"}>
-            {!isMobile?(<nav className="sm:w-[200px] bg-[var(--gray-1-fill)] fixed h-screen">
+            {!isMobile?(<nav className="sm:w-[150px] bg-[var(--gray-1-fill)] fixed h-screen">
                 <div className="flex flex-col py-4 h-full w-full items-center">
                     <Link to="/">
                         <img src={Logo} alt="Logo" className="w-[42px] h-[46px]"/>
@@ -128,7 +138,7 @@ export default function Layout(){
             </nav>
             )}
             
-            <div className="sm:ml-[200px] bg-[var(--grey-1-fill)] flex flex-col p-10 min-h-[60vh]">
+            <div className="sm:ml-[150px] bg-[var(--grey-1-fill)] flex flex-col flex-grow p-10 min-h-[60vh]">
                 <Outlet />
             </div>
         </div>
@@ -150,7 +160,8 @@ export default function Layout(){
           </div>
         </div>
       ):""}
-
+      <CongratulationDialog data={{userInfo,functions:{toggleDialog}}}/>
+      <NewFeatures data={{functions:{toggleDialog}}}/>
     </>
   )
 };
