@@ -4,8 +4,12 @@ import { ToastContainer } from 'react-toastify';
 import { Toaster } from "react-hot-toast";
 import Layout from './pages/Layout';
 import NotFound from './pages/NotFound';
-import About from './pages/About';
 import GetStarted from "./pages/GetStarted";
+import Home from './pages/Home';
+import Events from './pages/Events';
+import Neighbours from './pages/Neighbours';
+import BulletIn from './pages/BulletIn';
+import Settings from './pages/Settings';
 import SignIn from "./pages/SignIn";
 import SignInWithEmail from "./pages/SignInWithEmail";
 import SignUpWithEmail from "./pages/SignUpWithEmail";
@@ -106,8 +110,11 @@ function App() {
               <Route path="/verify_account" element={!isAuth?<VerifyAccount/>:<Navigate to="/"/>}/>
               <Route path="/sign_up_with_email" element={!isAuth?<SignUpWithEmail />:<Navigate to="/"/>} />
               <Route path="/" element={isAuth?<Layout />:<Navigate to="/getstarted"/>}>
-                <Route index element={<About />} />
-                {/*<Route path="chat_room" element={<ChatRoom />} />*/}
+                <Route index element={<Home />} />
+                <Route path="events" element={<Events />} />
+                <Route path="bulletin_board" element={<BulletIn />} />
+                <Route path="neighbours" element={<Neighbours />} />
+                <Route path="settings" element={<Settings />} />
               </Route>
               <Route path="*" element={<NotFound />} />
             </Routes>

@@ -2,12 +2,15 @@ import { Outlet, Link, useLocation } from "react-router-dom";
 import Footer from "../components/Footer";
 import { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../context";
-import { MdClose, MdMenu } from "react-icons/md";
+import { MdClose, MdMenu, MdHome, MdOutlineHome, MdGroup, MdOutlineGroup, MdAssignment, MdOutlineAssignment, MdLogout, MdSettings, MdOutlineSettings, MdEventNote, MdOutlineEventNote } from "react-icons/md";
 import { err_toast, success_toast } from "../components/Feedback";
+import Logo from "../assets/images/logos/logo.svg"
 
 export default function Layout(){
   const { email } =useContext(GlobalContext);
   let [showMobileSidebar, setShowMobileSidebar]=useState(false)
+  let [isMobile,setIsMobile]=useState(false)
+
   const location=useLocation()
   async function logout(){
     try{
@@ -23,12 +26,35 @@ export default function Layout(){
 
   let links=[
     {
-      name:"About",
+      name:"Home",
+      icon:(<MdHome className="w-[32px] h-[32px]"/>),
+      OutlineIcon:(<MdOutlineHome className="w-[32px] h-[32px]"/>),
       to:"/"
     },
     {
-      name:"Chat Room",
-      to:"/chat_room"
+      name:"Events",
+      icon:(<MdEventNote  className="w-[32px] h-[32px]"/>),
+      OutlineIcon:(<MdOutlineEventNote className="w-[32px] h-[32px]"/>),
+      to:"/events"
+    },
+    {
+      name:"Bulletin Board",
+      icon:(<MdAssignment className="w-[32px] h-[32px]"/>),
+      OutlineIcon:(<MdOutlineAssignment className="w-[32px] h-[32px]"/>),
+      to:"/bulletin_board"
+    },
+    {
+      name:"Neighbour Connnect",
+      icon:(<MdGroup className="w-[32px] h-[32px]"/>),
+      OutlineIcon:(<MdOutlineGroup className="w-[32px] h-[32px]"/>),
+      to:"/neighbours"
+    },
+
+    {
+      name:"Settings",
+      icon:(<MdSettings className="w-[32px] h-[32px]"/>),
+      OutlineIcon:(<MdOutlineSettings className="w-[32px] h-[32px]"/>),
+      to:"/settings"
     }
   ]
 
@@ -51,81 +77,63 @@ export default function Layout(){
     setShowMobileSidebar(true)
   })
 
-  useEffect(()=>{
-    if(screen.width>768){
-      let header:any=document.getElementById("header")
-      header.innerHTML=`
-        <div class="px-2 pt-1 flex items-center justify-between">
-            <p class="text-sm ml-auto">Logged in as <span class="underline text-[var(--primary-01)]">${email}</span></p>
-        </div>
-        <div class="px-2 py-2 flex items-center justify-between ">
-            <div class="flex gap-2 items-center">
-                <img src="/favicon.png" alt="ruiru logo" width="30" height="30"/>
-                <p class="text-lg font-semibold">Townhouse</p>
-            </div>
-  
-            <div class="flex flex-col justify-center">
-                <p class="text-[var(--theme-yellow)] font-semibold">Email:</p>
-                <a href="mailto:imranmat254@gmail.com" target="_blank" rel="noopener noreferrer">imranmat254@gmail.com</a>
-            </div>
-  
-            <div class="flex flex-col justify-center">
-                <p class="text-[var(--theme-yellow)] font-semibold">Virtual Tour:</p>
-                <a href="#" target="_blank" rel="noopener noreferrer">Click to Visit</a>
-            </div>
-            </div>
-        </div>
-      `
+  window.onresize=()=>{
+    if(screen.width<640){
+        setIsMobile(true)
+    }else{
+        setIsMobile(false)
     }
+    console.log("screen changed")
+  }
+
+  useEffect(()=>{
+        console.log(location.pathname)
   },[location.pathname])
   return (
     <>
-      <nav className="md-nav border-b-[1px] shadow-sm">
-        <div className="" id={screen.width>768?"header":""}>
-          <div className="px-2 pt-1 flex items-center justify-between">
-            <p className="text-sm ml-auto">Logged in as <span className="underline text-[var(--primary-01)]">{email}</span></p>
-          </div>
-          <div className="px-2 py-2 flex items-center justify-between ">
-            <div className="flex gap-2 items-center">
-              <img src="/uni_logo.png" alt="ruiru logo" width={30} height={30}/>
-              <p className="text-lg font-semibold">Townhouse</p>
+    <div className={"flex max-sm:flex-col w-[100vw] h-screen"}>
+            {!isMobile?(<nav className="sm:w-[200px] bg-[var(--gray-1-fill)] fixed h-screen">
+                <div className="flex flex-col py-4 h-full w-full items-center">
+                    <Link to="/">
+                        <img src={Logo} alt="Logo" className="w-[42px] h-[46px]"/>
+                    </Link>
+                    <div className="flex flex-col items-center gap-[20px] mt-[50px] w-[81px]">
+	                    {links.map((link,index)=>(
+                            <Link to={link.to} className={location.pathname===link.to?"flex flex-col items-center text-[var(--primary-01)]":"hover:text-[var(--primary-01)] flex flex-col items-center"} key={index}>
+                                {location.pathname===link.to?link.icon:link.OutlineIcon}
+                                <span className="text-center text-sm">{link.name}</span>
+                            </Link>
+                        ))}
+                        <button onClick={logout} className="flex flex-col text-sm items-center hover:text-[var(--primary-01)]">
+                            <MdLogout className="w-[32px] h-[32px]"/>
+                            Log out
+                        </button>
+                    </div>
+                </div>
+            </nav>):(
+            <nav className="bg-[var(--primary-01)] text-white shadow-sm">
+                <div className="px-2 py-2 flex items-center justify-between ">
+                    <div className="flex gap-2 items-center">
+                        <img src={Logo} alt="Logo" width={25} height={25}/>
+                        <p className="text-base font-semibold">Townhouse</p>
+                    </div>
+                    <button
+                        id="show_mobile_sidebar_btn"
+                        onClick={()=>setShowMobileSidebar(true)}
+                        className="rounded-md p-1 border-[1px]"
+                    >
+                        <MdMenu className="w-5 h-5"/>
+                    </button>
+                </div>
+            </nav>
+            )}
+            
+            <div className="sm:ml-[200px] bg-[var(--grey-1-fill)] flex flex-col p-10 min-h-[60vh]">
+                <Outlet />
             </div>
-            <div className="flex gap-8 items-center">
-              <div className="flex flex-col justify-center">
-                <p className="text-[var(--primary-01)] font-semibold">Email:</p>
-                <a href="mailto:imranmat2542gmail.com" target="_blank" rel="noopener noreferrer">imranmat254@gmail.com</a>
-              </div>
+        </div>
+        
 
-              <div className="flex flex-col justify-center">
-                <p className="text-[var(--primary-01)] font-semibold">Virtual Tour:</p>
-                <a href="#" target="_blank" rel="noopener noreferrer">Click to Visit</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="flex text-white bg-[var(--primary-01)] pr-2">
-	        {links.map((link,index)=>(<Link to={link.to} className={location.pathname===link.to?"px-2 py-3 bg-white text-[#213547]":"px-2 py-3 hover:bg-slate-200 hover:text-[#213547]"} key={index}>{link.name}</Link>))}
-          <button onClick={logout} className="px-2 hover:bg-slate-200 hover:text-[#213547]">Log out</button>
-        </div>
-      </nav>
-
-      <nav className="max-md-nav bg-[var(--primary-01)] text-white shadow-sm">
-        <div className="" id={screen.width<768?"header":""}>
-          <div className="px-2 py-2 flex items-center justify-between ">
-            <div className="flex gap-2 items-center">
-              <img src="/uni_logo.png" alt="ruiru logo" width={25} height={25}/>
-              <p className="text-base font-semibold">Townhouse</p>
-            </div>
-            <button
-              id="show_mobile_sidebar_btn"
-              onClick={()=>setShowMobileSidebar(true)}
-              className="rounded-md p-1 border-[1px]"
-            >
-              <MdMenu className="w-5 h-5"/>
-            </button>
-          </div>
-        </div>
-      </nav>
       {showMobileSidebar===true?(
         <div id="mobile-sidebar" className="max-md-nav py-6 bg-white z-10 fixed top-0 bottom-0 left-0 right-0 h-[100vh]">
           <div className="flex flex-col">
@@ -142,8 +150,7 @@ export default function Layout(){
           </div>
         </div>
       ):""}
-      <Outlet />
-      <Footer/>
+
     </>
   )
 };

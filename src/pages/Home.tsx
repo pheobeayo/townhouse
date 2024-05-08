@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 //import { FaBuilding, FaFacebook, FaPhone } from "react-icons/fa"
 //import { FaLocationPin } from "react-icons/fa6";
-function About() {
+export default function Home() {
 	useEffect(()=>{
 		window.scrollTo(0,0)
 	},[])
     return (
-        <div className="flex flex-col p-10 min-h-[60vh]">
+        <div>
 			<div>
 				<p className="text-3xl max-md:text-2xl font-semibold">About Us</p>
 				<p>Welcome to Townhouse</p> 
@@ -22,4 +22,3 @@ function About() {
     );
 };
 
-export default About;

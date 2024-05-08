@@ -29,6 +29,9 @@
   --gray-5-stroke:#D9D9D9;
   --gray-7-text:gray;
 
+  /*bg*/
+  --gray-1-fill: #F7F8FA;
+  --grey-1-fill: #FEFEFE;
 
   /*secondary color*/
   --secondary-08:#808080;
