@@ -65,6 +65,7 @@ export default function SignInWithEmail() {
                 success_toast(parseRes.msg)
                 localStorage.setItem("user_data",JSON.stringify(userData))
                 setDisable(false)
+                window.location.reload()
             }
         } catch (error:any) {
             setDisable(false)
