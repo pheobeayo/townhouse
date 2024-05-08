@@ -6,3 +6,20 @@ export interface User{
     phoneNumber:number,
     emailVerified:boolean
 }
+
+export interface Event{
+    image:string,
+    title:string,
+    host:string,
+    date:string,
+    startingTime:string,
+    location:string,
+    attendees:number
+}
+
+export interface Bulletin{
+    title:string,
+    description:string,
+    postedOn:string,
+    image:string
+}

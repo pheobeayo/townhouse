@@ -5,7 +5,6 @@ import { CongratulationDialog, NewFeatures } from "../components/dialog"
 import { MdClose, MdMenu, MdHome, MdOutlineHome, MdGroup, MdOutlineGroup, MdAssignment, MdOutlineAssignment, MdLogout, MdSettings, MdOutlineSettings, MdEventNote, MdOutlineEventNote } from "react-icons/md";
 import { err_toast, success_toast } from "../components/Feedback";
 import Logo from "../assets/images/logos/logo.svg"
-import { openDialog } from "../components/actions"
 
 export default function Layout(){
   const userInfo =useContext(GlobalContext);
@@ -96,12 +95,11 @@ export default function Layout(){
     }
 
   useEffect(()=>{
-        openDialog("new_features_dialog")
         console.log(location.pathname)
   },[location.pathname])
   return (
     <>
-    <div className={"flex max-sm:flex-col w-[100vw] h-screen"}>
+    <div className={"flex max-sm:flex-col h-screen"}>
             {!isMobile?(<nav className="sm:w-[150px] bg-[var(--gray-1-fill)] fixed h-screen">
                 <div className="flex flex-col py-4 h-full w-full items-center">
                     <Link to="/">
@@ -138,7 +136,7 @@ export default function Layout(){
             </nav>
             )}
             
-            <div className="sm:ml-[150px] bg-[var(--grey-1-fill)] flex flex-col flex-grow p-10 min-h-[60vh]">
+            <div className="sm:ml-[150px] bg-[var(--grey-1-fill)] flex flex-col flex-grow p-10">
                 <Outlet />
             </div>
         </div>
