@@ -10,7 +10,7 @@ export default function CreateAccount() {
     let API_URL='https://townhouse-server.onrender.com'
     let navigate=useNavigate()
     return (
-        <main className="w-screen h-[100vh]">
+        <main style={{background:`url(${backgroundPattern})`}} className={`flex h-screen justify-center flex-col items-center`}>
             <div className="sm:m-[40px] items-center sm:shadow-lg bg-white flex flex-col sm:w-[520px] max-sm:px-[3vw]">
                 <div className="sm:w-[360px] my-[40px]">
                 <div className="sm:mb-[40px] gap-[8px] flex flex-col items-center max-sm:my-[20px]">
