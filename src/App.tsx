@@ -75,7 +75,7 @@ function App() {
       if(searchParams.has('access_token')===true||$userData!==null){
             authenticate()
       }else{
-        setIsAuth(false)
+        setIsAuth(true)
         setIsLoading(false)
       }
   },[isAuth]);
