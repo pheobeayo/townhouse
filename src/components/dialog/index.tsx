@@ -94,7 +94,7 @@ type CommentProps={
 }
 
 
-export function Comment(props:commentProps){
+export function Comment(props:CommentProps){
     return(
         <div id={`comment_dialog`} onDoubleClick={()=>props.data.functions.toggleDialog(`comment_dialog`)} className="fixed top-0 bottom-0 left-0 right-0 z-20 bg-[#101828]/10 none">
             <div className="flex items-center h-screen">

@@ -30,7 +30,7 @@ export default function Events() {
     const {username,photo} =useContext(GlobalContext);
     const [eventPeriod,setEventPeriod]=useState("")
     const [locationOption, setLocationOption]=useState<any>(null);
-    const events:Events[]=[
+    const events:Event[]=[
         {
             title:"Donations from UPs",
             image:Sample3,
