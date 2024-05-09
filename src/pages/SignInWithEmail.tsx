@@ -1,5 +1,5 @@
 import { useState } from "react"
-import backgroundPattern from "../assets/images/backgrounds/Background_pattern.png"
+import loginimage from "../assets/images/backgrounds/loginimage.svg";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { err_toast } from "../components/Feedback";
 import { Link } from "react-router-dom";
@@ -72,11 +72,15 @@ export default function SignInWithEmail() {
         }
     }
     return (
-        <main style={{background:`url(${backgroundPattern})`}} className={`flex h-screen justify-center flex-col items-center`}>
-            <div className="sm:m-[40px] items-center sm:shadow-lg bg-white flex flex-col sm:w-[520px] max-sm:px-[6vw]">
+        <main className="w-screen h-[100vh]" >
+            <div className="grid grid-cols-2 gap-4">
+            <div>
+          <img src={loginimage} alt="loginimage" />
+        </div>
+        <div className=" flex flex-col mx-32 mt-20 ">
             <div className="sm:w-[360px] my-[40px]">
                  <div className="sm:mb-[40px] gap-[8px] flex flex-col items-center max-sm:my-[20px]">
-                    <p className="text-[30px] font-semibold">Sign in</p>
+                    <p className="text-[30px] font-semibold">Welcome Back</p>
                     <p className="text-[var(--secondary-08)] text-[14px]">Get you connected with your community</p>
                 </div>
                 <form onSubmit={(e)=>handleLogin(e)} className="flex flex-col gap-[12px] text-sm">
@@ -120,6 +124,8 @@ export default function SignInWithEmail() {
                         <p className="text-center">By tapping "Continue", you understand and agree to <Link to="/" className="underline text-[var(--primary-01)]">TownHouse's Terms and Policies</Link></p>
                 </div>
                 </form>
+                
+            </div>
             </div>
             </div>
         </main>

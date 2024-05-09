@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 function GetStarted() {
     let API_URL='https://townhouse-server.onrender.com'
     let navigate=useNavigate()
+    
     return (
         <main style={{background:`url(${backgroundPattern})`}} className={`flex h-screen justify-center flex-col items-center`}>
             <div className="sm:m-[40px] items-center sm:shadow-lg bg-white flex flex-col sm:w-[520px] max-sm:px-[3vw]">
