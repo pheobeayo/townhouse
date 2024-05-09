@@ -72,12 +72,13 @@ function App() {
   }
 
   useEffect(()=>{
-      if(searchParams.has('access_token')===true||$userData!==null){
+        if(searchParams.has('access_token')===true||$userData!==null){
             authenticate()
-      }else{
-        setIsAuth(true)
-        setIsLoading(false)
-      }
+        }else{
+            setIsAuth(false)
+            setIsLoading(false)
+        }
+      //setIsAuth(true)
   },[isAuth]);
 
   return (

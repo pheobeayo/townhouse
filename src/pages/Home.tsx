@@ -110,7 +110,7 @@ export default function Home() {
                         </Link>
                     </div>
                     <div className="grid max-sm:grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
-                        {events.map((event)=>{
+                        {events.slice(0,5).map((event)=>{
                             return(
                                 <div className="flex rounded-[20px] gap-4 border-[1px] flex-col p-4">
                                     <div className="flex gap-4">
@@ -168,7 +168,7 @@ export default function Home() {
                         </Link>
                     </div>
                     <div className="grid max-sm:grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
-                        {bulletins.map((bulletin)=>{
+                        {bulletins.slice(0,5).map((bulletin)=>{
                             return(
                                 <div className="flex rounded-[20px] gap-4 border-[1px]">
                                     <img src={bulletin.image} alt={bulletin.title} className="w-[182px] h-[200px] rounded-bl-[20px] rounded-tl-[20px]"/>

@@ -2,6 +2,7 @@ import { MdClose } from "react-icons/md";
 import { User } from "../../types/definitions";
 import Illustration from "../../assets/images/icons/Illustration.png"
 import { CiLock } from "react-icons/ci";
+import { IoMdSend } from "react-icons/io";
 
 type CongratulationProps={
     data:{
@@ -77,6 +78,70 @@ export function NewFeatures(props:NewFeaturesProps){
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    )
+}
+
+
+type CommentProps={
+    data:{
+        //userInfo:User,
+        functions:{
+            toggleDialog:any
+        }
+    }
+}
+
+
+export function Comment(props:commentProps){
+    return(
+        <div id={`comment_dialog`} onDoubleClick={()=>props.data.functions.toggleDialog(`comment_dialog`)} className="fixed top-0 bottom-0 left-0 right-0 z-20 bg-[#101828]/10 none">
+            <div className="flex items-center h-screen">
+
+                <div className="fixed md:scale-[0.9] md:ml-auto md:w-[500px] md:h-[600px] bg-[var(--grey-1-fill)] focus:ring-1 focus:ring-violet-300 rounded-md right-10">
+
+                <div id="dialog" className="items-center flex flex-col  justify-center">
+                    <div className="rounded-t-md p-6 text-white w-full h-[185px] bg-[var(--primary-01)]">
+                        <div className="flex ml-auto mb-[8px] justify-end h-[22px] pb-[4px]">
+                            <MdClose onClick={()=>props.data.functions.toggleDialog(`comment_dialog`)} className="w-[24px] h-[24px] cursor-pointer"/>
+                        </div>
+                        <div className="flex gap-4">
+                            <img src="/favicon.png" className="w-[30px] h-[30px] rounded-[50]" alt=""/>
+                            <div className="flex flex-col gap-3">
+                                <div>
+                                    <p className="text-lg font-semibold">Alan Walker</p>
+                                    <p className="text-[14px]">Member since May 2024</p>
+                                </div>
+                                <div>
+                                    <p className="text-lg font-semibold">Pet Sitter Needed for the weekend</p>
+                                    <p className="text-[14px]">I need a pet sitter for my cat for the weekend from 10th to 13th May. Your recommendation would be helpful. Thanks</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="flex flex-col justify-center items-center w-full p-6"> 
+                        <div className="flex w-full h-[320px] flex-col gap-3 pb-4">
+                            <div className="w-full">
+                                <p className="text-gray-500 font-semibold">You</p>
+                                <div className="rounded-md bg-[var(--primary-01)] p-2 text-white">
+                                    <p className="flex">I'll be expecting, Thank you.</p>
+                                </div>
+                            </div>
+                            <div></div>
+                        </div>
+                        <div className="flex gap-2 w-full">
+                            <form className="flex gap-2 text-[gray-7-text] items-center justify-center border-[1px] px-4 py-2 rounded-[20px] border-[var(--gray-5-stroke)]">
+                                <input type="text" placeholder="Comment" className="outline-none sm:w-[400px]"/>
+                                <button>
+                                    <IoMdSend  className="w-[20px] h-[20px] text-[var(--primary-01)]"/>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             </div>
         </div>
     )
