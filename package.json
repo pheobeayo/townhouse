@@ -17,6 +17,7 @@
     "url": "https://github.com/aimset-hackathon-team6/Townhall"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.3.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.1",
