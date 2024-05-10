@@ -1,16 +1,16 @@
-import { openDialog } from "../components/actions"
 //import { FaBuilding, FaFacebook, FaPhone } from "react-icons/fa"
 //import { FaLocationPin } from "react-icons/fa6";
 import { useContext, useEffect } from "react";
 import { GlobalContext } from "../context";
-import { CiLocationOn, CiSearch, CiCalendarDate, CiShare2 } from "react-icons/ci";
-import { IoIosNotificationsOutline, IoIosHeartEmpty } from "react-icons/io";
+import { CiLocationOn, CiCalendarDate, CiShare2 } from "react-icons/ci";
+import { IoIosHeartEmpty } from "react-icons/io";
 import { AiOutlineMessage } from "react-icons/ai";
 import { Link } from "react-router-dom"
 import { MdChevronRight } from "react-icons/md";
 import Sample1 from "../assets/images/sample1.svg"
 import Sample2 from "../assets/images/sample2.png"
 import { Event, Bulletin } from "../types/definitions";
+import Nav from "../components/Nav"
 
 export default function Home() { 
     const {username,photo} =useContext(GlobalContext);
@@ -74,30 +74,7 @@ export default function Home() {
 	},[])
     return (
         <div>
-			<div className="flex w-full max-sm:text-base  items-center justify-between">
-                <p className="text-2xl max-sm:text-base capitalize">Hi, {username}</p>
-                <button onClick={()=>openDialog("new_features_dialog")}>
-                    <IoIosNotificationsOutline className="w-[24px] h-[24px] hover:text-[var(--primary-01)]"/>
-                </button>
-                <form className="flex gap-2 text-[gray-7-text] items-center justify-center border-[1px] px-4 py-2 rounded-[20px] border-[var(--gray-5-stroke)]">
-                    <CiSearch className="w-[20px] h-[20px]"/>
-                    <input type="text" placeholder="Search" className="outline-none sm:w-[400px]"/>
-                </form>
-                <div className="flex justify-center items-center gap-2">
-                    <CiLocationOn className="w-[16px] h-[16px]"/>
-                    <p>Rotterdam</p>
-                </div>
-                <div>
-                    {photo===null?(
-                        <div className="bg-gray-300 flex items-center justify-center w-[42px] h-[42px] rounded-[30px]">
-                            <span className="uppercase">{username.slice(0,2)}</span>
-                        </div>
-                    ):(
-                        <img src={photo} alt="user profile" className="w-[42px] h-[42px] rounded-[30px]"/>
-                    )}
-                </div> 
-			</div>
-
+		    <Nav data={{username,photo}}/>	
 		    <p className="mt-10 text-lg sm:w-[600px]">Welcome to Townhouse. Here, you'll find everything you need to get acquainted with your neighbourhood.</p>
 
             <div className="flex mt-6 flex-col gap-10 py-2 pb-10">

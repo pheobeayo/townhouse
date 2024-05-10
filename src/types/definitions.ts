@@ -8,6 +8,7 @@ export interface User{
 }
 
 interface Comment{
+    id?:string,
     from:string,
     to:string,
     message:string,
@@ -16,11 +17,13 @@ interface Comment{
 }
 
 interface Like{
+    id?:string,
     from:string,
     to:string
 }
 
 export interface Event{
+    id?:string,
     image:string,
     title:string,
     description?:string,
@@ -35,6 +38,7 @@ export interface Event{
 }
 
 export interface Bulletin{
+    id?:string,
     title:string,
     description:string,
     postedOn:string,

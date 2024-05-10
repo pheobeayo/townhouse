@@ -3,8 +3,6 @@ import { openDialog } from "../components/actions"
 //import { FaLocationPin } from "react-icons/fa6";
 import { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../context";
-import { CiLocationOn, CiSearch } from "react-icons/ci";
-import { IoIosNotificationsOutline } from "react-icons/io";
 import { FaRegThumbsUp } from "react-icons/fa6";
 import { FaRegSmile } from "react-icons/fa";
 import { AiOutlineMessage } from "react-icons/ai";
@@ -14,6 +12,7 @@ import Select from 'react-select';
 import Sample3 from "../assets/images/sample3.svg"
 import {Event} from "../types/definitions"
 import { Comment } from "../components/dialog"
+import Nav from "../components/Nav"
 
 type OptionType={
     value:string,
@@ -32,6 +31,7 @@ export default function Events() {
     const [locationOption, setLocationOption]=useState<any>(null);
     const events:Event[]=[
         {
+            id:"0",
             title:"Donations from UPs",
             image:Sample3,
             host:"John Doe",
@@ -43,6 +43,7 @@ export default function Events() {
             attendees:25
         },
         {
+            id:"1",
             title:"Donations from UPs",
             image:Sample3,
             host:"John Doe",
@@ -54,6 +55,7 @@ export default function Events() {
             attendees:25
         },
         {
+            id:"2",
             title:"Donations from UPs",
             image:Sample3,
             host:"John Doe",
@@ -65,6 +67,7 @@ export default function Events() {
             attendees:25
         },
         {
+            id:"3",
             title:"Donations from UPs",
             image:Sample3,
             host:"John Doe",
@@ -113,30 +116,7 @@ export default function Events() {
     },[eventPeriod])
     return (
         <div>
-			<div className="flex w-full items-center justify-between">
-                <p className="text-2xl capitalize">Hi, {username}</p>
-                <button>
-                    <IoIosNotificationsOutline className="w-[24px] h-[24px]"/>
-                </button>
-                <form className="flex gap-2 text-[gray-7-text] items-center justify-center border-[1px] px-4 py-2 rounded-[20px] border-[var(--gray-5-stroke)]">
-                    <CiSearch className="w-[20px] h-[20px]"/>
-                    <input type="text" placeholder="Search" className="outline-none sm:w-[400px]"/>
-                </form>
-                <div className="flex justify-center items-center gap-2">
-                    <CiLocationOn className="w-[16px] h-[16px]"/>
-                    <p>Rotterdam</p>
-                </div>
-                <div>
-                    {photo===null?(
-                        <div className="bg-gray-300 flex items-center justify-center w-[42px] h-[42px] rounded-[30px]">
-                            <span className="uppercase">{username.slice(0,2)}</span>
-                        </div>
-                    ):(
-                        <img src={photo} alt="user profile" className="w-[42px] h-[42px] rounded-[30px]"/>
-                    )}
-                </div> 
-			</div>
-
+            <Nav data={{username,photo}}/>	
 			<div className="mt-12 text-[14px]">
 				<div className="pb-1 border-b-[1px] ">
                     <p className="text-2xl font-semibold">Events</p>
@@ -174,7 +154,7 @@ export default function Events() {
                 <div className="mt-8 grid max-sm:grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
                     {events?events.map((event)=>{
                         return(
-                    <div className="flex flex-col gap-3 p-3">
+                    <div className="flex flex-col gap-3 p-3" key={event.id}>
                         <p className="text-[var(--primary-01)] font-semibold text-base">{event.title}</p>
                         <p>{event.subTitle}</p>
                         <img src={event.image} alt={event.title} className="rounded-md w-[533px] h-[130px]"/>
@@ -194,7 +174,7 @@ export default function Events() {
                         </div>
                         <div className="flex gap-3">
                             <button className="text-[var(--primary-01)] font-semibold text-base">Save</button>
-                            <button className="text-[var(--primary-01)] font-semibold text-base">Read more</button>
+                            <Link to={`/events/${event.id}`}  className="text-[var(--primary-01)] font-semibold text-base">Read more</Link>
                         </div>
                         <div className="justify-end flex items-center gap-4">
                             <button className="hover:text-[var(--primary-01)] active:text-[var(--primary-01)]">
@@ -203,7 +183,7 @@ export default function Events() {
                             <button className="hover:text-[var(--primary-01)] active:text-[var(--primary-01)]">
                                 <FaRegSmile  className="w-[20px] h-[20px]"/>
                             </button>
-                            <button className="hover:text-[var(--primary-01)] active:text-[var(--primary-01)]">
+                            <button onClick={()=>openDialog("comment_dialog")}  className="hover:text-[var(--primary-01)] active:text-[var(--primary-01)]">
                                 <AiOutlineMessage className="w-[20px] h-[20px]"/>
                             </button>
                         </div>
@@ -223,7 +203,7 @@ export default function Events() {
                         </div>
                     </button>
 
-                    <button onClick={()=>openDialog("comment_dialog")} className="flex gap-4 items-center justify-center">
+                    <button className="flex gap-4 items-center justify-center">
                         <MdEdit className="w-[24px] text-[var(--primary-01)] h-[24px]"/>
                         <div className="flex flex-col items-start">
                             <p className="text-[var(--primary-01)] font-semibold text-base">Create a new post</p>

@@ -7,6 +7,8 @@ import NotFound from './pages/NotFound';
 import GetStarted from "./pages/GetStarted";
 import Home from './pages/Home';
 import Events from './pages/Events';
+import Event from './pages/Event';
+import Profile from './pages/Profile';
 import Neighbours from './pages/Neighbours';
 import BulletIn from './pages/BulletIn';
 import Settings from './pages/Settings';
@@ -113,7 +115,9 @@ function App() {
               <Route path="/" element={isAuth?<Layout />:<Navigate to="/getstarted"/>}>
                 <Route index element={<Home />} />
                 <Route path="events" element={<Events />} />
+                <Route path="events/:id" element={<Event />} />
                 <Route path="bulletin_board" element={<BulletIn />} />
+                <Route path="profile" element={<Profile />} />
                 <Route path="neighbours" element={<Neighbours />} />
                 <Route path="settings" element={<Settings />} />
               </Route>
