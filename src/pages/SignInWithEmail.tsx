@@ -76,7 +76,7 @@ export default function SignInWithEmail() {
             <div className="sm:m-[40px] items-center sm:shadow-lg bg-white flex flex-col sm:w-[520px] max-sm:px-[6vw]">
             <div className="sm:w-[360px] my-[40px]">
                  <div className="sm:mb-[40px] gap-[8px] flex flex-col items-center max-sm:my-[20px]">
-                    <p className="text-[30px] font-semibold">Sign in</p>
+                    <p className="text-[30px] font-semibold">Welcome back</p>
                     <p className="text-[var(--secondary-08)] text-[14px]">Get you connected with your community</p>
                 </div>
                 <form onSubmit={(e)=>handleLogin(e)} className="flex flex-col gap-[12px] text-sm">
@@ -99,7 +99,7 @@ export default function SignInWithEmail() {
 
                 <a href="#" target="_blank" rel="noopener noreferrer" className="text-[var(--primary-01)] underline text-sm ml-auto">Forget Password?</a>
                 <div className="flex gap-2 w-full items-center">
-                    <button type='button' onClick={()=>navigate(-1)} className={"flex-grow font-semibold cursor-wait mt-5 capitalize py-3 px-6 text-[var(--gray-7-text)] rounded-md bg-[var(--white)] border-[1px]"}>
+                    <button type='button' onClick={()=>navigate(-1)} className={"flex-grow font-semibold mt-5 capitalize py-3 px-6 text-[var(--gray-7-text)] rounded-md bg-[var(--white)] border-[1px]"}>
                         Back
                     </button>
 

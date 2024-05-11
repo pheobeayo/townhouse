@@ -14,7 +14,7 @@ export default function CreateAccount() {
             <div className="sm:m-[40px] items-center sm:shadow-lg bg-white flex flex-col sm:w-[520px] max-sm:px-[3vw]">
                 <div className="sm:w-[360px] my-[40px]">
                 <div className="sm:mb-[40px] gap-[8px] flex flex-col items-center max-sm:my-[20px]">
-                    <p className="text-[30px] font-semibold">Sign in</p>
+                    <p className="text-[30px] font-semibold">Welcome back</p>
                     <p className="text-[var(--secondary-08)] text-[14px]">Get you connected with your community</p>
                 </div>
                 <div  className="flex flex-col gap-[12px] text-sm">

@@ -108,13 +108,13 @@ function App() {
             />
             <Toaster/>
             <Routes>
-              <Route index element={<LandingPage/>} />
+              <Route path="/landing_page" element={!isAuth?<LandingPage/>:<Navigate to="/"/>}/>
               <Route path="/getstarted" element={!isAuth?<GetStarted/>:<Navigate to="/"/>}/>
-              <Route path="/log-in" element={!isAuth?<SignIn />:<Navigate to="/"/>} />
+              <Route path="/sign_in" element={!isAuth?<SignIn />:<Navigate to="/"/>} />
               <Route path="/sign_in_with_email" element={!isAuth?<SignInWithEmail />:<Navigate to="/"/>} />
               <Route path="/verify_account" element={!isAuth?<VerifyAccount/>:<Navigate to="/"/>}/>
               <Route path="/sign_up_with_email" element={!isAuth?<SignUpWithEmail />:<Navigate to="/"/>} />
-              <Route path="/" element={isAuth?<Layout />:<Navigate to="/getstarted"/>}>
+              <Route path="/" element={isAuth?<Layout />:<Navigate to="/landing_page"/>}>
                 <Route index element={<Home />} />
                 <Route path="events" element={<Events />} />
                 <Route path="events/:id" element={<Event />} />

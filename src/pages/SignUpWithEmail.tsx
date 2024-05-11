@@ -117,7 +117,7 @@ export default function SignInWithEmail() {
                 </div>
 
                 <div className="flex gap-2 w-full items-center">
-                    <button type="button" onClick={()=>navigate(-1)} className={"flex-grow font-semibold cursor-wait mt-1 capitalize py-3 px-6 text-[var(--gray-7-text)] rounded-md bg-[var(--white)] border-[1px]"}>
+                    <button type="button" onClick={()=>navigate(-1)} className={"flex-grow font-semibold mt-1 capitalize py-3 px-6 text-[var(--gray-7-text)] rounded-md bg-[var(--white)] border-[1px]"}>
                         Back
                     </button>
 

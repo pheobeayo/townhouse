@@ -6,31 +6,30 @@ import { Link } from "react-router-dom";
 export default function Header () {
 
   return (
-    <nav className="bg-white">
-      <div className="fixed top-0 right-0 left-0 bg-gradient z-40 bg-white p-2 border-y ">
-        <div className="flex gap-2 justify-center items-center px-10 pt-8 pr-10">
-          <img src={landinglogo} alt="landinglogo" />
+    <nav>
+      <div className="fixed top-0 right-0 left-0 bg-gradient z-40 bg-white px-6 py-3 border-y ">
+        <div className="flex gap-2 justify-center items-center">
+          <img src={landinglogo} className="h-[40px] w-[160px]" alt="landinglogo" />
 
-          <ul className="flex m-auto gap-16 ">
-            <li className="hidden md:inline-block text-black text-xl font-serif hover:text-[#DC0E62] ">
+          <ul className="flex m-auto gap-16 text-lg">
+              <li className="hidden md:inline-block hover:text-[var(--primary-01)] ">
               <Link to="/">Home</Link>
             </li>
-            <li className="hidden md:inline-block text-black text-xl font-serif hover:text-[#DC0E62]">
+            <li className="hidden md:inline-block hover:text-[var(--primary-01)]">
               <Link to="/about">About</Link>
             </li>
-            <li className="hidden md:inline-block  text-black text-xl font-serif hover:text-[#DC0E62]">
+            <li className="hidden md:inline-block hover:text-[var(--primary-01)]">
               <Link to="/contact">Contact</Link>
             </li>
            
           </ul>
 
           <Link
-              to="/log-in"
-              style={{ textDecoration: "none", color: "#ffffff" }}
+              to="/sign_in"
             >
               {" "}
-              <button className="bg-[#DC0E62] hover:bg-[##FF5100] text-[#ffffff] font-bold py-2 px-4 border border-[#DC0E62] rounded w-40">
-                Log in{" "}
+              <button className="bg-[var(--primary-01)] hover:bg-[var(--primary-02)] text-white font-semibold py-2 px-4 border border-[var(--primary-01)] rounded w-40">
+                Sign in
               </button>
             </Link>
 
