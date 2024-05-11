@@ -20,12 +20,13 @@ import VerifyAccount from "./pages/VerifyAccount";
 import { User } from "./types/definitions";
 import { GlobalContext } from "./context";
 import LandingPage from "./pages/LandingPage";
+import CreatePost from "./pages/CreatePost";
 
 function App() {
-    let API_URL='https://townhouse-server.onrender.com'
+    const API_URL='https://townhouse-server.onrender.com'
     const searchParams = new URLSearchParams(window.location.search);
 
-    let accessTokenQuery:any=searchParams.get('access_token');
+    const accessTokenQuery:any=searchParams.get('access_token');
 
   const [user,setUser]=useState<User>({
     photo:"",
@@ -38,24 +39,24 @@ function App() {
   const [isLoading,setIsLoading]=useState(true)
   const [isAuth,setIsAuth]=useState(false);
 
-  let $userData:any=localStorage.getItem('user_data')
-  let parsedUserData:User=JSON.parse($userData)
+  const $userData:any=localStorage.getItem('user_data')
+  const parsedUserData:User=JSON.parse($userData)
   async function authenticate(){
     try{
-        let url=searchParams.has('access_token')===false&&$userData!==null?`${API_URL}/api/users/${parsedUserData.email}`:`${API_URL}/api/authenticate/${JSON.parse(accessTokenQuery)}`
-        let response=await fetch(url,{
+        const url=searchParams.has('access_token')===false&&$userData!==null?`${API_URL}/api/users/${parsedUserData.email}`:`${API_URL}/api/authenticate/${JSON.parse(accessTokenQuery)}`
+        const response=await fetch(url,{
             method:"GET",
             headers:{
                 authorization:searchParams.has('access_token')===false&&$userData!==null?`Bearer ${parsedUserData.accessToken}`:""
             }
         })
-        let parseRes=await response.json()
+        const parseRes=await response.json()
         if(parseRes.error){
             setIsAuth(false)
             setIsLoading(false)
         }else{
-            let user:any=parseRes.data;
-            let userData:User={
+            const user:any=parseRes.data;
+            const userData:User={
                 photo:user.photo,
                 email:user.email,
                 username:user.username,
@@ -70,7 +71,7 @@ function App() {
             setIsLoading(false)
         }
     }catch(error:any){
-        let errorMessage:string=error.message==="Fail to fetch"?"No internet":`${error.message}`
+        const errorMessage:string=error.message==="Fail to fetch"?"No internet":`${error.message}`
         console.log(errorMessage)
 	    setIsAuth(false)
         setIsLoading(false)
@@ -122,6 +123,7 @@ function App() {
                 <Route path="events" element={<Events />} />
                 <Route path="events/:id" element={<Event />} />
                 <Route path="bulletin_board" element={<BulletIn />} />
+                <Route path="create_post" element={<CreatePost/>}/>
                 <Route path="profile" element={<Profile />} />
                 <Route path="neighbours" element={<Neighbours />} />
                 <Route path="create_group" element={<CreateGroup />} />

@@ -106,7 +106,7 @@ export default function Events() {
     ]
 
     function toggleDialog(id:string){
-        let dialog_bg=document.getElementById(id);
+        const dialog_bg=document.getElementById(id);
         dialog_bg?.classList.add("ease-in-out");
         dialog_bg?.classList.toggle("none");
         dialog_bg?.classList.add("duration-1000");
@@ -220,5 +220,5 @@ export default function Events() {
             <Comment data={{functions:{toggleDialog}}}/>
         </div>
     );
-};
+}
 

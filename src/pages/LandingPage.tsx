@@ -9,12 +9,13 @@ import towntalk from "../assets/images/backgrounds/towntalk.svg";
 import neighbourhoodheart from "../assets/images/backgrounds/neighbourhoodheart.svg";
 import LandingFooter from "../components/LandingFooter";
 
+
 export default function LandingPage() {
   return (
     <main className="bg-white">
       <Header />
       <section className="mt-40">
-        <div className=" grid grid-cols-2 gap-10">
+        <div className=" grid md:grid-cols-2 max-sm:grid-cols-1 gap-10">
           <div className="bg-white w-full mx-12">
             <h1 className="text-black font-semibold text-6xl mt-8">
               Townhouse - Where
@@ -44,7 +45,7 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
-      <div className=" grid grid-cols-2 gap-4">
+      <div className=" grid md:grid-cols-2 gap-4 max-sm:grid-cols-1">
       <div className="content-card w-full md:w-[50%] mb-5 h-full  px-4 mt-10 md:mx-20 ">
         <div className='grid place-items-center'>
           <img src={starticon} alt="starticon" className="h-28 mx-10" />
@@ -94,7 +95,7 @@ export default function LandingPage() {
         
         </div>
       </div>
-      <div className=" grid grid-cols-2 gap-10 mt-20">
+      <div className=" grid md:grid-cols-2 max-sm:grid-cols-1 gap-10 mt-20">
         <div className="mx-10">
           <img src={townevent} alt="townevent" className="h-3/4" />
         </div>
@@ -114,7 +115,7 @@ export default function LandingPage() {
           </p>
         </div>
       </div>
-      <div className=" grid grid-cols-2 gap-10 mt-20">
+      <div className=" grid md:grid-cols-2 max-sm:grid-cols-1 gap-10 mt-20">
         <div className="bg-white mx-10">
           <h4 className="text-[var(--primary-01)] text-base font-bold">TOWNTALK</h4>
           <h1 className="text-5xl font-bold mt-4">
@@ -134,7 +135,7 @@ export default function LandingPage() {
           <img src={towntalk} alt="towntalk" className="h-3/4" />
         </div>
       </div>
-      <div className="grid grid-cols-2 gap-10 mt-20">
+      <div className="grid md:grid-cols-2 max-sm:grid-cols-1 gap-10 mt-20">
         <div className="mx-10">
           <img src={neighbourhoodheart} alt="neighbourhoodheart"  className="h-3/4" />
         </div>
@@ -155,6 +156,6 @@ export default function LandingPage() {
         </div>
       </div>
       <LandingFooter/>
-    </main>
+     </main>
   );
 }
