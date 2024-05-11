@@ -26,7 +26,7 @@ const options:OptionType[] = [
 
 export default function Events() { 
     const searchParams = new URLSearchParams(window.location.search);
-    const {username,photo} =useContext(GlobalContext);
+    const {username,photo,location} =useContext(GlobalContext);
     const [eventPeriod,setEventPeriod]=useState("")
     const [locationOption, setLocationOption]=useState<any>(null);
     const events:Event[]=[
@@ -39,8 +39,9 @@ export default function Events() {
             subTitle:`We've donating and helding fundraiser from UPs `,
             description:`Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incididunt ut labore et dolore.`,
             startingTime:"15:00",
-            location:"City Museum",
-            attendees:25
+            eventLocation:"City Museum",
+            attendees:25,
+            creatorEmail:"", eventTags:[], privacy:false
         },
         {
             id:"1",
@@ -51,8 +52,9 @@ export default function Events() {
             subTitle:`We've donating and helding fundraiser from UPs `,
             description:`Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incididunt ut labore et dolore.`,
             startingTime:"15:00",
-            location:"City Museum",
-            attendees:25
+            eventLocation:"City Museum",
+            attendees:25,
+            creatorEmail:"", eventTags:[], privacy:false
         },
         {
             id:"2",
@@ -63,8 +65,9 @@ export default function Events() {
             subTitle:`We've donating and helding fundraiser from UPs `,
             description:`Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incididunt ut labore et dolore.`,
             startingTime:"15:00",
-            location:"City Museum",
-            attendees:25
+            eventLocation:"City Museum",
+            attendees:25,
+            creatorEmail:"", eventTags:[], privacy:false
         },
         {
             id:"3",
@@ -75,8 +78,9 @@ export default function Events() {
             subTitle:`We've donating and helding fundraiser from UPs `,
             description:`Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incididunt ut labore et dolore.`,
             startingTime:"15:00",
-            location:"City Museum",
-            attendees:25
+            eventLocation:"City Museum",
+            attendees:25,
+            creatorEmail:"", eventTags:[], privacy:false
         }
 
     ]
@@ -116,7 +120,7 @@ export default function Events() {
     },[eventPeriod])
     return (
         <div>
-            <Nav data={{username,photo}}/>	
+            <Nav data={{username,photo,location}}/>	
 			<div className="mt-12 text-[14px]">
 				<div className="pb-1 border-b-[1px] ">
                     <p className="text-2xl font-semibold">Events</p>
@@ -166,7 +170,7 @@ export default function Events() {
                                 <p>{event.date}</p>
                             </div>
                             <div className="flex border-[1px] border-[var(--gray-5-stroke)] items-center justify-center rounded-md h-[24px] px-4">
-                                <p>{event.location}</p>
+                                <p>{event.eventLocation}</p>
                             </div>
                             <div className="flex border-[1px] border-[var(--gray-5-stroke)]  items-center justify-center rounded-md h-[24px] px-4">
                                 <p>{event.startingTime}</p>
@@ -195,13 +199,13 @@ export default function Events() {
 
             <div className="fixed bottom-0 px-10 sm:left-[150px] z-10 bg-white right-0 h-[70px]">
                 <div className="flex items-center justify-between h-full">
-                    <button className="flex gap-4 items-center justify-center">
+                    <Link to="/create_group" className="flex gap-4 items-center justify-center">
                         <MdOutlineGroupAdd  className="w-[24px] text-[var(--primary-01)] h-[24px]"/>
                         <div className="flex flex-col items-start">
                             <p className="text-[var(--primary-01)] font-semibold text-base">Create group event</p>
                             <p className="text-gray-500 text-[13px]">Add a new event to the group</p>
                         </div>
-                    </button>
+                    </Link>
 
                     <button className="flex gap-4 items-center justify-center">
                         <MdEdit className="w-[24px] text-[var(--primary-01)] h-[24px]"/>

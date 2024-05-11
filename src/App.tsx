@@ -6,6 +6,7 @@ import Layout from './pages/Layout';
 import NotFound from './pages/NotFound';
 import GetStarted from "./pages/GetStarted";
 import Home from './pages/Home';
+import CreateGroup from './pages/CreateGroup';
 import Events from './pages/Events';
 import Event from './pages/Event';
 import Profile from './pages/Profile';
@@ -31,7 +32,8 @@ function App() {
     email:"",
     username:"",
     phoneNumber:0,
-    emailVerified:false
+    emailVerified:false,
+    location:""
   })
   const [isLoading,setIsLoading]=useState(true)
   const [isAuth,setIsAuth]=useState(false);
@@ -59,7 +61,8 @@ function App() {
                 username:user.username,
                 accessToken:user.access_token,
                 phoneNumber:user.phone_number,
-                emailVerified:user.email_verified
+                emailVerified:user.email_verified,
+                location:user.location
             }
             localStorage.setItem('user_data',JSON.stringify(userData))
             setUser(userData)
@@ -121,6 +124,7 @@ function App() {
                 <Route path="bulletin_board" element={<BulletIn />} />
                 <Route path="profile" element={<Profile />} />
                 <Route path="neighbours" element={<Neighbours />} />
+                <Route path="create_group" element={<CreateGroup />} />
                 <Route path="settings" element={<Settings />} />
               </Route>
               <Route path="*" element={<NotFound />} />

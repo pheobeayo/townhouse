@@ -13,7 +13,7 @@ import { Event, Bulletin } from "../types/definitions";
 import Nav from "../components/Nav"
 
 export default function Home() { 
-    const {username,photo} =useContext(GlobalContext);
+    const {username,photo, location} =useContext(GlobalContext);
 
     const events:Event[]=[
         {
@@ -22,8 +22,9 @@ export default function Home() {
             startingTime:"3pm",
             date:"Friday, May 31st",
             attendees:25,
-            location:"10 Fiesta Lane, Rotterdam, Netherland",
+            eventLocation:"10 Fiesta Lane, Rotterdam, Netherland",
             image:Sample1,
+            creatorEmail:"", eventTags:[], privacy:false
         },
         {
             title:"Fiesta Lane Block Party",
@@ -31,8 +32,9 @@ export default function Home() {
             startingTime:"3pm",
             date:"Friday, May 31st",
             attendees:25,
-            location:"10 Fiesta Lane, Rotterdam, Netherland",
+            eventLocation:"10 Fiesta Lane, Rotterdam, Netherland",
             image:Sample1,
+            creatorEmail:"", eventTags:[], privacy:false
         },
         {
             title:"Fiesta Lane Block Party",
@@ -40,8 +42,9 @@ export default function Home() {
             startingTime:"3pm",
             date:"Friday, May 31st",
             attendees:25,
-            location:"10 Fiesta Lane, Rotterdam, Netherland",
+            eventLocation:"10 Fiesta Lane, Rotterdam, Netherland",
             image:Sample1,
+            creatorEmail:"", eventTags:[], privacy:false
         }
     ]
 
@@ -74,7 +77,7 @@ export default function Home() {
 	},[])
     return (
         <div>
-		    <Nav data={{username,photo}}/>	
+		    <Nav data={{username,photo,location}}/>	
 		    <p className="mt-10 text-lg sm:w-[600px]">Welcome to Townhouse. Here, you'll find everything you need to get acquainted with your neighbourhood.</p>
 
             <div className="flex mt-6 flex-col gap-10 py-2 pb-10">
@@ -101,7 +104,7 @@ export default function Home() {
                                             </div>
                                             <div className="flex gap-2 text-[13px]">
                                                 <CiLocationOn className="w-[20px] h-[20px]"/>
-                                                <p>{event.location}</p>
+                                                <p>{event.eventLocation}</p>
                                             </div>
                                             <div className="flex gap-2 mt-2 text-[13px]">
                                                 <p className="w-[20px] h-[20px]">😊</p>

@@ -4,7 +4,8 @@ export interface User{
     username:string,
     accessToken?:string,
     phoneNumber:number,
-    emailVerified:boolean
+    emailVerified:boolean,
+    location:string,
 }
 
 interface Comment{
@@ -31,10 +32,13 @@ export interface Event{
     host:string,
     date:string,
     startingTime:string,
-    location:string,
+    eventLocation:string,
     attendees:number
     likes?:Like[],
-    comments?:Comment[]
+    creatorEmail:string,
+    eventTags:any,
+    comments?:Comment[],
+    privacy:boolean
 }
 
 export interface Bulletin{

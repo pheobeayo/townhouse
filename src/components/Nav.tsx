@@ -5,7 +5,8 @@ import { CiLocationOn, CiSearch } from "react-icons/ci";
 type NavProp={
     data:{
         username:string
-        photo:string
+        photo:string,
+        location:string
     }
 }
 
@@ -27,7 +28,11 @@ export default function Nav(props:NavProp){
                 </form>
                 <div className="flex justify-center items-center gap-2">
                     <CiLocationOn className="w-[16px] h-[16px]"/>
-                    <p>Rotterdam</p>
+                    {props.data.location.includes('null')?(
+                        <button>Enable Location</button>
+                    ):(
+                        <p>{props.data.location}</p>
+                    )}
                 </div>
                 <Link to="/profile">
                     {props.data.photo===null?(

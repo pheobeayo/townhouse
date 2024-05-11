@@ -75,6 +75,7 @@ export default function SignInWithEmail() {
                     username:user.username,
                     accessToken:user.access_token,
                     phoneNumber:user.phone_number,
+                    location:user.location,
                     emailVerified:user.email_verified
                 }
                 success_toast(parseRes.msg)

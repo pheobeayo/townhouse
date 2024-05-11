@@ -71,6 +71,7 @@ export default function SignInWithEmail() {
                     email:user.email,
                     username:user.username,
                     accessToken:user.access_token,
+                    location:user.location,
                     phoneNumber:user.phone_number,
                     emailVerified:user.email_verified
                 }

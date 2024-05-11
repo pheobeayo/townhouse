@@ -7,5 +7,6 @@ export const GlobalContext=createContext<User>({
     username:"",
     accessToken:"",
     phoneNumber:0,
+    location:"",
     emailVerified:false
 })
