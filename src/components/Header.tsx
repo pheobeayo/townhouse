@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 export default function Header () {
 
   return (
-    <nav>
+    <nav className='w-screen'>
       <div className="fixed top-0 right-0 left-0 bg-gradient z-40 bg-white px-6 py-3 border-y ">
         <div className="flex gap-2 justify-center items-center">
           <img src={landinglogo} className="h-[40px] w-[160px]" alt="landinglogo" />

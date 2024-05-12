@@ -41,8 +41,9 @@ export default function BulletIn(){
 
 	useEffect(()=>{
 		window.scrollTo(0,0)
-       
-    },[])
+	},[])
+
+	
     return(
         <main>
             <Nav data={{username,photo,location}}/>	
@@ -93,5 +94,5 @@ export default function BulletIn(){
                         })}
                     </div> 
         </main>
-    )
+    );
 }

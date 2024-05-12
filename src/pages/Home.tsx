@@ -24,32 +24,36 @@ export default function Home() {
             title:"Babysitter available",
             description:`Experienced and reliable babysitter offering childcare service
             in the neighbourhood.`,
-            postedOn:"25 mins ago",
-            image:Sample2
-        },
-        {
-            title:"Babysitter available",
-            description:`Experienced and reliable babysitter offering childcare service
+      postedOn: "25 mins ago",
+      image: Sample2,
+    },
+    {
+      title: "Babysitter available",
+      description: `Experienced and reliable babysitter offering childcare service
             in the neighbourhood.`,
-            postedOn:"25 mins ago",
-            image:Sample2
-        },
-        {
-            title:"Babysitter available",
-            description:`Experienced and reliable babysitter offering childcare service
+      postedOn: "25 mins ago",
+      image: Sample2,
+    },
+    {
+      title: "Babysitter available",
+      description: `Experienced and reliable babysitter offering childcare service
             in the neighbourhood.`,
-            postedOn:"25 mins ago",
-            image:Sample2
-        }
-    ]
+      postedOn: "25 mins ago",
+      image: Sample2,
+    },
+  ];
 
-	useEffect(()=>{
-		window.scrollTo(0,0)
-	},[])
-    return (
-        <div>
-		    <Nav data={{username,photo,location}}/>	
-		    <p className="mt-10 text-lg sm:w-[600px]">Welcome to Townhouse. Here, you'll find everything you need to get acquainted with your neighbourhood.</p>
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  return (
+    <div>
+      <Nav data={{ username, photo, location }} />
+      <p className="mt-10 text-lg sm:w-[600px]">
+        Welcome to Townhouse. Here, you'll find everything you need to get
+        acquainted with your neighbourhood.
+      </p>
 
             <div className="flex mt-6 flex-col gap-10 py-2 pb-10">
                 <div>
@@ -123,54 +127,71 @@ export default function Home() {
                     </div>
                 </div>
 
-                <div>
-                    <div className="flex justify-between w-full">
-                        <p className="font-semibold text-xl mb-4">Bulletin board</p>
-                        <Link to="/bulletin_board" className="flex text-base gap-[2px] items-center justify-center">
-                            <span>View all posts</span>
-                            <MdChevronRight className="w-[20px] h-[20px] mt-1"/>
+        <div>
+          <div className="flex justify-between w-full">
+            <p className="font-semibold text-xl mb-4">Bulletin board</p>
+            <Link
+              to="/bulletin_board"
+              className="flex text-base gap-[2px] items-center justify-center"
+            >
+              <span>View all posts</span>
+              <MdChevronRight className="w-[20px] h-[20px] mt-1" />
+            </Link>
+          </div>
+          <div className="grid max-sm:grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+            {bulletins.slice(0, 5).map((bulletin) => {
+              return (
+                <div className="flex rounded-[20px] gap-4 border-[1px]">
+                  <img
+                    src={bulletin.image}
+                    alt={bulletin.title}
+                    className="w-[182px] h-[200px] rounded-bl-[20px] rounded-tl-[20px]"
+                  />
+                  <div className="flex flex-col gap-1  p-4">
+                    <div className="flex items-center justify-center rounded-[50px] border-[1px] h-[30px] px-1 w-[190px]">
+                      <p className="capitalize text-[13px]">{bulletin.title}</p>
+                    </div>
+                    <p className="text-[13px] mt-2 text-gray-500">
+                      {bulletin.description}
+                    </p>
+
+                    <p className="mt-2 text-[13px] text-[var(--primary-01)]">
+                      {bulletin.postedOn}
+                    </p>
+
+                    <div className="flex justify-between items-center">
+                      <div className="flex gap-4 items-center justify-center">
+                        <button>
+                          <IoIosHeartEmpty className="w-[20px] h-[20px] hover:text-[var(--primary-01)]" />
+                        </button>
+                        <button>
+                          <AiOutlineMessage className="w-[20px] h-[20px] hover:text-[var(--primary-01)]" />
+                        </button>
+                        <button>
+                          <CiShare2 className="w-[20px] h-[20px] hover:text-[var(--primary-01)]" />
+                        </button>
+                      </div>
+                      <div className="flex items-center justify-center gap-3">
+                        <Link
+                          to=""
+                          className="text-[var(--primary-01)] font-semibold"
+                        >
+                          Contact
                         </Link>
+                        <img
+                          src={bulletin.image}
+                          alt={bulletin.title}
+                          className="w-[30px] h-[30px] rounded-[50px]]"
+                        />
+                      </div>
                     </div>
-                    <div className="grid max-sm:grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
-                        {bulletins.slice(0,5).map((bulletin)=>{
-                            return(
-                                <div className="flex rounded-[20px] gap-4 border-[1px]">
-                                    <img src={bulletin.image} alt={bulletin.title} className="w-[182px] h-[200px] rounded-bl-[20px] rounded-tl-[20px]"/>
-                                    <div className="flex flex-col gap-1  p-4">
-                                        <div className="flex items-center justify-center rounded-[50px] border-[1px] h-[30px] px-1 w-[190px]">
-                                            <p className="capitalize text-[13px]">{bulletin.title}</p>
-                                        </div>
-                                        <p className="text-[13px] mt-2 text-gray-500">
-                                            {bulletin.description}
-                                        </p>
-                                        
-                                       <p className="mt-2 text-[13px] text-[var(--primary-01)]">{bulletin.postedOn}</p>
-
-                                        <div className="flex justify-between items-center">
-                                            <div className="flex gap-4 items-center justify-center">
-                                                <button>
-                                                    <IoIosHeartEmpty className="w-[20px] h-[20px] hover:text-[var(--primary-01)]"/>
-                                                </button>
-                                                <button>
-                                                    <AiOutlineMessage className="w-[20px] h-[20px] hover:text-[var(--primary-01)]"/>
-                                                </button>
-                                                <button>
-                                                    <CiShare2 className="w-[20px] h-[20px] hover:text-[var(--primary-01)]"/>
-                                                </button>
-                                            </div>
-                                            <div className="flex items-center justify-center gap-3">
-                                                <Link to="" className="text-[var(--primary-01)] font-semibold">Contact</Link>
-                                                <img src={bulletin.image} alt={bulletin.title} className="w-[30px] h-[30px] rounded-[50px]]"/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            )
-                        })}
-                    </div>
+                  </div>
                 </div>
-           </div>
+              );
+            })}
+          </div>
         </div>
-    );
-};
-
+      </div>
+    </div>
+  );
+}
