@@ -5,14 +5,14 @@
 
 Townhouse is an innovative community engagement platform aimed at enhancing community and resident engagement within neighborhoods. Our goal is to provide a transparent centralized digital space where residents can connect, communicate, and collaborate with one another and local government agencies and their local community.
 
-Figma design: 
+Figma design: https://www.figma.com/file/ePYE09tjXeHEMZxaibLxqc/AIMSET-DESIGN-TEAM?type=design&node-id=1-2&mode=design&t=1GCcKv6x0vKbOyeb-0
 
 ## GitHub Repositories
 Frontend Repository:  Contains the code for the Townhouse user interface, built using web technologies.
 
 Server Repository: Contains the code for Townhouse server responsible for Authentication, data storage, Groups, Marketplace, Bulletin Board, Events and Community Directories.
 
-Deployment Link: 
+Deployment Link: https://townhouse-webapp.web.app/
 
 ## Features 
 
