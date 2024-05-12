@@ -25,7 +25,7 @@ const options: OptionType[] = [
 
 export default function CreateEvent() {
     const navigate = useNavigate()
-    const { user, actions } = useContext(GlobalContext);
+    const { user } = useContext(GlobalContext);
     const { accessToken, email } = user;
 
     const API_URL = `https://townhouse-server.onrender.com`
@@ -92,7 +92,6 @@ export default function CreateEvent() {
                 e.target.reset()
                 setDisable(false)
                 openDialog("congratulation_dialog")
-                actions.getEvents()
             }
         } catch (error: any) {
             setDisable(false)

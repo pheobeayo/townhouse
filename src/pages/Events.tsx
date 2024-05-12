@@ -28,7 +28,7 @@ const options:OptionType[] = [
 export default function Events() { 
     const API_URL=`https://townhouse-server.onrender.com`
     const searchParams = new URLSearchParams(window.location.search);
-    const {user,loader,events,actions}=useContext(GlobalContext);
+    const {user,loader,events}=useContext(GlobalContext);
     const {username,photo,location,email} =user;
     const [eventPeriod,setEventPeriod]=useState("")
     const [locationOption, setLocationOption]=useState<any>(null);
