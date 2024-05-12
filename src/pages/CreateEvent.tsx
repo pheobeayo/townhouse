@@ -12,9 +12,12 @@ type OptionType={
     label:string
 }
 const options:OptionType[] = [
-  { value: 'Rotterdam', label: 'Rotterdam' },
-  { value: 'London', label: 'London' },
-  { value: 'Ramsgate', label: 'Ramsgate' },
+  { value: 'Community Engagement', label: 'Community Engagement' },
+  { value: 'Social Services', label: 'Social Services' },
+  { value: 'Safety and Security', label: 'Safety and Security' },
+  { value:"Infrastructure and Devlopment", label:"Infrastructure and Development" },
+  { value: "Entertainment", label:"Entertainment" },
+  { value:"Environmental Sustainability", label:"Environmental Sustainability" }
 ];
 
 export default function CreateEvent(){
