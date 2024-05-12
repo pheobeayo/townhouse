@@ -23,20 +23,20 @@ interface Like{
     to:string
 }
 
-export interface Event{
+export interface EventType{
     id?:string,
-    image:string,
+    event_photo:string,
     title:string,
     description?:string,
-    subTitle?:string,
+    sub_title?:string,
     host:string,
     date:string,
-    startingTime:string,
-    eventLocation:string,
-    attendees:number
+    starting_time:string,
+    event_location:string,
+    attendees?:any,
     likes?:Like[],
-    creatorEmail:string,
-    eventTags:any,
+    creator_email:string,
+    event_tags:any,
     comments?:Comment[],
     privacy:boolean
 }
@@ -56,4 +56,3 @@ export interface Connect{
     postedOn:string,
     image:string
 }
-

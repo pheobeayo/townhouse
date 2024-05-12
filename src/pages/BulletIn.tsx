@@ -10,8 +10,8 @@ import { Link } from "react-router-dom";
 import { CiShare2 } from "react-icons/ci";
 
 export default function BulletIn(){
-    const {username,photo,location} =useContext(GlobalContext);
-    
+    const {user}=useContext(GlobalContext);
+    const {username,photo,location}=user;
     const bulletins:Bulletin[]=[
         {
             title:"Laura Newcombe",
@@ -47,15 +47,13 @@ export default function BulletIn(){
     return(
         <main>
             <Nav data={{username,photo,location}}/>	
-           
-            
                     <div className="flex justify-between w-full">
                         <p className="font-semibold text-xl mb-4 mt-10">Welcome to the <span className="text-[#DC0E62]">Bulletin board! </span>
                         <br/> 
                         Here you can find all listings available in your community.</p>
                         <Link to="/create_post" className="flex text-base gap-[2px] items-center justify-center">
                             <span><button  className="px-2 sm:px-4 py-2 bg-[var(--primary-01)] hover:bg-[var(--primary-02)] text-white rounded-lg w-40 focus:outline-none ">Create Post</button></span>
-                            
+
                         </Link>
                     </div>
                     <div className="grid max-sm:grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-2">
@@ -70,7 +68,7 @@ export default function BulletIn(){
                                         <p className="text-[13px] mt-2 text-gray-500">
                                             {bulletin.description}
                                         </p>
-                                        
+
                                        <p className="mt-2 text-[13px] text-[var(--primary-01)]">{bulletin.postedOn}</p>
 
                                         <div className="flex justify-between items-center">
@@ -94,7 +92,7 @@ export default function BulletIn(){
                                 </div>
                             )
                         })}
-                    </div>
+                    </div> 
         </main>
     );
 }

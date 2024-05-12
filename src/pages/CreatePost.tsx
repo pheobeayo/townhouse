@@ -2,11 +2,13 @@ import Nav from "../components/Nav";
 import { useContext, useEffect } from "react";
 import { GlobalContext } from "../context";
 import { MdChevronLeft } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 export default function CreatePost() {
-  const { username, photo, location } = useContext(GlobalContext);
+  const navigate=useNavigate()  
+  const {user}=useContext(GlobalContext);
+  const { username, photo, location } =user
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -17,13 +19,12 @@ export default function CreatePost() {
       <Nav data={{ username, photo, location }} />
 
       <div className="flex justify-between w-full">
-        <Link
-          to="/bulletin_board"
+        <button onClick={()=>navigate(-1)} 
           className="flex text-base gap-[2px] items-center justify-center"
         >
           <MdChevronLeft className="w-[20px] h-[20px] " />
           <p className="font-semibold text-xl mb-4 mt-4">All posts</p>
-        </Link>
+        </button>
         <div className="inline-flex rounded-md shadow-sm mt-4" role="group">
           <button
             type="button"
@@ -43,7 +44,7 @@ export default function CreatePost() {
         <div className="flex rounded-[20px] gap-4 ">
           <div className="flex items-center justify-center w-full">
             <label
-              
+
               className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
             >
               <div className="flex flex-col items-center justify-center pt-5 pb-6">
@@ -104,7 +105,7 @@ export default function CreatePost() {
             <button
                   type="submit"
                   className="w-1/4 px-8 py-2 mb-2 font-semibold rounded-lg text-white bg-[#DC0E62]"
-                  
+
                 >
                   Post
                 </button>

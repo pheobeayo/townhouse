@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react";
 import { GlobalContext } from "../context";
-import Nav from "../components/Nav";
+import Nav from "../components/Nav"
 import { Connect } from "../types/definitions";
 import sample6 from "../assets/images/sample6.svg";
 import sample5 from "../assets/images/sample5.svg";
@@ -11,10 +11,12 @@ import { AiOutlineMessage } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { CiShare2 } from "react-icons/ci";
 
-export default function Neighbours() {
-  const { username, photo, location } = useContext(GlobalContext);
 
-  const connect: Connect[] = [
+export default function Neighbours(){
+    const {user}=useContext(GlobalContext);
+    const {username,photo,location}=user;
+
+    const connect: Connect[] = [
     {
       title: "Advice request",
       description: `Does anyone know how to get an aztec 984 drone to work?!`,
@@ -80,17 +82,17 @@ export default function Neighbours() {
         No job is too small.`,
         postedOn: "25 mins ago",
         image: sample6,
-      },
+      }
+    ]
 
-  ];
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-  return (
+	useEffect(()=>{
+		window.scrollTo(0,0)
+       
+    },[])
+    return (
     <main>
       <Nav data={{ username, photo, location }} />
-      <div className="flex justify-between w-full">
+      <div className="flex justify-between">
         <p className="font-semibold text-xl mb-4 mt-10">
           Welcome to the{" "}
           <span className="text-[#DC0E62]">Neighbour Connect! </span>
@@ -111,7 +113,7 @@ export default function Neighbours() {
           </span>
         </Link>
       </div>
-      <div className="grid max-sm:grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-2">
+      <div className="grid max-sm:grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-2 mb-6">
         {connect.slice(0, 10).map((connect) => {
           return (
             <div className="flex rounded-[20px] gap-4 border-[1px]">
@@ -163,6 +165,6 @@ export default function Neighbours() {
           );
         })}
       </div>
-    </main>
-  );
+    </main>    
+    )
 }
