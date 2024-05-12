@@ -3,17 +3,21 @@ import { User } from "../../types/definitions";
 import Illustration from "../../assets/images/icons/Illustration.png"
 import { CiLock } from "react-icons/ci";
 import { IoMdSend } from "react-icons/io";
+import { useLocation, useNavigate } from "react-router-dom";
 
 type CongratulationProps={
     data:{
-        userInfo:User,
+        user:User,
         functions:{
             toggleDialog:any
-        }
+        },
+        message:string
     }
 }
 
 export function CongratulationDialog(props:CongratulationProps){
+    const location=useLocation()
+    const navigate=useNavigate()
     return(
         <div id={`congratulation_dialog`} onDoubleClick={()=>props.data.functions.toggleDialog(`congratulation_dialog`)}className="fixed top-0 bottom-0 left-0 right-0 z-20 bg-[#101828]/40 none">
             <div className="flex flex-col justify-center items-center h-[100vh]">
@@ -25,14 +29,20 @@ export function CongratulationDialog(props:CongratulationProps){
                         <img src={Illustration} alt="illustration"/> 
                         <div className="flex flex-col items-center justify-center gap-3 mt-2 pb-4">
                             <p className="text-3xl font-semibold">Congratulations</p>
-                            <p className="text-sm text-center">Your account experience has been personalized successfully</p>
+                            <p className="text-sm text-center">{props.data.message}</p>
                         </div>
                         <div className="flex gap-2 w-full">
                            <button onClick={()=>props.data.functions.toggleDialog(`congratulation_dialog`)} className={"flex-grow font-semibold mt-5 capitalize py-3 px-6 text-[var(--gray-7-text)] rounded-md bg-[var(--white)] border-[1px]"}>
                                 Dismiss
                             </button>
 
-                            <button onClick={()=>props.data.functions.toggleDialog(`congratulation_dialog`)} className={"flex-grow mt-5 capitalize py-3 px-6 text-white rounded-md bg-[var(--primary-01)]"}>
+                            <button onClick={()=>{
+                                if(location.pathname==="/create_event"){
+                                    navigate("/events")
+                                }else{
+                                    navigate("/home")
+                                }
+                            }} className={"flex-grow mt-5 capitalize py-3 px-6 text-white rounded-md bg-[var(--primary-01)]"}>
                                 View more
                             </button>
                         </div>
@@ -45,7 +55,7 @@ export function CongratulationDialog(props:CongratulationProps){
 
 type NewFeaturesProps={
     data:{
-        //userInfo:User,
+        //user:User,
         functions:{
             toggleDialog:any
         }
@@ -83,10 +93,32 @@ export function NewFeatures(props:NewFeaturesProps){
     )
 }
 
+type ImageDialogProps={
+    data:{
+        imageUrl:string,
+        id:string,
+        functions:{
+            toggleDialog:any
+        }
+    }
+}
+
+
+export function ImageDialog(props:ImageDialogProps){
+    return(
+        <div id={`image_dialog_${props.data.id}`} onClick={()=>props.data.functions.toggleDialog(`image_dialog_${props.data.id}`)} className="fixed top-0 bottom-0 left-0 right-0 z-20 bg-[#101828]/40 none">
+            <div className="flex flex-col justify-center items-center h-[100vh]">
+                <img src={props.data.imageUrl} alt="image" className="w-[70vw] h-[80vh] object-cover"/>
+            </div>
+        </div>
+    )
+}
+
+
 
 type CommentProps={
     data:{
-        //userInfo:User,
+        //user:User,
         functions:{
             toggleDialog:any
         }

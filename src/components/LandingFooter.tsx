@@ -38,12 +38,8 @@ export default function LandingFooter() {
       </div>
         </figcaption>
       </figure>
-      <div className='grid place-items-center mt-10 '>
-      <button
-                className="px-2 sm:px-4 py-2 bg-[var(--primary-01)] hover:bg-[var(--primary-02)] text-white rounded-lg w-40 focus:outline-none "
-            >
-              Join us
-            </button>
+      <div className="flex items-center justify-center py-1">
+        <p className="text-[13px]">2024 Copyright. All rigths reserved</p>
       </div>
     </footer>
   );

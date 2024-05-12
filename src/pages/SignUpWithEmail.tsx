@@ -8,14 +8,14 @@ import Logo from "../assets/images/logos/Logo2.svg"
 import { useState, useEffect } from "react"
 
 export default function SignInWithEmail() {
-    let date=new Date()    
-    let API_URL=`https://townhouse-server.onrender.com`
-    let [eye_icon,setEye_icon]=useState(<FaEye className="h-5 w-5"/>);
-    let [disable,setDisable]=useState(false); 
-    let navigate=useNavigate()
+    const date=new Date()    
+    const API_URL=`https://townhouse-server.onrender.com`
+    const [eye_icon,setEye_icon]=useState(<FaEye className="h-5 w-5"/>);
+    const [disable,setDisable]=useState(false); 
+    const navigate=useNavigate()
 
     function toggle_password(){
-        let password=document.getElementById("password");
+        const password=document.getElementById("password");
         if(password?.getAttribute("type")=="password"){
           password?.setAttribute("type","text");
           setEye_icon(<FaEyeSlash className="h-5 w-5"/>);
@@ -25,10 +25,10 @@ export default function SignInWithEmail() {
         setEye_icon(<FaEye className="h-5 w-5"/>);
     }
 
-    let [screenBackground,setScreenBackground]=useState(``)
-    let [showLogo,setShowLogo]=useState(true)
+    const [screenBackground,setScreenBackground]=useState(``)
+    const [showLogo,setShowLogo]=useState(true)
     window.onresize=()=>{
-        let screen_width=window.innerWidth;
+        const screen_width=window.innerWidth;
         if(screen_width>768){
             setScreenBackground(`linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url(${background}),no-repeat`)
             setShowLogo(true)
@@ -43,7 +43,7 @@ export default function SignInWithEmail() {
         try {
             e.preventDefault();
             setDisable(true)
-            let userInput={
+            const userInput={
                 phone_number:e.target.phone_number.value,
                 username:e.target.username.value,
                 email:e.target.email.value,
@@ -54,8 +54,8 @@ export default function SignInWithEmail() {
                 user_time_zone:`${Intl.DateTimeFormat().resolvedOptions().timeZone}`,
                 last_time_loggedin:`${date}`, user_browser:`${navigator.userAgent}`
             }
-            let url=`${API_URL}/api/sign_up`
-            let response=await fetch(url,{
+            const url=`${API_URL}/api/sign_up`
+            const response=await fetch(url,{
                 method:"POST",
                 headers:{
                     "content-type":"application/json"
@@ -68,8 +68,8 @@ export default function SignInWithEmail() {
                 setDisable(false)
                 err_toast(parseRes.error)
             }else{
-                let user:any=parseRes.data;
-                let userData:User={
+                const user:any=parseRes.data;
+                const userData:User={
                     photo:user.photo,
                     email:user.email,
                     username:user.username,
@@ -92,7 +92,7 @@ export default function SignInWithEmail() {
     }
 
     useEffect(()=>{
-        let screen_width=window.innerWidth;
+        const screen_width=window.innerWidth;
         if(screen_width>768){
             setScreenBackground(`linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url(${background}),no-repeat`)
             setShowLogo(true)

@@ -6,3 +6,10 @@ export function openDialog(dialog_id:string){
     dialog_bg?.classList.add("delay-2000"); 
 }
 
+export function toggleDialog(id:string){
+    let dialog_bg=document.getElementById(id);
+    dialog_bg?.classList.add("ease-in-out");
+    dialog_bg?.classList.toggle("none");
+    // dialog_bg?.classList.add("duration-1000");
+    // dialog_bg?.classList.add("delay-2000");
+}

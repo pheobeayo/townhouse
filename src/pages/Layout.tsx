@@ -1,15 +1,13 @@
 import { Outlet, Link, useLocation } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
-import { GlobalContext } from "../context";
-import { CongratulationDialog, NewFeatures } from "../components/dialog"
+import { useEffect, useState } from "react";
+import { NewFeatures } from "../components/dialog"
 import { MdClose, MdMenu, MdHome, MdOutlineHome, MdGroup, MdOutlineGroup, MdAssignment, MdOutlineAssignment, MdLogout, MdSettings, MdOutlineSettings, MdEventNote, MdOutlineEventNote } from "react-icons/md";
 import { FaUser, FaRegUser } from "react-icons/fa6";
 import { err_toast, success_toast } from "../components/Feedback";
 import Logo from "../assets/images/logos/logo.svg"
+import { toggleDialog } from "../components/actions";
 
 export default function Layout(){
-  const {user} =useContext(GlobalContext);
-  const userInfo=user
   let [showMobileSidebar, setShowMobileSidebar]=useState(false)
   let [isMobile,setIsMobile]=useState(false)
 
@@ -94,14 +92,6 @@ export default function Layout(){
     console.log("screen changed")
   }
 
-    function toggleDialog(id:string){
-        let dialog_bg=document.getElementById(id);
-        dialog_bg?.classList.add("ease-in-out");
-        dialog_bg?.classList.toggle("none");
-        // dialog_bg?.classList.add("duration-1000");
-        // dialog_bg?.classList.add("delay-2000");
-    }
-
   useEffect(()=>{
         console.log(location.pathname)
   },[location.pathname])
@@ -166,7 +156,6 @@ export default function Layout(){
           </div>
         </div>
       ):""}
-      <CongratulationDialog data={{userInfo,functions:{toggleDialog}}}/>
       <NewFeatures data={{functions:{toggleDialog}}}/>
     </>
   )

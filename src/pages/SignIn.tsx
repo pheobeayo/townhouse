@@ -10,12 +10,12 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react"
 
 export default function CreateAccount() {
-    let API_URL='https://townhouse-server.onrender.com'
-    let navigate=useNavigate()
-    let [screenBackground,setScreenBackground]=useState(``)
-    let [showLogo,setShowLogo]=useState(true)
+    const API_URL='https://townhouse-server.onrender.com'
+    const navigate=useNavigate()
+    const [screenBackground,setScreenBackground]=useState(``)
+    const [showLogo,setShowLogo]=useState(true)
     window.onresize=()=>{
-        let screen_width=window.innerWidth;
+        const screen_width=window.innerWidth;
         if(screen_width>768){
             setScreenBackground(`linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url(${background}),no-repeat`)
             setShowLogo(true)
@@ -25,7 +25,7 @@ export default function CreateAccount() {
         }
     }
     useEffect(()=>{
-        let screen_width=window.innerWidth;
+        const screen_width=window.innerWidth;
         if(screen_width>768){
             setScreenBackground(`linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url(${background}),no-repeat`)
             setShowLogo(true)
@@ -48,19 +48,19 @@ export default function CreateAccount() {
                     <p className="text-[var(--secondary-08)] text-[14px]">Get you connected with your community</p>
                 </div>
                 <div  className="flex flex-col gap-[12px] text-sm">
-                    <button onClick={()=>window.location.href=`${API_URL}/auth/googleOAuth/google`} className={`flex justify-center items-center py-3 px-6 rounded-md bg-white border-[1px] rounded-lg`}>
+                    <button onClick={()=>window.location.href=`${API_URL}/auth/googleOAuth/google`} className={`flex justify-center items-center py-3 px-6 bg-white border-[1px] rounded-lg`}>
                         <img src={googleIcon} alt="google's icon" className="sm:w-[24px] mr-auto sm:h-[24px]"/>
                         <span className="text-base flex-grow">Sign in with Google </span>
                     </button>
 
-                    <button onClick={()=>window.location.href=`#`} className={`flex justify-center items-center py-3 px-6 rounded-md bg-white border-[1px] rounded-lg`}>
+                    <button onClick={()=>window.location.href=`#`} className={`flex justify-center items-center py-3 px-6 rounded-md bg-white border-[1px]`}>
                         <img src={facebookIcon} alt="google's icon" className="sm:w-[24px] mr-auto sm:h-[24px]"/>
                         <span className="text-base flex-grow">Sign in with Facebook </span>
                     </button>
 
                     <img src={orIcon} className="h-[20px]" alt="Or"/>
 
-                    <button onClick={()=>navigate('/sign_in_with_email')} className={`flex justify-center items-center py-3 px-6 rounded-md bg-white border-[1px] rounded-lg`}>
+                    <button onClick={()=>navigate('/sign_in_with_email')} className={`flex justify-center items-center py-3 px-6 rounded-md bg-white border-[1px]`}>
                         <img src={emailIcon} alt="google's icon" className="sm:w-[24px] mr-auto sm:h-[24px]"/>
                         <span className="text-base flex-grow">Sign in with Email Address</span>
                     </button>

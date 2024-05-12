@@ -9,7 +9,7 @@ import { AiOutlineMessage } from "react-icons/ai";
 import { MdOutlineGroupAdd, MdEdit } from "react-icons/md";
 import { Link } from "react-router-dom"
 import Select from 'react-select';
-import { Comment } from "../components/dialog"
+import { Comment, ImageDialog } from "../components/dialog"
 import { EventType } from "../types/definitions"
 import Nav from "../components/Nav"
 import { CiPickerEmpty } from "react-icons/ci";
@@ -119,11 +119,11 @@ export default function Events() {
     async function handleDeleteEvent(id:string){
         try{
             loader.on()
-            let url=`${API_URL}/api/events/${email}/${id}`
-            let response=await fetch(url,{
+            const url=`${API_URL}/api/events/${email}/${id}`
+            const response=await fetch(url,{
                 method:"DELETE"
             })
-            let parseRes=await response.json()
+            const parseRes=await response.json()
             if(parseRes.error){
                 console.log(parseRes.error)
                 loader.off()
@@ -189,54 +189,54 @@ export default function Events() {
                 <div className="mt-8 grid max-sm:grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
                     {domEvents.map((event)=>{
                         return(
-                    <div className="flex flex-col gap-3 p-3" key={event.id}>
-                        <p className="text-[var(--primary-01)] font-semibold text-lg">{event.title}</p>
-                        <p>{event.sub_title}</p>
-                        <div className="bg-gray-100 w-full rounded-md">
-                            <img src={`${API_URL}/drive/download/${event.event_photo}`} alt={event.title} className="rounded-md w-[533px] h-[130px] object-cover"/>
-                        </div>
-                        <div>
-                            <p>{event.description}</p>
-                        </div>
-                        <div className="flex gap-2">
-                            <div className="flex border-[1px]  border-[var(--gray-5-stroke)] items-center justify-center rounded-md h-[24px] px-4">
-                                <p>{event.date}</p>
-                            </div>
-                            <div className="flex border-[1px] border-[var(--gray-5-stroke)] items-center justify-center rounded-md h-[24px] px-4">
-                                <p>{event.event_location}</p>
-                            </div>
-                            <div className="flex border-[1px] border-[var(--gray-5-stroke)]  items-center justify-center rounded-md h-[24px] px-4">
-                                <p>{event.starting_time}</p>
-                            </div>
-                        </div>
-                        <div className="flex gap-3">
-                            <button className="text-[var(--primary-01)] font-semibold text-base">Save</button>
-                            <Link to={`/events/${event.id}`}  className="text-[var(--primary-01)] font-semibold text-base">Read more</Link>
-                        </div>
-                        <div className="justify-end flex items-center gap-4">
-                            <button className="hover:text-[var(--primary-01)] active:text-[var(--primary-01)]">
-                                <FaRegThumbsUp className="w-[20px] h-[20px]"/>
-                            </button>
-                            <button className="hover:text-[var(--primary-01)] active:text-[var(--primary-01)]">
-                                <FaRegSmile  className="w-[20px] h-[20px]"/>
-                            </button>
-                            <button onClick={()=>openDialog("comment_dialog")}  className="hover:text-[var(--primary-01)] active:text-[var(--primary-01)]">
-                                <AiOutlineMessage className="w-[20px] h-[20px]"/>
-                            </button>
-                            {event.creator_email===email?(
-                                <>
-                                <button className="hover:text-[var(--primary-01)] active:text-[var(--primary-01)]">
-                                    <MdEdit className="w-[20px] h-[20px]"/>
+                            <div className="flex flex-col gap-3 p-3" key={event.id}>
+                                <p className="text-[var(--primary-01)] font-semibold text-lg">{event.title}</p>
+                                <p>{event.sub_title}</p>
+                                <button onClick={()=>openDialog(`image_dialog_${event.id}`)} className="bg-gray-100 w-full rounded-md">
+                                    <img src={`${API_URL}/drive/download/${event.event_photo}`} alt={event.title} className="rounded-md w-[533px] h-[130px] object-cover"/>
                                 </button>
+                                <div>
+                                    <p>{event.description}</p>
+                                </div>
+                                <div className="flex gap-2">
+                                    <div className="flex border-[1px]  border-[var(--gray-5-stroke)] items-center justify-center rounded-md h-[24px] px-4">
+                                        <p>{event.date}</p>
+                                    </div>
+                                    <div className="flex border-[1px] border-[var(--gray-5-stroke)] items-center justify-center rounded-md h-[24px] px-4">
+                                        <p>{event.event_location}</p>
+                                    </div>
+                                    <div className="flex border-[1px] border-[var(--gray-5-stroke)]  items-center justify-center rounded-md h-[24px] px-4">
+                                        <p>{event.starting_time}</p>
+                                    </div>
+                                </div>
+                                <div className="flex gap-3">
+                                    <button className="text-[var(--primary-01)] font-semibold text-base">Save</button>
+                                    <Link to={`/events/${event.id}`}  className="text-[var(--primary-01)] font-semibold text-base">Read more</Link>
+                                </div>
+                                <div className="justify-end flex items-center gap-4">
+                                    <button className="hover:text-[var(--primary-01)] active:text-[var(--primary-01)]">
+                                        <FaRegThumbsUp className="w-[20px] h-[20px]"/>
+                                    </button>
+                                    <button className="hover:text-[var(--primary-01)] active:text-[var(--primary-01)]">
+                                        <FaRegSmile  className="w-[20px] h-[20px]"/>
+                                    </button>
+                                    <button onClick={()=>openDialog("comment_dialog")}  className="hover:text-[var(--primary-01)] active:text-[var(--primary-01)]">
+                                        <AiOutlineMessage className="w-[20px] h-[20px]"/>
+                                    </button>
+                                    {event.creator_email===email?(
+                                        <>
+                                        <button className="hover:text-[var(--primary-01)] active:text-[var(--primary-01)]">
+                                            <MdEdit className="w-[20px] h-[20px]"/>
+                                        </button>
 
-                                <button onClick={()=>handleDeleteEvent(event.event_photo)} className="text-red-500 active:text-red-500">
-                                    <FaRegTrashCan className="w-[20px] h-[20px]"/>
-                                </button>
-                                </>
-                            ):""}
-
-                        </div>
-                    </div>
+                                        <button onClick={()=>handleDeleteEvent(event.event_photo)} className="text-red-500 active:text-red-500">
+                                            <FaRegTrashCan className="w-[20px] h-[20px]"/>
+                                        </button>
+                                        </>
+                                    ):""}
+                                </div>
+                                <ImageDialog data={{functions:{toggleDialog},imageUrl:`${API_URL}/drive/download/${event.event_photo}`,id:`${event.id}`}}/>
+                            </div>
                         )
                     })} 
                 </div>

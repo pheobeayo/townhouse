@@ -11,6 +11,8 @@ import Sample2 from "../assets/images/sample2.png"
 import { Bulletin } from "../types/definitions";
 import Nav from "../components/Nav"
 import { CiPickerEmpty } from "react-icons/ci";
+import { openDialog, toggleDialog } from "../components/actions";
+import { ImageDialog } from "../components/dialog";
 
 
 export default function Home() { 
@@ -66,14 +68,14 @@ export default function Home() {
                     </div>
                     <div className="flex items-center justify-center">
                         {events.length>0?(
-                            <div className="grid max-sm:grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3">
+                            <div className="grid max-sm:grid-cols-1 gap-2 gap-y-4 sm:grid-cols-2 md:grid-cols-3">
                             {events.slice(0,5).map((event)=>{
                             return(
                                 <div className="flex rounded-[20px] gap-4 border-[1px] flex-col p-3" key={event.id}>
                                     <div className="flex gap-4">
-                                        <div className="flex flex-col items-center justify-center rounded-md bg-gray-100">
-                                            <img src={`${API_URL}/drive/download/${event.event_photo}`} alt="" className="max-md: w-full md:w-[310px] h-[136px] object-cover"/>
-                                        </div>
+                                        <button onClick={()=>openDialog(`image_dialog_${event.id}`)} className="flex flex-col items-center justify-center rounded-md bg-gray-100">
+                                            <img src={`${API_URL}/drive/download/${event.event_photo}`} alt="" className="max-md: w-full md:w-[250px] h-[136px] object-cover"/>
+                                        </button>
                                         <div className="flex flex-col gap-1">
                                             <p className="capitalize text-lg font-semibold">{event.title}</p>
                                             <p className="text-[14px] font-semibold"><span className="font-normal text-gray-500">Hosted by </span>{event.host}</p>
@@ -114,6 +116,7 @@ export default function Home() {
                                             </button>
                                         </div>
                                     </div>
+                                    <ImageDialog data={{functions:{toggleDialog},imageUrl:`${API_URL}/drive/download/${event.event_photo}`,id:`${event.id}`}}/>
                                 </div>
                             )})}
                             </div>

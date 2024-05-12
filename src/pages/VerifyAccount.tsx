@@ -4,23 +4,23 @@ import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 
 export default function VerifyAccount(){
-    let [disable,setDisable]=useState(false); 
-    let navigate=useNavigate()
-    let user_data:any=sessionStorage.getItem("user_data")
-    let userEmail:any=user_data===null?null:JSON.parse(user_data)
+    const [disable,setDisable]=useState(false); 
+    const navigate=useNavigate()
+    const user_data:any=sessionStorage.getItem("user_data")
+    const userEmail:any=user_data===null?null:JSON.parse(user_data)
 
     async function handleVerification(e:any){
         try{
             e.preventDefault();
             setDisable(true)
-            let verification_code=sessionStorage.getItem("verification_code")
+            const verification_code=sessionStorage.getItem("verification_code")
             if(e.target.verification_code.value!==verification_code){
                 setDisable(false)
                 err_toast("You've enter a wrong verification code, Try again!")
                 navigate(-1)
                 sessionStorage.clear()
             }else{
-                let userData:any=sessionStorage.getItem("user_data")
+                const userData:any=sessionStorage.getItem("user_data")
                 localStorage.setItem("user_data",userData)
                 setDisable(false)
                 window.location.reload()
