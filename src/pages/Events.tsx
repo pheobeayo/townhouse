@@ -132,7 +132,6 @@ export default function Events() {
                 loader.off()
                 console.log(parseRes.msg)
                 success_toast(parseRes.msg)
-                actions.getEvents()
             }
         }catch(error:any){
             loader.off()
