@@ -2,7 +2,9 @@ import Select from 'react-select';
 import {useState,useContext} from "react"
 import { GlobalContext } from "../context";
 import { CiLock } from "react-icons/ci";
-import { openDialog } from "../components/actions"
+import { openDialog, toggleDialog } from "../components/actions"
+import { err_toast } from '../components/Feedback';
+import { CongratulationDialog } from '../components/dialog';
 
 type OptionType={
     value:string,
@@ -44,7 +46,9 @@ export default function CreateGroup(){
                 handleCreateGroup(parseRes.id,e)
             }
         }catch(error:any){
-            console.log(error.message)
+            const errorMessage = error.message;
+            console.log(errorMessage)
+            errorMessage==="Failed to fetch"?err_toast(`No internet`):err_toast(error.message)
         }
     }
 
@@ -72,7 +76,7 @@ export default function CreateGroup(){
             
             const parseRes=await response.json()
             if(parseRes.error){
-                console.log(parseRes.error)
+                err_toast(parseRes.error)
                 setDisable(false)
             }else{
                 console.log(parseRes)
@@ -81,7 +85,9 @@ export default function CreateGroup(){
             }
         }catch(error:any){
             setDisable(false)
-            console.log(error.message)
+            const errorMessage = error.message;
+            console.log(errorMessage)
+            errorMessage==="Failed to fetch"?err_toast(`No internet`):err_toast(error.message)
         }
     }
     return(
@@ -126,8 +132,8 @@ export default function CreateGroup(){
                             <i className="italic">Creating...</i>
                         )}
                     </button>
-
             </form>
+            <CongratulationDialog data={{user,functions:{toggleDialog},message:"Group was create successfully"}}/>
         </main>
     )
 }

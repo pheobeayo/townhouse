@@ -8,6 +8,7 @@ import { IoChevronBackOutline } from "react-icons/io5";
 import { v4 as uuidv4 } from 'uuid';
 import { CongratulationDialog } from "../components/dialog"
 import { toggleDialog } from "../components/actions";
+import { err_toast } from "../components/Feedback";
 
 type OptionType = {
     value: string,
@@ -48,12 +49,14 @@ export default function CreateEvent() {
             })
             const parseRes = await response.json()
             if (parseRes.error) {
-                console.log(parseRes.error)
+                err_toast(parseRes.error)
             } else {
                 handleCreateEvent(parseRes.id, e)
             }
         } catch (error: any) {
-            console.log(error.message)
+            const errorMessage = error.message;
+            console.log(errorMessage)
+            errorMessage==="Failed to fetch"?err_toast(`No internet`):err_toast(error.message)
         }
     }
 
@@ -90,11 +93,12 @@ export default function CreateEvent() {
                 setDisable(false)
                 openDialog("congratulation_dialog")
                 actions.getEvents()
-                navigate("/events")
             }
         } catch (error: any) {
             setDisable(false)
-            console.log(error.message)
+            const errorMessage = error.message;
+            console.log(errorMessage)
+            errorMessage==="Failed to fetch"?err_toast(`No internet`):err_toast(error.message)
         }
     }
     return (

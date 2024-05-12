@@ -7,8 +7,8 @@ function NotFound() {
             <p className="text-3xl font-semibold">404: Page Not Found</p>
             <p className="text-base my-2">Ooh..! This page is not available.</p>
             <div className="flex gap-10 mt-4">
-                <Link to="/" className="button bg-[var(--theme-gray)]">Go Home</Link>
-                <button className="button bg-[var(--theme-gray)]" onClick={()=>navigate(-1)}>Go Back</button>
+                <Link to="/" className="button bg-[var(--primary-01)]">Go Home</Link>
+                <button className="button bg-[var(--gray-1-fill)]" onClick={()=>navigate(-1)}>Go Back</button>
             </div>
         </div>
     );

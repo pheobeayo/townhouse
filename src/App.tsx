@@ -22,6 +22,7 @@ import VerifyAccount from "./pages/VerifyAccount";
 import { User, EventType } from "./types/definitions";
 import { GlobalContext } from "./context";
 import LandingPage from "./pages/LandingPage";
+import { err_toast } from "./components/Feedback";
 
 
 function App() {
@@ -74,47 +75,45 @@ function App() {
         })
         const parseRes=await response.json()
         if(parseRes.error){
-            setIsAuth(false)
-            setIsLoading(false)
+          setIsAuth(false)
+          setIsLoading(false)
         }else{
-            const user:any=parseRes.data;
-            const userData:User={
-                photo:user.photo,
-                email:user.email,
-                username:user.username,
-                accessToken:user.access_token,
-                phoneNumber:user.phone_number,
-                emailVerified:user.email_verified,
-                location:user.location
-            }
-            localStorage.setItem('user_data',JSON.stringify(userData))
-            setUser(userData)
-            setIsAuth(true)
-            setIsLoading(false)
+          const user:any=parseRes.data;
+          const userData:User={
+              photo:user.photo,
+              email:user.email,
+              username:user.username,
+              accessToken:user.access_token,
+              phoneNumber:user.phone_number,
+              emailVerified:user.email_verified,
+              location:user.location
+          }
+          localStorage.setItem('user_data',JSON.stringify(userData))
+          setUser(userData)
+          setIsAuth(true)
+          setIsLoading(false)
         }
     }catch(error:any){
-        const errorMessage:string=error.message==="Fail to fetch"?"No internet":`${error.message}`
-        console.log(errorMessage)
 	    setIsAuth(false)
-        setIsLoading(false)
+      setIsLoading(false)
     }
   }
 
     async function getEvents(){
-        try{
-            const url=`${API_URL}/api/events`
-            const response=await fetch(url)
-            const parseRes=await response.json()
-            if(parseRes.error){
-                console.log(parseRes.error)
-            }else{
-                const events:EventType[]=parseRes.data
-                setEvents(events)
-                console.log(parseRes)
-            }
-        }catch(error:any){
-            console.log(error.message)
-        }
+      try{
+          const url=`${API_URL}/api/events`
+          const response=await fetch(url)
+          const parseRes=await response.json()
+          if(parseRes.error){
+              console.log(parseRes.error)
+          }else{
+              const events:EventType[]=parseRes.data
+              setEvents(events)
+          }
+      }catch(error:any){
+        const errorMessage:string=error.message==="Fail to fetch"?"No internet":`${error.message}`
+        err_toast(errorMessage)
+      }
     }
 
 
@@ -138,7 +137,6 @@ function App() {
             setIsAuth(false)
             setIsLoading(false)
         }
-        getEvents()
       //setIsAuth(true)
   },[isAuth]);
 

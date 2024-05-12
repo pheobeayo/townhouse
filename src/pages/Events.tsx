@@ -13,6 +13,7 @@ import { Comment, ImageDialog } from "../components/dialog"
 import { EventType } from "../types/definitions"
 import Nav from "../components/Nav"
 import { CiPickerEmpty } from "react-icons/ci";
+import { err_toast, success_toast } from "../components/Feedback";
 
 type OptionType={
     value:string,
@@ -116,25 +117,28 @@ export default function Events() {
         })
     }
 
-    async function handleDeleteEvent(id:string){
+    async function handleDeleteEvent(event_id:string){
         try{
             loader.on()
-            const url=`${API_URL}/api/events/${email}/${id}`
+            const url=`${API_URL}/api/events/${email}/${event_id}`
             const response=await fetch(url,{
                 method:"DELETE"
             })
             const parseRes=await response.json()
             if(parseRes.error){
-                console.log(parseRes.error)
                 loader.off()
+                err_toast(parseRes.error)
             }else{
-                actions.getEvents()
-                console.log(parseRes)
                 loader.off()
+                console.log(parseRes.msg)
+                success_toast(parseRes.msg)
+                actions.getEvents()
             }
         }catch(error:any){
-            console.log(error.message)
             loader.off()
+            const errorMessage = error.message;
+            console.log(errorMessage)
+            errorMessage==="Failed to fetch"?err_toast(`No internet`):err_toast(error.message)
         }
     }
 
@@ -229,7 +233,7 @@ export default function Events() {
                                             <MdEdit className="w-[20px] h-[20px]"/>
                                         </button>
 
-                                        <button onClick={()=>handleDeleteEvent(event.event_photo)} className="text-red-500 active:text-red-500">
+                                        <button onClick={()=>handleDeleteEvent(`${event.id}`)} className="text-red-500 active:text-red-500">
                                             <FaRegTrashCan className="w-[20px] h-[20px]"/>
                                         </button>
                                         </>
