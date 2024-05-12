@@ -19,8 +19,8 @@ export default function CreateGroup(){
     const {accessToken,email} =user
 
     const API_URL=`https://townhouse-server.onrender.com`
-    let [disable,setDisable]=useState(false)
-    let [category,setCategory]=useState<any>(null)
+    const [disable,setDisable]=useState(false)
+    const [category,setCategory]=useState<any>(null)
 
     async function handleUpload(e:any){
         try{
@@ -37,7 +37,7 @@ export default function CreateGroup(){
                     'authorization':`Bearer ${accessToken}`,
                 }
             })
-            let parseRes=await response.json()
+            const parseRes=await response.json()
             if(parseRes.error){
                 console.log(parseRes.error)
             }else{
@@ -51,8 +51,8 @@ export default function CreateGroup(){
     async function handleCreateGroup(fileId:string,e:any){
         try{
             console.log(fileId,e)
-            let url=`${API_URL}/api/create_group`
-            let response=await fetch(url,{
+            const url=`${API_URL}/api/create_group`
+            const response=await fetch(url,{
                 method:"POST",
                 headers:{
                     "content-type":"application/json",
@@ -70,7 +70,7 @@ export default function CreateGroup(){
                 }) 
             })
             
-            let parseRes=await response.json()
+            const parseRes=await response.json()
             if(parseRes.error){
                 console.log(parseRes.error)
                 setDisable(false)

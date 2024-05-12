@@ -22,7 +22,7 @@ import VerifyAccount from "./pages/VerifyAccount";
 import { User, EventType } from "./types/definitions";
 import { GlobalContext } from "./context";
 import LandingPage from "./pages/LandingPage";
-import CreatePost from "./pages/CreatePost";
+
 
 function App() {
     const API_URL='https://townhouse-server.onrender.com'
@@ -102,13 +102,13 @@ function App() {
 
     async function getEvents(){
         try{
-            let url=`${API_URL}/api/events`
-            let response=await fetch(url)
-            let parseRes=await response.json()
+            const url=`${API_URL}/api/events`
+            const response=await fetch(url)
+            const parseRes=await response.json()
             if(parseRes.error){
                 console.log(parseRes.error)
             }else{
-                let events:EventType[]=parseRes.data
+                const events:EventType[]=parseRes.data
                 setEvents(events)
                 console.log(parseRes)
             }
@@ -118,7 +118,7 @@ function App() {
     }
 
 
-  let loader={
+  const loader={
     on:()=>{
       setIsLoading(true)
     },
@@ -127,7 +127,7 @@ function App() {
     }
   }
 
-  let actions={
+  const actions={
     getEvents:getEvents()
   }
 

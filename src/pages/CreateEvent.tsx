@@ -26,15 +26,15 @@ export default function CreateEvent(){
     const {accessToken,email} =user;
 
     const API_URL=`https://townhouse-server.onrender.com`
-    let [disable,setDisable]=useState(false)
-    let [category,setCategory]=useState<any>(null)
+    const [disable,setDisable]=useState(false)
+    const [category,setCategory]=useState<any>(null)
 
     async function handleUpload(e:any){
         try{
             loader.on();
             e.preventDefault()
             setDisable(true)
-            let url=`${API_URL}/drive/upload`
+            const url=`${API_URL}/drive/upload`
             const file=e.target.event_photo.files[0]
             const formData=new FormData()
             formData.append("file",file)
@@ -45,7 +45,7 @@ export default function CreateEvent(){
                     'authorization':`Bearer ${accessToken}`,
                 }
             })
-            let parseRes=await response.json()
+            const parseRes=await response.json()
             if(parseRes.error){
                 console.log(parseRes.error)
             }else{
@@ -59,8 +59,8 @@ export default function CreateEvent(){
     async function handleCreateEvent(fileId:string,e:any){
         try{
             console.log(fileId,e)
-            let url=`${API_URL}/api/event`
-            let response=await fetch(url,{
+            const url=`${API_URL}/api/event`
+            const response=await fetch(url,{
                 method:"POST",
                 headers:{
                     "content-type":"application/json",
@@ -81,7 +81,7 @@ export default function CreateEvent(){
                     sub_title:e.target.sub_title.value,
                 }) 
             })
-            let parseRes=await response.json()
+            const parseRes=await response.json()
             if(parseRes.error){
                 console.log(parseRes.error)
                 setDisable(false)

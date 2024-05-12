@@ -19,7 +19,7 @@ export default function Home() {
     const {user,events}=useContext(GlobalContext);
     const {username,photo,location}=user;
     
-    let bulletins:Bulletin[]=[
+    const bulletins:Bulletin[]=[
         {
             title:"Babysitter available",
             description:`Experienced and reliable babysitter offering childcare service
