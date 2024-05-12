@@ -3,17 +3,16 @@ import { openDialog } from "../components/actions"
 //import { FaLocationPin } from "react-icons/fa6";
 import { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../context";
-import { CiLocationOn, CiSearch } from "react-icons/ci";
-import { IoIosNotificationsOutline } from "react-icons/io";
-import { FaRegThumbsUp } from "react-icons/fa6";
-import { FaRegSmile } from "react-icons/fa";
+import { FaRegTrashCan } from "react-icons/fa6";
+import { FaRegSmile, FaRegThumbsUp } from "react-icons/fa";
 import { AiOutlineMessage } from "react-icons/ai";
 import { MdOutlineGroupAdd, MdEdit } from "react-icons/md";
 import { Link } from "react-router-dom"
 import Select from 'react-select';
-import Sample3 from "../assets/images/sample3.svg"
-import {Event} from "../types/definitions"
 import { Comment } from "../components/dialog"
+import { EventType } from "../types/definitions"
+import Nav from "../components/Nav"
+import { CiPickerEmpty } from "react-icons/ci";
 
 type OptionType={
     value:string,
@@ -26,57 +25,60 @@ const options:OptionType[] = [
 ];
 
 export default function Events() { 
+    const API_URL=`https://townhouse-server.onrender.com`
     const searchParams = new URLSearchParams(window.location.search);
-    const {username,photo} =useContext(GlobalContext);
+    const {user,loader,events,actions}=useContext(GlobalContext);
+    const {username,photo,location,email} =user;
     const [eventPeriod,setEventPeriod]=useState("")
     const [locationOption, setLocationOption]=useState<any>(null);
-    const events:Event[]=[
+    const [filteredEvents,setFilteredEvents]=useState<EventType[]>([
         {
-            title:"Donations from UPs",
-            image:Sample3,
-            host:"John Doe",
-            date:"50 May 2024",
-            subTitle:`We've donating and helding fundraiser from UPs `,
-            description:`Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incididunt ut labore et dolore.`,
-            startingTime:"15:00",
-            location:"City Museum",
-            attendees:25
-        },
-        {
-            title:"Donations from UPs",
-            image:Sample3,
-            host:"John Doe",
-            date:"50 May 2024",
-            subTitle:`We've donating and helding fundraiser from UPs `,
-            description:`Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incididunt ut labore et dolore.`,
-            startingTime:"15:00",
-            location:"City Museum",
-            attendees:25
-        },
-        {
-            title:"Donations from UPs",
-            image:Sample3,
-            host:"John Doe",
-            date:"50 May 2024",
-            subTitle:`We've donating and helding fundraiser from UPs `,
-            description:`Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incididunt ut labore et dolore.`,
-            startingTime:"15:00",
-            location:"City Museum",
-            attendees:25
-        },
-        {
-            title:"Donations from UPs",
-            image:Sample3,
-            host:"John Doe",
-            date:"50 May 2024",
-            subTitle:`We've donating and helding fundraiser from UPs `,
-            description:`Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incididunt ut labore et dolore.`,
-            startingTime:"15:00",
-            location:"City Museum",
-            attendees:25
+            title:"",
+            description:"",
+            sub_title:"",
+            host:"",
+            date:"",
+            starting_time:"",
+            event_location:"",
+            attendees:[],
+            likes:[],
+            event_photo:"",
+            creator_email:"",
+            event_tags:[],
+            comments:[],
+            privacy:false,
+            id:''
         }
+    ])
+    const [domEvents,setDomEvents]=useState<EventType[]>([
+        {
+            title:"",
+            description:"",
+            sub_title:"",
+            host:"",
+            date:"",
+            starting_time:"",
+            event_location:"",
+            attendees:[],
+            likes:[],
+            event_photo:"",
+            creator_email:"",
+            event_tags:[],
+            comments:[],
+            privacy:false,
+            id:''
 
-    ]
+        }
+    ])
+
+
+
+    function getEvents(){
+        setFilteredEvents(events)
+        setDomEvents(events)
+        console.log(events)
+    }
+
     const eventTypes=[
         {
             period:"New"
@@ -106,37 +108,51 @@ export default function Events() {
         dialog_bg?.classList.add("delay-2000");
     }
 
+    function filterEvents(period?:any){
+        events.filter((event,index,array)=>{
+            // if(event.date)
+            console.log(event.date, index,period)
+            return setDomEvents(array);
+        })
+    }
+
+    async function handleDeleteEvent(id:string){
+        try{
+            loader.on()
+            let url=`${API_URL}/api/events/${email}/${id}`
+            let response=await fetch(url,{
+                method:"DELETE"
+            })
+            let parseRes=await response.json()
+            if(parseRes.error){
+                console.log(parseRes.error)
+                loader.off()
+            }else{
+                actions.getEvents()
+                console.log(parseRes)
+                loader.off()
+            }
+        }catch(error:any){
+            console.log(error.message)
+            loader.off()
+        }
+    }
+
 	useEffect(()=>{
 		window.scrollTo(0,0)
-       
+        if(searchParams.has("period")){
+            setDomEvents(filteredEvents)
+            filterEvents(searchParams.get("period"))
+        }else{
+            getEvents()
+        }
         //console.log(searchParams.get("period"))
     },[eventPeriod])
     return (
         <div>
-			<div className="flex w-full items-center justify-between">
-                <p className="text-2xl capitalize">Hi, {username}</p>
-                <button>
-                    <IoIosNotificationsOutline className="w-[24px] h-[24px]"/>
-                </button>
-                <form className="flex gap-2 text-[gray-7-text] items-center justify-center border-[1px] px-4 py-2 rounded-[20px] border-[var(--gray-5-stroke)]">
-                    <CiSearch className="w-[20px] h-[20px]"/>
-                    <input type="text" placeholder="Search" className="outline-none sm:w-[400px]"/>
-                </form>
-                <div className="flex justify-center items-center gap-2">
-                    <CiLocationOn className="w-[16px] h-[16px]"/>
-                    <p>Rotterdam</p>
-                </div>
-                <div>
-                    {photo===null?(
-                        <div className="bg-gray-300 flex items-center justify-center w-[42px] h-[42px] rounded-[30px]">
-                            <span className="uppercase">{username.slice(0,2)}</span>
-                        </div>
-                    ):(
-                        <img src={photo} alt="user profile" className="w-[42px] h-[42px] rounded-[30px]"/>
-                    )}
-                </div> 
-			</div>
-
+            <Nav data={{username,photo,location}}/>	
+            {domEvents.length>0?(
+            <>
 			<div className="mt-12 text-[14px]">
 				<div className="pb-1 border-b-[1px] ">
                     <p className="text-2xl font-semibold">Events</p>
@@ -156,7 +172,6 @@ export default function Events() {
                         )
                     })}
                 </div>
-
                 <div className="flex justify-center items-center gap-2">
                     <p>Filter by Name</p>
                     <Select
@@ -172,12 +187,14 @@ export default function Events() {
             <div className="mt-3 pb-[88px]">
                 <p className="font-semibold">{searchParams.get("period")!==null?searchParams.get("period"):"All"} Events</p>
                 <div className="mt-8 grid max-sm:grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
-                    {events?events.map((event)=>{
+                    {domEvents.map((event)=>{
                         return(
-                    <div className="flex flex-col gap-3 p-3">
+                    <div className="flex flex-col gap-3 p-3" key={event.id}>
                         <p className="text-[var(--primary-01)] font-semibold text-base">{event.title}</p>
-                        <p>{event.subTitle}</p>
-                        <img src={event.image} alt={event.title} className="rounded-md w-[533px] h-[130px]"/>
+                        <p>{event.sub_title}</p>
+                        <div className="bg-gray-100 w-full rounded-md">
+                            <img src={`${API_URL}/drive/download/${event.event_photo}`} alt={event.title} className="rounded-md w-[533px] h-[130px] object-contain"/>
+                        </div>
                         <div>
                             <p>{event.description}</p>
                         </div>
@@ -186,15 +203,15 @@ export default function Events() {
                                 <p>{event.date}</p>
                             </div>
                             <div className="flex border-[1px] border-[var(--gray-5-stroke)] items-center justify-center rounded-md h-[24px] px-4">
-                                <p>{event.location}</p>
+                                <p>{event.event_location}</p>
                             </div>
                             <div className="flex border-[1px] border-[var(--gray-5-stroke)]  items-center justify-center rounded-md h-[24px] px-4">
-                                <p>{event.startingTime}</p>
+                                <p>{event.starting_time}</p>
                             </div>
                         </div>
                         <div className="flex gap-3">
                             <button className="text-[var(--primary-01)] font-semibold text-base">Save</button>
-                            <button className="text-[var(--primary-01)] font-semibold text-base">Read more</button>
+                            <Link to={`/events/${event.id}`}  className="text-[var(--primary-01)] font-semibold text-base">Read more</Link>
                         </div>
                         <div className="justify-end flex items-center gap-4">
                             <button className="hover:text-[var(--primary-01)] active:text-[var(--primary-01)]">
@@ -203,27 +220,46 @@ export default function Events() {
                             <button className="hover:text-[var(--primary-01)] active:text-[var(--primary-01)]">
                                 <FaRegSmile  className="w-[20px] h-[20px]"/>
                             </button>
-                            <button className="hover:text-[var(--primary-01)] active:text-[var(--primary-01)]">
+                            <button onClick={()=>openDialog("comment_dialog")}  className="hover:text-[var(--primary-01)] active:text-[var(--primary-01)]">
                                 <AiOutlineMessage className="w-[20px] h-[20px]"/>
                             </button>
+                            {event.creator_email===email?(
+                                <>
+                                <button className="hover:text-[var(--primary-01)] active:text-[var(--primary-01)]">
+                                    <MdEdit className="w-[20px] h-[20px]"/>
+                                </button>
+
+                                <button onClick={()=>handleDeleteEvent(event.event_photo)} className="text-red-500 active:text-red-500">
+                                    <FaRegTrashCan className="w-[20px] h-[20px]"/>
+                                </button>
+                                </>
+                            ):""}
+
                         </div>
                     </div>
                         )
-                    }):(<p>No Events</p>)} 
+                    })} 
                 </div>
             </div>
-
+            </>):(
+                <div className="flex-grow h-[70vh] gap-1 flex flex-col items-center justify-center">
+                    <CiPickerEmpty className="w-[70px] h-[70px] text-gray-500"/>
+                    <p className="text-lg">Oops, currently there are no events</p>
+                    <Link to="/create_event" className='text-[var(--primary-01)] text-base'>Create an event</Link>
+                </div>
+            )}
+            
             <div className="fixed bottom-0 px-10 sm:left-[150px] z-10 bg-white right-0 h-[70px]">
                 <div className="flex items-center justify-between h-full">
-                    <button className="flex gap-4 items-center justify-center">
+                    <Link to="/create_event" className="flex gap-4 items-center justify-center">
                         <MdOutlineGroupAdd  className="w-[24px] text-[var(--primary-01)] h-[24px]"/>
                         <div className="flex flex-col items-start">
                             <p className="text-[var(--primary-01)] font-semibold text-base">Create group event</p>
                             <p className="text-gray-500 text-[13px]">Add a new event to the group</p>
                         </div>
-                    </button>
+                    </Link>
 
-                    <button onClick={()=>openDialog("comment_dialog")} className="flex gap-4 items-center justify-center">
+                    <button className="flex gap-4 items-center justify-center">
                         <MdEdit className="w-[24px] text-[var(--primary-01)] h-[24px]"/>
                         <div className="flex flex-col items-start">
                             <p className="text-[var(--primary-01)] font-semibold text-base">Create a new post</p>
@@ -232,7 +268,6 @@ export default function Events() {
                     </button>
                 </div>
             </div>
-            <button onClick={()=>openDialog("new_features_dialog")}>View new features</button>
             <Comment data={{functions:{toggleDialog}}}/>
         </div>
     );

@@ -47,6 +47,43 @@
   scrollbar-width: none;
 }
 
+/* toggle in label designing */
+    .toggle {
+        position : relative ;
+        display : inline-block;
+        width : 42px;
+        height : 24px;
+        background-color: gray;
+        border-radius: 50px;
+        border: 1px solid gray;
+    }
+           
+    /* After slide changes */
+    .toggle:after {
+        content: '';
+        position: absolute;
+        width: 21px;
+        height: 22px;
+        border-radius: 50%;
+        background-color: white;
+        transition:  all 0.5s;
+    }
+           
+/* Checkbox checked effect */
+    .checkbox:checked + .toggle::after {
+        left : 20px; 
+    }
+           
+    /* Checkbox checked toggle label bg color */
+    .checkbox:checked + .toggle {
+        background-color: var(--primary-01);
+    }
+           
+    /* Checkbox vanished */
+    .checkbox { 
+        display : none;
+    }
+
 #notifcation_hero_image{
   background: linear-gradient(rgba(40, 40, 41, 0.5), rgba(24, 23, 26, 0.5)),
   url("./assets/team-dynamics.png");

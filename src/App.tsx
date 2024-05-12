@@ -6,7 +6,12 @@ import Layout from './pages/Layout';
 import NotFound from './pages/NotFound';
 import GetStarted from "./pages/GetStarted";
 import Home from './pages/Home';
+import CreateGroup from './pages/CreateGroup';
+import CreatePost from './pages/CreatePost';
+import CreateEvent from './pages/CreateEvent';
 import Events from './pages/Events';
+import Event from './pages/Event';
+import Profile from './pages/Profile';
 import Neighbours from './pages/Neighbours';
 import BulletIn from './pages/BulletIn';
 import Settings from './pages/Settings';
@@ -14,7 +19,7 @@ import SignIn from "./pages/SignIn";
 import SignInWithEmail from "./pages/SignInWithEmail";
 import SignUpWithEmail from "./pages/SignUpWithEmail";
 import VerifyAccount from "./pages/VerifyAccount";
-import { User } from "./types/definitions";
+import { User, EventType } from "./types/definitions";
 import { GlobalContext } from "./context";
 import LandingPage from "./pages/LandingPage";
 
@@ -29,8 +34,29 @@ function App() {
     email:"",
     username:"",
     phoneNumber:0,
-    emailVerified:false
+    emailVerified:false,
+    location:""
   })
+    let [events,setEvents]=useState<EventType[]>([
+        {
+            title:"",
+            description:"",
+            sub_title:"",
+            host:"",
+            date:"",
+            starting_time:"",
+            event_location:"",
+            attendees:[],
+            likes:[],
+            event_photo:"",
+            creator_email:"",
+            event_tags:[],
+            comments:[],
+            privacy:false,
+            id:''
+        }
+    ])
+
   const [isLoading,setIsLoading]=useState(true)
   const [isAuth,setIsAuth]=useState(false);
 
@@ -57,7 +83,8 @@ function App() {
                 username:user.username,
                 accessToken:user.access_token,
                 phoneNumber:user.phone_number,
-                emailVerified:user.email_verified
+                emailVerified:user.email_verified,
+                location:user.location
             }
             localStorage.setItem('user_data',JSON.stringify(userData))
             setUser(userData)
@@ -72,6 +99,37 @@ function App() {
     }
   }
 
+    async function getEvents(){
+        try{
+            let url=`${API_URL}/api/events`
+            let response=await fetch(url)
+            let parseRes=await response.json()
+            if(parseRes.error){
+                console.log(parseRes.error)
+            }else{
+                let events:EventType[]=parseRes.data
+                setEvents(events)
+                console.log(parseRes)
+            }
+        }catch(error:any){
+            console.log(error.message)
+        }
+    }
+
+
+  let loader={
+    on:()=>{
+      setIsLoading(true)
+    },
+    off:()=>{
+        setIsLoading(false)
+    }
+  }
+
+  let actions={
+    getEvents:getEvents()
+  }
+
   useEffect(()=>{
         if(searchParams.has('access_token')===true||$userData!==null){
             authenticate()
@@ -79,12 +137,13 @@ function App() {
             setIsAuth(false)
             setIsLoading(false)
         }
+        getEvents()
       //setIsAuth(true)
   },[isAuth]);
 
   return (
     <BrowserRouter>
-      <GlobalContext.Provider value={user}>
+      <GlobalContext.Provider value={{user,loader,events,actions}}>
         {isLoading?(
           <div className="fixed top-0 bottom-0 left-0 z-20 right-0 bg-white">
             <div className="flex flex-col items-center h-[100vh] justify-center">
@@ -106,17 +165,22 @@ function App() {
             />
             <Toaster/>
             <Routes>
-              <Route index element={<LandingPage/>} />
+              <Route path="/landing_page" element={!isAuth?<LandingPage/>:<Navigate to="/"/>}/>
               <Route path="/getstarted" element={!isAuth?<GetStarted/>:<Navigate to="/"/>}/>
-              <Route path="/log-in" element={!isAuth?<SignIn />:<Navigate to="/"/>} />
+              <Route path="/sign_in" element={!isAuth?<SignIn />:<Navigate to="/"/>} />
               <Route path="/sign_in_with_email" element={!isAuth?<SignInWithEmail />:<Navigate to="/"/>} />
               <Route path="/verify_account" element={!isAuth?<VerifyAccount/>:<Navigate to="/"/>}/>
               <Route path="/sign_up_with_email" element={!isAuth?<SignUpWithEmail />:<Navigate to="/"/>} />
-              <Route path="/" element={isAuth?<Layout />:<Navigate to="/getstarted"/>}>
+              <Route path="/" element={isAuth?<Layout />:<Navigate to="/landing_page"/>}>
                 <Route index element={<Home />} />
                 <Route path="events" element={<Events />} />
+                <Route path="events/:id" element={<Event />} />
                 <Route path="bulletin_board" element={<BulletIn />} />
+                <Route path="profile" element={<Profile />} />
                 <Route path="neighbours" element={<Neighbours />} />
+                <Route path="create_group" element={<CreateGroup />} />
+                <Route path="create_post" element={<CreatePost />} />
+                <Route path="create_event" element={<CreateEvent />} />
                 <Route path="settings" element={<Settings />} />
               </Route>
               <Route path="*" element={<NotFound />} />

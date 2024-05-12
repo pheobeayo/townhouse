@@ -3,11 +3,13 @@ import { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../context";
 import { CongratulationDialog, NewFeatures } from "../components/dialog"
 import { MdClose, MdMenu, MdHome, MdOutlineHome, MdGroup, MdOutlineGroup, MdAssignment, MdOutlineAssignment, MdLogout, MdSettings, MdOutlineSettings, MdEventNote, MdOutlineEventNote } from "react-icons/md";
+import { FaUser, FaRegUser } from "react-icons/fa6";
 import { err_toast, success_toast } from "../components/Feedback";
 import Logo from "../assets/images/logos/logo.svg"
 
 export default function Layout(){
-  const userInfo =useContext(GlobalContext);
+  const {user} =useContext(GlobalContext);
+  const userInfo=user
   let [showMobileSidebar, setShowMobileSidebar]=useState(false)
   let [isMobile,setIsMobile]=useState(false)
 
@@ -45,9 +47,15 @@ export default function Layout(){
     },
     {
       name:"Neighbour Connnect",
-      icon:(<MdGroup className="w-[32px] h-[32px]"/>),
-      OutlineIcon:(<MdOutlineGroup className="w-[32px] h-[32px]"/>),
+      icon:(<MdGroup className="w-[25px] h-[25px]"/>),
+      OutlineIcon:(<MdOutlineGroup className="w-[32px] h-[25px]"/>),
       to:"/neighbours"
+    },
+    {
+      name:"Profile",
+      icon:(<FaUser className="w-[30px] h-[30px]"/>),
+      OutlineIcon:(<FaRegUser className="w-[25px] h-[30px]"/>),
+      to:"/profile"
     },
 
     {

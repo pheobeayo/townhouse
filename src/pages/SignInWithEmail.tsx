@@ -1,10 +1,12 @@
-import { useState } from "react"
-import backgroundPattern from "../assets/images/backgrounds/Background_pattern.png"
+import background from "../assets/images/backgrounds/Screen3.jpg";
+import backgroundPattern from "../assets/images/backgrounds/Background_pattern.svg";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { err_toast } from "../components/Feedback";
-import { Link } from "react-router-dom";
 import { User } from "../types/definitions"
 import { useNavigate } from "react-router-dom"
+import Logo from "../assets/images/logos/Logo2.svg"
+import { Link } from "react-router-dom";
+import { useState, useEffect } from "react"
 
 export default function SignInWithEmail() {
     let date=new Date()    
@@ -12,6 +14,19 @@ export default function SignInWithEmail() {
     let [eye_icon,setEye_icon]=useState(<FaEye className="h-5 w-5"/>);
     let [disable,setDisable]=useState(false); 
     let navigate=useNavigate()
+
+    let [screenBackground,setScreenBackground]=useState(``)
+    let [showLogo,setShowLogo]=useState(true)
+    window.onresize=()=>{
+        let screen_width=window.innerWidth;
+        if(screen_width>768){
+            setScreenBackground(`linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url(${background}),no-repeat`)
+            setShowLogo(true)
+        }else{
+            setScreenBackground(`url(${backgroundPattern})`)
+            setShowLogo(false)
+        }
+    }
 
     function toggle_password(){
         let password=document.getElementById("password");
@@ -56,6 +71,7 @@ export default function SignInWithEmail() {
                     email:user.email,
                     username:user.username,
                     accessToken:user.access_token,
+                    location:user.location,
                     phoneNumber:user.phone_number,
                     emailVerified:user.email_verified
                 }
@@ -71,12 +87,28 @@ export default function SignInWithEmail() {
             errorMessage==="Failed to fetch"?err_toast(`No internet`):err_toast(error.message)
         }
     }
+
+    useEffect(()=>{
+        let screen_width=window.innerWidth;
+        if(screen_width>768){
+            setScreenBackground(`linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url(${background}),no-repeat`)
+            setShowLogo(true)
+        }else{
+            setScreenBackground(`url(${backgroundPattern})`)
+            setShowLogo(false)
+        }
+    },[screenBackground])
     return (
-        <main style={{background:`url(${backgroundPattern})`}} className={`flex h-screen justify-center flex-col items-center`}>
-            <div className="sm:m-[40px] items-center sm:shadow-lg bg-white flex flex-col sm:w-[520px] max-sm:px-[6vw]">
-            <div className="sm:w-[360px] my-[40px]">
-                 <div className="sm:mb-[40px] gap-[8px] flex flex-col items-center max-sm:my-[20px]">
-                    <p className="text-[30px] font-semibold">Sign in</p>
+        <main style={{background:`${screenBackground}`,backgroundPosition:'center',backgroundSize:'cover'}} className={`flex h-screen justify-center max-md:flex-col max-md:items-center `}>
+            {showLogo?(
+                <Link to="/" className="mr-auto h-full flex-grow flex items-center justify-center">
+                    <img src={Logo} className="w-[363px] h-[87px]" alt="logo"/>
+                </Link>
+            ):""}
+            <div className="md:ml-auto sm:m-[40px] items-center sm:rounded-sm sm:shadow-lg bg-white flex flex-col sm:w-[520px] max-sm:px-[4vw]">
+                <div className="sm:w-[360px] my-[40px]">
+                <div className="sm:mb-[40px] gap-[8px] flex flex-col items-center max-sm:my-[20px]">
+                    <p className="text-[30px] font-semibold">Welcome Back</p>
                     <p className="text-[var(--secondary-08)] text-[14px]">Get you connected with your community</p>
                 </div>
                 <form onSubmit={(e)=>handleLogin(e)} className="flex flex-col gap-[12px] text-sm">
@@ -99,7 +131,7 @@ export default function SignInWithEmail() {
 
                 <a href="#" target="_blank" rel="noopener noreferrer" className="text-[var(--primary-01)] underline text-sm ml-auto">Forget Password?</a>
                 <div className="flex gap-2 w-full items-center">
-                    <button type='button' onClick={()=>navigate(-1)} className={"flex-grow font-semibold cursor-wait mt-5 capitalize py-3 px-6 text-[var(--gray-7-text)] rounded-md bg-[var(--white)] border-[1px]"}>
+                    <button type='button' onClick={()=>navigate(-1)} className={"flex-grow font-semibold mt-5 capitalize py-3 px-6 text-[var(--gray-7-text)] rounded-md bg-[var(--white)] border-[1px]"}>
                         Back
                     </button>
 

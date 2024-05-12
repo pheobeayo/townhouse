@@ -1,9 +1,11 @@
-import { useState } from "react"
-import backgroundPattern from "../assets/images/backgrounds/Background_pattern.png"
+import background from "../assets/images/backgrounds/Screen4.jpg";
+import backgroundPattern from "../assets/images/backgrounds/Background_pattern.svg";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { err_toast, success_toast } from "../components/Feedback";
 import { Link, useNavigate } from "react-router-dom";
 import { User } from "../types/definitions"
+import Logo from "../assets/images/logos/Logo2.svg"
+import { useState, useEffect } from "react"
 
 export default function SignInWithEmail() {
     let date=new Date()    
@@ -21,6 +23,19 @@ export default function SignInWithEmail() {
         }
         password?.setAttribute("type","password");
         setEye_icon(<FaEye className="h-5 w-5"/>);
+    }
+
+    let [screenBackground,setScreenBackground]=useState(``)
+    let [showLogo,setShowLogo]=useState(true)
+    window.onresize=()=>{
+        let screen_width=window.innerWidth;
+        if(screen_width>768){
+            setScreenBackground(`linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url(${background}),no-repeat`)
+            setShowLogo(true)
+        }else{
+            setScreenBackground(`url(${backgroundPattern})`)
+            setShowLogo(false)
+        }
     }
 
 
@@ -60,6 +75,7 @@ export default function SignInWithEmail() {
                     username:user.username,
                     accessToken:user.access_token,
                     phoneNumber:user.phone_number,
+                    location:user.location,
                     emailVerified:user.email_verified
                 }
                 success_toast(parseRes.msg)
@@ -74,11 +90,28 @@ export default function SignInWithEmail() {
             errorMessage==="Failed to fetch"?err_toast(`No internet`):err_toast(error.message)
         }
     }
+
+    useEffect(()=>{
+        let screen_width=window.innerWidth;
+        if(screen_width>768){
+            setScreenBackground(`linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url(${background}),no-repeat`)
+            setShowLogo(true)
+        }else{
+            setScreenBackground(`url(${backgroundPattern})`)
+            setShowLogo(false)
+        }
+    },[screenBackground])
+
     return (
-        <main style={{background:`url(${backgroundPattern})`}} className={`flex h-screen justify-center flex-col items-center`}>
-            <div className="sm:m-[40px] items-center sm:shadow-lg bg-white flex flex-col sm:w-[520px] max-sm:px-[6vw]">
-                <div className="sm:w-[360px] my-2">
-                 <div className="gap-[8px] flex flex-col items-center my-[20px]">
+        <main style={{background:`${screenBackground}`,backgroundPosition:'center',backgroundSize:'cover'}} className={`flex h-screen justify-center max-md:flex-col max-md:items-center `}>
+            {showLogo?(
+                <Link to="/" className="mr-auto h-full flex-grow flex items-center justify-center">
+                    <img src={Logo} className="w-[363px] h-[87px]" alt="logo"/>
+                </Link>
+            ):""}
+            <div className="md:ml-auto md:h-screen  items-center bg-white flex flex-col sm:w-[520px] max-sm:px-[4vw]">
+            <div className="sm:w-[360px] max-md:my-[40px] md:py-4">
+                <div className="sm:mb-[20px] gap-[8px] flex flex-col items-center max-sm:my-[20px]">
                     <p className="text-[30px] font-semibold">Get Started</p>
                     <p className="text-[var(--secondary-08)] text-[14px]">Get you connected with your community</p>
                 </div>
@@ -117,7 +150,7 @@ export default function SignInWithEmail() {
                 </div>
 
                 <div className="flex gap-2 w-full items-center">
-                    <button type="button" onClick={()=>navigate(-1)} className={"flex-grow font-semibold cursor-wait mt-1 capitalize py-3 px-6 text-[var(--gray-7-text)] rounded-md bg-[var(--white)] border-[1px]"}>
+                    <button type="button" onClick={()=>navigate(-1)} className={"flex-grow font-semibold mt-1 capitalize py-3 px-6 text-[var(--gray-7-text)] rounded-md bg-[var(--white)] border-[1px]"}>
                         Back
                     </button>
 

@@ -4,10 +4,12 @@ export interface User{
     username:string,
     accessToken?:string,
     phoneNumber:number,
-    emailVerified:boolean
+    emailVerified:boolean,
+    location:string,
 }
 
 interface Comment{
+    id?:string,
     from:string,
     to:string,
     message:string,
@@ -16,25 +18,39 @@ interface Comment{
 }
 
 interface Like{
+    id?:string,
     from:string,
     to:string
 }
 
-export interface Event{
-    image:string,
+export interface EventType{
+    id?:string,
+    event_photo:string,
     title:string,
     description?:string,
-    subTitle?:string,
+    sub_title?:string,
     host:string,
     date:string,
-    startingTime:string,
-    location:string,
-    attendees:number
+    starting_time:string,
+    event_location:string,
+    attendees?:any,
     likes?:Like[],
-    comments?:Comment[]
+    creator_email:string,
+    event_tags:any,
+    comments?:Comment[],
+    privacy:boolean
 }
 
 export interface Bulletin{
+    id?:string,
+    title:string,
+    description:string,
+    postedOn:string,
+    image:string
+}
+
+export interface Connect{
+    id?:string,
     title:string,
     description:string,
     postedOn:string,
