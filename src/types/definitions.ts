@@ -48,3 +48,11 @@ export interface Bulletin{
     postedOn:string,
     image:string
 }
+
+export interface Connect{
+    id?:string,
+    title:string,
+    description:string,
+    postedOn:string,
+    image:string
+}

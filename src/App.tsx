@@ -7,6 +7,7 @@ import NotFound from './pages/NotFound';
 import GetStarted from "./pages/GetStarted";
 import Home from './pages/Home';
 import CreateGroup from './pages/CreateGroup';
+import CreatePost from './pages/CreatePost';
 import CreateEvent from './pages/CreateEvent';
 import Events from './pages/Events';
 import Event from './pages/Event';
@@ -178,6 +179,7 @@ function App() {
                 <Route path="profile" element={<Profile />} />
                 <Route path="neighbours" element={<Neighbours />} />
                 <Route path="create_group" element={<CreateGroup />} />
+                <Route path="create_post" element={<CreatePost />} />
                 <Route path="create_event" element={<CreateEvent />} />
                 <Route path="settings" element={<Settings />} />
               </Route>
