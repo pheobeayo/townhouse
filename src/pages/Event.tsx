@@ -5,7 +5,8 @@ import { GlobalContext } from "../context";
 
 export default function Event(){
     const { id }=useParams()
-    const {username,photo,location} =useContext(GlobalContext);
+    const {user}=useContext(GlobalContext);
+    const {username,photo,location} =user;
 
     useEffect(()=>{
 		window.scrollTo(0,0)

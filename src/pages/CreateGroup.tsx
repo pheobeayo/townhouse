@@ -15,34 +15,61 @@ const options:OptionType[] = [
 ];
 
 export default function CreateGroup(){
-    const {accessToken,email} =useContext(GlobalContext);
+    const {user}=useContext(GlobalContext)
+    const {accessToken,email} =user
 
     const API_URL=`https://townhouse-server.onrender.com`
     let [disable,setDisable]=useState(false)
     let [category,setCategory]=useState<any>(null)
 
-    async function handleCreateGroup(e:any){
+    async function handleUpload(e:any){
         try{
-            setDisable(true)
             e.preventDefault()
+            setDisable(true)
+            let url=`${API_URL}/drive/upload`
+            const file=e.target.group_photo.files[0]
+            const formData=new FormData()
+            formData.append("file",file)
+            const response=await fetch(url,{
+                method:"POST",
+                body:formData,
+                headers:{
+                    'authorization':`Bearer ${accessToken}`,
+                }
+            })
+            let parseRes=await response.json()
+            if(parseRes.error){
+                console.log(parseRes.error)
+            }else{
+                handleCreateGroup(parseRes.id,e)
+            }
+        }catch(error:any){
+            console.log(error.message)
+        }
+    }
+
+    async function handleCreateGroup(fileId:string,e:any){
+        try{
+            console.log(fileId,e)
             let url=`${API_URL}/api/create_group`
             let response=await fetch(url,{
                 method:"POST",
                 headers:{
                     "content-type":"application/json",
-                    "authorizatio":`Bearer ${accessToken}`
+                    "authorization":`Bearer ${accessToken}`
                 },
                 body:JSON.stringify({
+                    community_photo:fileId,
                     community_name:e.target.group_name.value,
                     creator_email:`${email}`, 
                     community_description:e.target.description.value,
                     communty_location:e.target.location.value,
                     community_tags: [`${category}`],
-                    community_photo:'',
                     privacy:e.target.privacy.value,
                     members:[`${email}`]
                 }) 
             })
+            
             let parseRes=await response.json()
             if(parseRes.error){
                 console.log(parseRes.error)
@@ -58,10 +85,11 @@ export default function CreateGroup(){
         }
     }
     return(
-        <main className="flex h-screen flex-col items-center justify-center">
-            <form onSubmit={handleCreateGroup} className="flex flex-col gap-2">
+        <main className="flex mt-[30px] flex-col items-center justify-center">
+            <form onSubmit={(e)=>handleUpload(e)} className="flex flex-col gap-2">
                 <p className="text-xl font-semibold">Create a group</p>
-                <div className="flex gap-2">
+                <input id="group_photo" name="group_photo" type="file" accept=".png, .jpg, .jpeg, .svg"  className={`px-[10px] mt-2 w-full py-2 focus:outline-[var(--primary-01)] focus:outline-[1px] bg-white border-[1px] rounded-lg`} required/>
+                <div className="flex gap-2"> 
                         <input id="group_name" name="group_name" type="text" className={`px-[10px] w-full py-2 focus:outline-[var(--primary-01)] focus:outline-[1px] bg-white border-[1px] rounded-lg`} placeholder="Group name" required/>
                         <input id="location" name="location" type="text" className={`px-[10px] w-full py-2 focus:outline-[var(--primary-01)] focus:outline-[1px] bg-white border-[1px] rounded-lg`} placeholder="Location" required/>
                 </div>

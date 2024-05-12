@@ -8,7 +8,8 @@ import { err_toast, success_toast } from "../components/Feedback";
 import Logo from "../assets/images/logos/logo.svg"
 
 export default function Layout(){
-  const userInfo =useContext(GlobalContext);
+  const {user} =useContext(GlobalContext);
+  const userInfo=user
   let [showMobileSidebar, setShowMobileSidebar]=useState(false)
   let [isMobile,setIsMobile]=useState(false)
 

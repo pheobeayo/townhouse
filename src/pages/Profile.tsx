@@ -8,7 +8,8 @@ import { MdOutlineEdit } from "react-icons/md";
 import { CiLocationOn } from "react-icons/ci";
 
 export default function Profile(){
-    const {username,photo,email,location} =useContext(GlobalContext);
+    const {user}=useContext(GlobalContext);
+    const {username,photo,location,email}=user;
 
 
 	useEffect(()=>{

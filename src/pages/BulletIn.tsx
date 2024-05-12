@@ -4,7 +4,8 @@ import Nav from "../components/Nav"
 
 
 export default function BulletIn(){
-    const {username,photo,location} =useContext(GlobalContext);
+    const {user}=useContext(GlobalContext);
+    const {username,photo,location}=user;
 
 
 	useEffect(()=>{
