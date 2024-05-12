@@ -31,7 +31,6 @@ export default function CreateEvent(){
 
     async function handleUpload(e:any){
         try{
-            loader.on();
             e.preventDefault()
             setDisable(true)
             const url=`${API_URL}/drive/upload`
@@ -58,9 +57,8 @@ export default function CreateEvent(){
 
     async function handleCreateEvent(fileId:string,e:any){
         try{
-            console.log(fileId,e)
-            const url=`${API_URL}/api/event`
-            const response=await fetch(url,{
+            let url=`${API_URL}/api/event`
+            let response=await fetch(url,{
                 method:"POST",
                 headers:{
                     "content-type":"application/json",
@@ -72,30 +70,26 @@ export default function CreateEvent(){
                     title:e.target.title.value,
                     host:e.target.host.value,
                     creator_email:`${email}`, 
-                    description:e.target.description.value,
+                    description:`${e.target.description.value}`,
                     event_location:e.target.location.value,
                     event_tags: [`${category}`],
                     privacy:e.target.privacy.value,
                     date:e.target.date.value,
                     starting_time:e.target.time.value,
-                    sub_title:e.target.sub_title.value,
+                    sub_title:`${e.target.sub_title.value}`,
                 }) 
             })
             const parseRes=await response.json()
             if(parseRes.error){
                 console.log(parseRes.error)
                 setDisable(false)
-                loader.off()
             }else{
                 e.target.reset()
-                console.log(parseRes)
                 setDisable(false)
-                actions.getEvents()
-                loader.off()
                 openDialog("congratulation_dialog")
+                actions.getEvents()
             }
         }catch(error:any){
-            loader.off()
             setDisable(false)
             console.log(error.message)
         }
@@ -109,7 +103,7 @@ export default function CreateEvent(){
                 </div>
                 <input id="event_photo" name="event_photo" type="file" accept=".png, .jpg, .jpeg"  className={`px-[10px] mt-2 w-full py-2 focus:outline-[var(--primary-01)] focus:outline-[1px] bg-white border-[1px] rounded-lg`} required/>
                  <input id="title" name="title" type="text" className={`px-[10px] w-full py-2 focus:outline-[var(--primary-01)] focus:outline-[1px] bg-white border-[1px] rounded-lg`} placeholder="Event title" required/>
-                <input id="sub_title" name="sub_title" type="text" className={`px-[10px] w-full py-2 focus:outline-[var(--primary-01)] focus:outline-[1px] bg-white border-[1px] rounded-lg`} placeholder="Sub title .. brief descriptionof the event" required/>
+                <input id="sub_title" maxLength={80} name="sub_title" type="text" className={`px-[10px] w-full py-2 focus:outline-[var(--primary-01)] focus:outline-[1px] bg-white border-[1px] rounded-lg`} placeholder="Sub title .. brief descriptionof the event" required/>
                 <div className="flex max-md:flex-col gap-2"> 
                         <input id="date" name="date" type="date" className={`px-[10px] w-full py-2 focus:outline-[var(--primary-01)] focus:outline-[1px] bg-white border-[1px] rounded-lg`} required/>
                         <input id="time" name="time" type="time" className={`px-[10px] w-full py-2 focus:outline-[var(--primary-01)] focus:outline-[1px] bg-white border-[1px] rounded-lg`} required/>

@@ -66,13 +66,13 @@ export default function Home() {
                     </div>
                     <div className="flex items-center justify-center">
                         {events.length>0?(
-                            <div className="grid max-sm:grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+                            <div className="grid max-sm:grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3">
                             {events.slice(0,5).map((event)=>{
                             return(
-                                <div className="flex rounded-[20px] gap-4 border-[1px] flex-col p-4" key={event.id}>
+                                <div className="flex rounded-[20px] gap-4 border-[1px] flex-col p-3" key={event.id}>
                                     <div className="flex gap-4">
                                         <div className="flex flex-col items-center justify-center rounded-md bg-gray-100">
-                                        <img src={`${API_URL}/drive/download/${event.event_photo}`} alt="" className="w-full h-[136px] rounded-md "/>
+                                            <img src={`${API_URL}/drive/download/${event.event_photo}`} alt="" className="max-md: w-full md:w-[310px] h-[136px] object-cover"/>
                                         </div>
                                         <div className="flex flex-col gap-1">
                                             <p className="capitalize text-lg font-semibold">{event.title}</p>

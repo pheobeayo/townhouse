@@ -185,15 +185,15 @@ export default function Events() {
             </div>
 
             <div className="mt-3 pb-[88px]">
-                <p className="font-semibold">{searchParams.get("period")!==null?searchParams.get("period"):"All"} Events</p>
+                <p className="font-semibold text-lg">{searchParams.get("period")!==null?searchParams.get("period"):"All"} Events</p>
                 <div className="mt-8 grid max-sm:grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
                     {domEvents.map((event)=>{
                         return(
                     <div className="flex flex-col gap-3 p-3" key={event.id}>
-                        <p className="text-[var(--primary-01)] font-semibold text-base">{event.title}</p>
+                        <p className="text-[var(--primary-01)] font-semibold text-lg">{event.title}</p>
                         <p>{event.sub_title}</p>
                         <div className="bg-gray-100 w-full rounded-md">
-                            <img src={`${API_URL}/drive/download/${event.event_photo}`} alt={event.title} className="rounded-md w-[533px] h-[130px] object-contain"/>
+                            <img src={`${API_URL}/drive/download/${event.event_photo}`} alt={event.title} className="rounded-md w-[533px] h-[130px] object-cover"/>
                         </div>
                         <div>
                             <p>{event.description}</p>
@@ -259,13 +259,13 @@ export default function Events() {
                         </div>
                     </Link>
 
-                    <button className="flex gap-4 items-center justify-center">
+                    <Link to="/create_post" className="flex gap-4 items-center justify-center">
                         <MdEdit className="w-[24px] text-[var(--primary-01)] h-[24px]"/>
                         <div className="flex flex-col items-start">
                             <p className="text-[var(--primary-01)] font-semibold text-base">Create a new post</p>
                             <p className="text-gray-500 text-[13px]">Inform the community what's new</p>
                         </div>
-                    </button>
+                    </Link>
                 </div>
             </div>
             <Comment data={{functions:{toggleDialog}}}/>
