@@ -58,7 +58,7 @@ export default function Layout() {
       to: "/bulletin_board",
     },
     {
-      name: "Neighbour",
+      name: "Neighbour Connect",
       icon: <MdGroup className="w-[32px] h-[32px]" />,
       OutlineIcon: <MdOutlineGroup className="w-[32px] h-[32px]" />,
       to: "/neighbours",
