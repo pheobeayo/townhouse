@@ -1,6 +1,4 @@
 import { openDialog } from "../components/actions";
-//import { FaBuilding, FaFacebook, FaPhone } from "react-icons/fa"
-//import { FaLocationPin } from "react-icons/fa6";
 import { useContext, useEffect } from "react";
 import { GlobalContext } from "../context";
 import Nav from "../components/Nav";
@@ -168,7 +166,7 @@ export default function Profile() {
               />
             </div>
 
-            <Panel className="flex items-start flex-wrap flex-auto gap-3">
+            <Panel className="flex items-start flex-wrap h-full content-start gap-3">
               {tags && tags.map((tag, i) => <Tag key={i}>{tag.name}</Tag>)}
             </Panel>
           </div>
@@ -178,7 +176,7 @@ export default function Profile() {
               Matchmaking suggestions
             </h2>
 
-            <Panel>
+            <Panel className="h-full content-start">
               <p className="mb-6">
                 Hi James! We’ve noticed that you and these people in your
                 neighbourhood have some of the same interests. Maybe you could
