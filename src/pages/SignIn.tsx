@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import background from "../assets/images/backgrounds/Screen.jpg";
 import backgroundPattern from "../assets/images/backgrounds/Background_pattern.svg";
-import facebookIcon from "../assets/images/icons/facebook_icon.svg";
 import emailIcon from "../assets/images/icons/email_icon.svg";
 import googleIcon from "../assets/images/icons/google_icon.svg";
 import orIcon from "../assets/images/icons/or_icon.svg";
@@ -53,10 +52,7 @@ export default function CreateAccount() {
                         <span className="text-base flex-grow">Sign in with Google </span>
                     </button>
 
-                    <button onClick={()=>window.location.href=`#`} className={`flex justify-center items-center py-3 px-6 rounded-md bg-white border-[1px]`}>
-                        <img src={facebookIcon} alt="google's icon" className="sm:w-[24px] mr-auto sm:h-[24px]"/>
-                        <span className="text-base flex-grow">Sign in with Facebook </span>
-                    </button>
+                   
 
                     <img src={orIcon} className="h-[20px]" alt="Or"/>
 
@@ -78,6 +74,6 @@ export default function CreateAccount() {
             </div>
         </main>
     );
-};
+}
 
 
