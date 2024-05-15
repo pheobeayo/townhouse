@@ -29,21 +29,18 @@ export default function Header() {
           />
 
           <ul className="flex m-auto gap-16 text-lg">
-            {links.map((link, i) => {
-              console.log(location.pathname === link.path);
-              return (
-                <li
-                  className={`hidden md:inline-block font-medium ${
-                    location.pathname === link.path
-                      ? "text-[var(--primary-01)]"
-                      : "hover:text-[var(--primary-01)]"
-                  }`}
-                  key={i}
-                >
-                  <Link to={link.path}>{link.label}</Link>
-                </li>
-              );
-            })}
+            {links.map((link, i) => (
+              <li
+                className={`hidden md:inline-block font-medium ${
+                  location.pathname === link.path
+                    ? "text-[var(--primary-01)]"
+                    : "hover:text-[var(--primary-01)]"
+                }`}
+                key={i}
+              >
+                <Link to={link.path}>{link.label}</Link>
+              </li>
+            ))}
           </ul>
 
           <Link to="/sign_in">
