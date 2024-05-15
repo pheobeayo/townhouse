@@ -26,6 +26,7 @@ import { GlobalContext } from "./context";
 import LandingPage from "./pages/LandingPage";
 import { err_toast } from "./components/Feedback";
 import About from "./pages/About";
+import Contact from "./pages/Contact";
 
 function App() {
   const API_URL = "https://townhouse-server.onrender.com";
@@ -183,6 +184,10 @@ function App() {
                 element={!isAuth ? <About /> : <Navigate to="/" />}
               />
               <Route
+                path="/contact"
+                element={!isAuth ? <Contact /> : <Navigate to="/" />}
+              />
+              <Route
                 path="/getstarted"
                 element={!isAuth ? <GetStarted /> : <Navigate to="/" />}
               />
@@ -220,7 +225,7 @@ function App() {
                 <Route path="create_group" element={<CreateGroup />} />
                 <Route path="create_post" element={<CreatePost />} />
                 <Route path="create_event" element={<CreateEvent />} />
-                <Route path="help" element={<Help/>} />
+                <Route path="help" element={<Help />} />
                 <Route path="settings" element={<Settings />} />
               </Route>
               <Route path="*" element={<NotFound />} />
