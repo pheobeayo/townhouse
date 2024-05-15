@@ -116,3 +116,10 @@ export interface Connect{
     image:string
 }
 
+export interface Directory{
+    id?:string,
+    title:string,
+    description:string,
+    secondtitle:string,
+    image:string
+}

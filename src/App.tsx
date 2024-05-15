@@ -11,10 +11,12 @@ import CreatePost from './pages/CreatePost';
 import CreateEvent from './pages/CreateEvent';
 import Events from './pages/Events';
 import Event from './pages/Event';
+import CommunityDirectory from './pages/CommunityDirectory';
 import Profile from './pages/Profile';
 import Neighbours from './pages/Neighbours';
 import BulletIn from './pages/BulletIn';
 import Settings from './pages/Settings';
+import Help from './pages/Help';
 import SignIn from "./pages/SignIn";
 import SignInWithEmail from "./pages/SignInWithEmail";
 import SignUpWithEmail from "./pages/SignUpWithEmail";
@@ -175,12 +177,14 @@ function App() {
                 <Route path="events" element={<Events />} />
                 <Route path="events/:id" element={<Event />} />
                 <Route path="bulletin_board" element={<BulletIn />} />
-                <Route path="create_post" element={<CreatePost/>}/>
+                <Route path="create_post" element={<CreatePost/>} />
+                <Route path="community_directory" element={<CommunityDirectory/>}/>
                 <Route path="profile" element={<Profile />} />
                 <Route path="neighbours" element={<Neighbours />} />
                 <Route path="create_group" element={<CreateGroup />} />
                 <Route path="create_post" element={<CreatePost />} />
                 <Route path="create_event" element={<CreateEvent />} />
+                <Route path="help" element={<Help/>}/>
                 <Route path="settings" element={<Settings />} />
               </Route>
               <Route path="*" element={<NotFound />} />

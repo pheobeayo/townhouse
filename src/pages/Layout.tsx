@@ -15,6 +15,7 @@ import {
   MdOutlineSettings,
   MdEventNote,
   MdOutlineEventNote,
+  MdHelpCenter,
 } from "react-icons/md";
 import { FaUser, FaRegUser } from "react-icons/fa6";
 import { err_toast, success_toast } from "../components/Feedback";
@@ -41,41 +42,54 @@ export default function Layout() {
   let links = [
     {
       name: "Home",
-      icon: <MdHome className="w-[32px] h-[32px]" />,
-      OutlineIcon: <MdOutlineHome className="w-[32px] h-[32px]" />,
+      icon: <MdHome className="w-[28px] h-[28px]" />,
+      OutlineIcon: <MdOutlineHome className="w-[28px] h-[28px]" />,
       to: "/",
     },
     {
       name: "Events",
-      icon: <MdEventNote className="w-[32px] h-[32px]" />,
-      OutlineIcon: <MdOutlineEventNote className="w-[32px] h-[32px]" />,
+      icon: <MdEventNote className="w-[28px] h-[28px]" />,
+      OutlineIcon: <MdOutlineEventNote className="w-[28px] h-[28px]" />,
       to: "/events",
     },
     {
       name: "Bulletin Board",
-      icon: <MdAssignment className="w-[32px] h-[32px]" />,
-      OutlineIcon: <MdOutlineAssignment className="w-[32px] h-[32px]" />,
+      icon: <MdAssignment className="w-[28px] h-[28px]" />,
+      OutlineIcon: <MdOutlineAssignment className="w-[28px] h-[28px]" />,
       to: "/bulletin_board",
     },
     {
       name: "Neighbour Connect",
-      icon: <MdGroup className="w-[32px] h-[32px]" />,
-      OutlineIcon: <MdOutlineGroup className="w-[32px] h-[32px]" />,
+      icon: <MdGroup className="w-[28px] h-[28px]" />,
+      OutlineIcon: <MdOutlineGroup className="w-[28px] h-[28px]" />,
       to: "/neighbours",
     },
     {
+      name: "Community Drectory",
+      icon: <FaUser className="w-[28px] h-[28px]" />,
+      OutlineIcon: <FaRegUser className="w-[28px] h-[28px]" />,
+      to: "/community_directory",
+    },
+    {
       name: "Profile",
-      icon: <FaUser className="w-[32px] h-[32px]" />,
-      OutlineIcon: <FaRegUser className="w-[32px] h-[32px]" />,
+      icon: <FaUser className="w-[28px] h-[28px]" />,
+      OutlineIcon: <FaRegUser className="w-[28px] h-[28px]" />,
       to: "/profile",
     },
 
     {
       name: "Settings",
-      icon: <MdSettings className="w-[32px] h-[32px]" />,
-      OutlineIcon: <MdOutlineSettings className="w-[32px] h-[32px]" />,
+      icon: <MdSettings className="w-[28px] h-[28px]" />,
+      OutlineIcon: <MdOutlineSettings className="w-[28px] h-[28px]" />,
       to: "/settings",
     },
+    {
+      name: "Help",
+      icon: <MdHelpCenter className="w-[28px] h-[28px]" />,
+      OutlineIcon: <MdHelpCenter className="w-[28px] h-[28px]" />,
+      to: "/help",
+    },
+
   ];
 
   // Close the dropdown if the user clicks outside of it
@@ -120,7 +134,7 @@ export default function Layout() {
               <Link to="/">
                 <img src={Logo} alt="Logo" className="w-[42px] h-[46px]" />
               </Link>
-              <div className="flex flex-col items-center gap-[20px] mt-[50px] w-[81px]">
+              <div className="flex flex-col items-center gap-[10px] mt-[15px] w-[81px]">
                 {links.map((link, index) => (
                   <Link
                     to={link.to}
@@ -141,7 +155,7 @@ export default function Layout() {
                   onClick={logout}
                   className="flex flex-col text-sm items-center hover:text-[var(--primary-01)]"
                 >
-                  <MdLogout className="w-[32px] h-[32px]" />
+                  <MdLogout className="w-[28px] h-[28px]" />
                   Log out
                 </button>
               </div>
