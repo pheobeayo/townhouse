@@ -1,11 +1,10 @@
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
-import { ReactElement } from "react";
 import starticon from "../assets/images/icons/starticon.svg";
 import borrowicon from "../assets/images/icons/borrowicon.svg";
 import planicon from "../assets/images/icons/planicon.svg";
-import { twMerge } from "tailwind-merge";
 import LandingFooter from "../components/LandingFooter";
+import Container from "../components/Container";
 
 function About() {
   return (
@@ -125,17 +124,6 @@ function About() {
       </Container>
     </div>
   );
-}
-
-interface ContainerProp {
-  children: ReactElement | ReactElement[];
-  className?: string;
-}
-
-function Container({ children, className }: ContainerProp) {
-  const classes = twMerge("max-w-screen-2xl mx-auto", className);
-
-  return <div className={classes}>{children}</div>;
 }
 
 export default About;
