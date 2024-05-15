@@ -7,8 +7,8 @@ export default function Header () {
 
   return (
     <nav className='w-screen'>
-      <div className="fixed top-0 right-0 left-0 bg-gradient z-40 bg-white border-y ">
-        <div className="flex gap-2 justify-center items-center">
+      <div className="fixed top-0 right-0 left-0 bg-gradient z-50 bg-white border-y ">
+        <div className="flex gap-2 justify-center items-center p-4 ">
           <img src={landinglogo} className="h-[40px] w-[160px]" alt="landinglogo" />
 
           <ul className="flex m-auto gap-16 text-lg">

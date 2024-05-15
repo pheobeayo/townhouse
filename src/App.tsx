@@ -184,7 +184,7 @@ function App() {
                 <Route path="create_group" element={<CreateGroup />} />
                 <Route path="create_post" element={<CreatePost />} />
                 <Route path="create_event" element={<CreateEvent />} />
-                <Route path="help" element={<Help/>}/>
+                <Route path="help" element={<Help/>} />
                 <Route path="settings" element={<Settings />} />
               </Route>
               <Route path="*" element={<NotFound />} />
