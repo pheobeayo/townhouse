@@ -122,9 +122,7 @@ export interface Directory{
     description:string,
     telephone:string,
     image:string
-}
-
-export interface Municipal{
+}export interface Municipal{
     id?:string,
     title:string,
     description:string,

@@ -11,7 +11,6 @@ import management from "../assets/images/management.svg";
 import { MdEditLocationAlt } from "react-icons/md";
 import { MdLocalPhone } from "react-icons/md";
 
-import { CiShare2 } from "react-icons/ci";
 
 export default function CommunityDirectory() {
   const { user } = useContext(GlobalContext);
