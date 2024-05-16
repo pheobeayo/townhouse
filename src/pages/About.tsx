@@ -11,7 +11,7 @@ function About() {
   return (
     <div>
       <Header />
-      <section className="mt-40 bg-[#930941] py-28 2xl:py-32 text-white">
+      <section className="mt-10 bg-[#930941] py-28 2xl:py-32 text-white">
         <Container>
           <div className="text-center max-w-7xl mx-auto">
             <h1 className="font-medium text-7xl mb-14">
