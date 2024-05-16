@@ -120,6 +120,14 @@ export interface Directory{
     id?:string,
     title:string,
     description:string,
-    secondtitle:string,
+    telephone:string,
+    image:string
+}
+
+export interface Municipal{
+    id?:string,
+    title:string,
+    description:string,
+    telephone:string,
     image:string
 }
