@@ -9,7 +9,7 @@ function Contact() {
   return (
     <div>
       <Header />
-      <section className="mt-40 bg-[#930941] py-28 2xl:py-32 text-white">
+      <section className="mt-10 bg-[#930941] py-28 2xl:py-32 text-white">
         <Container>
           <div className="text-center max-w-7xl mx-auto">
             <h1 className="font-medium text-7xl mb-14">
@@ -30,11 +30,11 @@ function Contact() {
         </Container>
       </section>
 
-      <section className="mt-32 mb-72">
+      <section className="mt-32 mb-72 mx-4">
         <Container>
-          <h2 className="font-medium text-4xl mb-16">Contact us</h2>
+          <h2 className="font-medium text-4xl mb-16 mx-4">Contact us</h2>
 
-          <form className="flex flex-col gap-8">
+          <form className="flex flex-col gap-8 w-3/4">
             <div className="flex flex-col gap-3">
               <label htmlFor="name" className="text-2xl">
                 Name <span className="text-red-600">*</span>

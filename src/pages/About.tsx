@@ -36,7 +36,7 @@ function About() {
 
       <section className="py-32">
         <Container>
-          <h2 className="text-5xl font-medium text-black mb-24">
+          <h2 className="text-5xl font-medium text-black mb-24 mx-4">
             What makes us different?
           </h2>
 
