@@ -34,9 +34,6 @@ export default function Profile() {
     { name: "Science & Tech" },
     { name: "Travel" },
     { name: "Film" },
-    { name: "Film" },
-    { name: "Film" },
-    { name: "Film" },
   ];
   const avatars = [
     { src: av1 },
@@ -57,8 +54,8 @@ export default function Profile() {
       <Nav data={{ username, photo, location }} />
 
       <div>
-        <div className="flex gap-28 mb-8 mt-20">
-          <div className="flex gap-7">
+        <div className="flex flex-col lg:flex-row gap-16 lg:gap-28 mb-28 md:mb-8 mt-20">
+          <div className="flex flex-col sm:flex-row items-center sm:items-start gap-2 sm:gap-7">
             <div>
               {photo ? (
                 <img
@@ -75,7 +72,7 @@ export default function Profile() {
               )}
             </div>
 
-            <div className="flex flex-col gap-2 py-3">
+            <div className="flex flex-col gap-2 py-3 text-center sm:text-start">
               <p className="text-2xl">{username}</p>
               <p className="text-gray-500 text-base">{email}</p>
               {!location.includes("null") && (
@@ -85,13 +82,14 @@ export default function Profile() {
                 </div>
               )}
             </div>
+
             <MdOutlineEdit
               onClick={() => openDialog("")}
-              className="hover:text-[var(--primary-01)] cursor-pointer w-[24px] ml-10 h-[24px]"
+              className="hover:text-[var(--primary-01)] cursor-pointer w-[24px] sm:ml-10 sm:mt-4 h-[24px]"
             />
           </div>
 
-          <div className="flex gap-6 items-center text-2xl">
+          <div className="flex gap-6 items-center text-2xl flex-col sm:flex-row">
             <CircleProgressBar
               sqSize={100}
               circleWidth={120}
@@ -119,7 +117,7 @@ export default function Profile() {
                   <ProgressBar />
                 </div>
               </div>
-              <div className="flex gap-4 px-10 py-5 bg-[#F8F8F8] rounded-2xl">
+              <div className="flex gap-4 p-5 md:px-10 py-5 bg-[#F8F8F8] rounded-2xl">
                 <img src={filledVector} alt="Filled Vector" />
                 <p className="text-base">
                   You received 25 points by RSVPing to the Street Gourmet
@@ -134,23 +132,23 @@ export default function Profile() {
               Community Engagement Metrics
             </h2>
 
-            <Panel className="grid grid-cols-2 gap-x-36 flex-1 content-between">
+            <Panel className="grid gap-y-6 md:grid-cols-2 md:gap-x-10 xl:gap-x-36 flex-1 content-between">
               <div>
-                <p className="text-lg">Volunteer hours</p>
+                <p className="text-lg mb-1 xl:mb-2">Volunteer hours</p>
                 <ProgressBar progress={60} strokeWidth="15px" />
               </div>
 
               <div>
-                <p className="text-lg">Neighbourhood watch</p>
+                <p className="text-lg mb-1 xl:mb-2">Neighbourhood watch</p>
                 <ProgressBar progress={85} strokeWidth="15px" />
               </div>
               <div>
-                <p className="text-lg">Group membership</p>
+                <p className="text-lg mb-1 xl:mb-2">Group membership</p>
                 <ProgressBar progress={40} strokeWidth="15px" />
               </div>
 
               <div>
-                <p className="text-lg">Event participation</p>
+                <p className="text-lg mb-1 xl:mb-2">Event participation</p>
                 <ProgressBar progress={45} strokeWidth="15px" />
               </div>
             </Panel>

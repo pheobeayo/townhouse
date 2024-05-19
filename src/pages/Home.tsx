@@ -174,9 +174,9 @@ export default function Home() {
             </Link>
           </div>
           <div className="grid max-sm:grid-cols-1 gap-4 sm:grid-cols-1 md:grid-cols-2">
-            {bulletins.slice(0, 2).map((bulletin) => {
+            {bulletins.slice(0, 2).map((bulletin, i) => {
               return (
-                <div className="flex rounded-[20px] gap-4 border-[1px]">
+                <div className="flex rounded-[20px] gap-4 border-[1px]" key={i}>
                   <img
                     src={bulletin.image}
                     alt={bulletin.title}

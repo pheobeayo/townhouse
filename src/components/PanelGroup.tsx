@@ -7,7 +7,7 @@ interface PanelGroupProps {
 }
 
 function PanelGroup({ children, className }: PanelGroupProps) {
-  const classes = twMerge("grid grid-cols-2 gap-x-14 gap-y-10", className);
+  const classes = twMerge("grid lg:grid-cols-2 gap-x-14 gap-y-10", className);
 
   return <div className={classes}>{children}</div>;
 }
